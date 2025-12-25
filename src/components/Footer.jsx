@@ -17,9 +17,6 @@ const Footer = () => {
   const navigationLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
-    { name: 'Events', href: '/events', type: 'route' },
-    { name: 'Problem Statements', href: '/problem-statements', type: 'route' },
-    { name: 'Mentors', href: '#mentors' },
     { name: 'Schedule', href: '#schedule' },
     { name: 'Pricing', href: '#pricing' }
   ];

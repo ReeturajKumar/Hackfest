@@ -1,241 +1,338 @@
 /* eslint-disable no-unused-vars */
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion'; 
 import { 
   TrophyIcon, 
   UserGroupIcon, 
-  CpuChipIcon, 
   RocketLaunchIcon, 
-  BoltIcon, 
-  GiftIcon 
-} from '@heroicons/react/24/outline';
+  GiftIcon,
+  AcademicCapIcon,
+  BriefcaseIcon,
+  SparklesIcon,
+  BuildingLibraryIcon,
+  CheckCircleIcon,
+  StarIcon,
+  FireIcon,
+  BoltIcon
+} from '@heroicons/react/24/solid';
 
-// --- ANIMATION VARIANTS ---
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15, // Stagger delay between cards
-      delayChildren: 0.2,
-    }
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
   }
 };
 
 const itemVariants = {
-  hidden: { y: 50, opacity: 0 }, // Start 50px below
+  hidden: { y: 20, opacity: 0 },
   visible: { 
     y: 0, 
     opacity: 1,
-    transition: { 
-      type: "spring", 
-      stiffness: 50, 
-      damping: 20 
-    } 
+    transition: { type: "spring", stiffness: 100, damping: 15 } 
   }
 };
 
-// --- COMPONENT: TECH SPOTLIGHT CARD ---
-const SpotlightCard = ({ children, className = "", span = "", label = "", variants }) => {
-  const divRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    if (!divRef.current) return;
-    const rect = divRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    divRef.current.style.setProperty('--mouse-x', `${x}px`);
-    divRef.current.style.setProperty('--mouse-y', `${y}px`);
-  };
-
-  return (
-    <motion.div
-      ref={divRef}
-      variants={variants}
-      onMouseMove={handleMouseMove}
-      className={`relative rounded-xl bg-[#0a0a0a] border border-white/10 overflow-hidden group transition-all duration-300 hover:-translate-y-1 ${className} ${span}`}
-    >
-      {/* 1. MOUSE SPOTLIGHT GLOW (Border) */}
-      <div 
-        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
-        style={{
-          background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(236, 72, 153, 0.4), rgba(249, 115, 22, 0.4), transparent 40%)`
-        }}
-      />
-
-      {/* 2. INNER CARD CONTAINER (Masks the glow) */}
-      <div className="absolute inset-[1px] rounded-[calc(0.75rem-1px)] bg-[#0f111a]/95 backdrop-blur-xl z-10">
-         <div className="absolute inset-0 opacity-10" 
-              style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
-         </div>
-      </div>
-
-      {/* 3. MOUSE SPOTLIGHT (Inner Surface) */}
-      <div 
-        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 mix-blend-overlay"
-        style={{
-          background: `radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.1), transparent 40%)`
-        }}
-      />
-
-      {/* 4. HUD CORNERS */}
-      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-white/10 group-hover:border-pink-500/50 transition-colors z-20 rounded-tl-xl"></div>
-      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/10 group-hover:border-orange-500/50 transition-colors z-20 rounded-br-xl"></div>
-
-      {/* 5. TECH LABEL */}
-      {label && (
-        <div className="absolute top-4 right-4 z-30">
-          <span className="text-[10px] font-mono text-gray-600 group-hover:text-pink-400 transition-colors uppercase tracking-widest border border-white/5 px-2 py-1 rounded bg-black/50">
-            {label}
-          </span>
-        </div>
-      )}
-
-      {/* 6. CONTENT */}
-      <div className="relative z-30 h-full">
-        {children}
-      </div>
-    </motion.div>
-  );
-};
-
-
 const WhyParticipate = () => {
-  return (
-    <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-transparent z-10 overflow-hidden">
-      
-      {/* --- BACKGROUND DECORATION --- */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-      <div className="absolute right-0 top-1/4 w-96 h-96 bg-pink-600/5 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute left-0 bottom-1/4 w-96 h-96 bg-orange-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+  const benefits = [
+    {
+      icon: GiftIcon,
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
+      title: "Free ₹19,999 AI Kit",
+      description: "Starter AI Kit with Python fundamentals, project ideas, and premium resume/LinkedIn templates.",
+      highlight: "Includes IIT expert guest lectures.",
+      tagline: "Learn. Build. Excel."
+    },
+    {
+      icon: AcademicCapIcon,
+      color: "text-purple-600",
+      bgColor: "bg-purple-50",
+      title: "IIT-BHU Certificate",
+      description: "Official co-branded participation certificate and physical gift box delivered to your doorstep.",
+      highlight: "Guaranteed portfolio-ready projects.",
+      tagline: "Credibility Meets Excellence"
+    },
+    {
+      icon: RocketLaunchIcon,
+      color: "text-pink-600",
+      bgColor: "bg-pink-50",
+      title: "Career Acceleration",
+      description: "Build resume-ready projects solving actual business problems from the EdTech industry.",
+      highlight: "Bridge the gap between academia & industry.",
+      tagline: "From Student to Industry Pro"
+    },
+    {
+      icon: SparklesIcon,
+      color: "text-amber-600",
+      bgColor: "bg-amber-50",
+      title: "Beginner-Friendly",
+      description: "No coding? No problem. Zero-Code AI Workshop provided 7 days before the event starts.",
+      highlight: "Value for everyone, not just winners.",
+      tagline: "Start Your Journey Here"
+    },
+    {
+      icon: BuildingLibraryIcon,
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+      title: "Industry Problems",
+      description: "Real-world challenges like Placement Intelligence and Content Automation tracking.",
+      highlight: "Multiple tracks for No-Code & AI.",
+      tagline: "Solve Real Challenges"
+    }
+  ];
 
-      <div className="max-w-7xl mx-auto">
+  const achievements = [
+    { icon: StarIcon, text: "Top 10 get internship interviews", color: "text-yellow-500" },
+    { icon: FireIcon, text: "Top 20 get national media coverage", color: "text-orange-500" },
+    { icon: BoltIcon, text: "Portfolio project for every participant", color: "text-pink-500" }
+  ];
+
+  return (
+    <section className="relative py-10 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
+      {/* Blueprint Grid Background */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(#000 1.5px, transparent 1.5px), linear-gradient(90deg, #000 1.5px, transparent 1.5px)`,
+          backgroundSize: '40px 40px'
+        }}
+      />
+      
+      {/* Subtle gradient overlays */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-pink-100/20 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-orange-100/20 to-transparent rounded-full blur-3xl pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* --- HEADER (Animated) --- */}
+        {/* --- HERO HEADER --- */}
         <motion.div 
-          className="text-center mb-24"
+          className="text-center mb-10"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }} /* CHANGE: once: false makes it repeat */
+          viewport={{ once: true }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
-            </span>
-            <span className="text-xs font-mono text-gray-300 uppercase tracking-[0.2em]">Why_Participate</span>
-          </motion.div>
+          <motion.span 
+            variants={itemVariants}
+            className="text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-3 block"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            Why Participate
+          </motion.span>
           
-          <motion.h2 variants={itemVariants} className="text-5xl md:text-7xl font-black uppercase text-white tracking-tighter leading-none">
-            Why Join <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500">CloudBlitz</span>
-          </motion.h2>
-          <motion.p variants={itemVariants} className="mt-6 text-lg text-gray-400 max-w-2xl mx-auto border-l-2 border-orange-500/50 pl-6 text-left md:text-center md:border-none md:pl-0">
-            No coding experience required. Get ₹19,999 worth AI kit free, official IIT co-branded certificate, portfolio projects, and career opportunities.
+          <motion.h1 
+            variants={itemVariants} 
+            className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
+          >
+            Your Path to <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500">Excellence</span>
+          </motion.h1>
+
+          <motion.p 
+            variants={itemVariants}
+            className="text-base md:text-lg text-slate-600 font-medium mb-6 max-w-2xl mx-auto"
+          >
+            Transform your career with industry-driven projects, IIT certification, and real-world AI experience
           </motion.p>
+
+          {/* Value Proposition Tagline */}
+          <motion.div 
+            variants={itemVariants}
+            className="flex flex-wrap items-center justify-center gap-3 text-xs font-bold text-slate-700"
+          >
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-50 rounded-full border border-pink-200">
+              <CheckCircleIcon className="w-3.5 h-3.5 text-pink-600" />
+              <span>No Coding Required</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 rounded-full border border-purple-200">
+              <CheckCircleIcon className="w-3.5 h-3.5 text-purple-600" />
+              <span>IIT Certification</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 rounded-full border border-orange-200">
+              <CheckCircleIcon className="w-3.5 h-3.5 text-orange-600" />
+              <span>₹19,999 Free Kit</span>
+            </div>
+          </motion.div>
         </motion.div>
 
-        {/* --- GRID (Animated Stagger) --- */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.1 }} /* CHANGE: once: false makes it repeat */
-          variants={containerVariants}
-        >
+        {/* --- MAIN CONTENT BENTO GRID --- */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-6">
           
-          {/* 1. PRIZES */}
-          <SpotlightCard span="md:col-span-2" label="SYS_REWARD_POOL" variants={itemVariants}>
-            <div className="p-8 md:p-12 h-full flex flex-col md:flex-row items-start md:items-center gap-8">
-              <div className="relative group/icon">
-                <div className="absolute inset-0 bg-pink-500/20 blur-xl rounded-full opacity-0 group-hover/icon:opacity-100 transition-opacity"></div>
-                <div className="relative p-6 rounded-2xl bg-[#0a0a0a] border border-white/10 text-white shadow-2xl">
-                  <TrophyIcon className="w-12 h-12 text-pink-500" />
+          {/* Prize Pool Card - Featured */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="md:col-span-8 p-8 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden group shadow-xl"
+          >
+            {/* Animated background elements */}
+            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-pink-500/10 to-transparent rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-orange-500/10 to-transparent rounded-full blur-3xl" />
+            
+            <TrophyIcon className="absolute -right-12 -bottom-12 w-56 h-56 text-white/5 group-hover:text-white/10 transition-all duration-1000 group-hover:rotate-12" />
+            
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 text-orange-400 font-bold text-[10px] uppercase tracking-widest mb-4">
+                <StarIcon className="w-4 h-4" />
+                <span>Most Rewarding Track</span>
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl font-black mb-3 leading-tight">
+                ₹2,20,000+
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-orange-400">Prize Pool</span>
+              </h2>
+              
+              <p className="text-slate-300 max-w-lg text-sm font-medium mb-6 leading-relaxed">
+                Compete for massive cash prizes while building your portfolio. Top performers get direct internship opportunities and national recognition.
+              </p>
+
+              {/* Prize breakdown */}
+              <div className="flex flex-wrap gap-3 mb-6">
+                <div className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
+                  <div className="text-[10px] text-slate-400 uppercase tracking-wider mb-1">First Place</div>
+                  <div className="text-xl font-black text-white">₹1,00,000</div>
+                </div>
+                <div className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
+                  <div className="text-[10px] text-slate-400 uppercase tracking-wider mb-1">Second Place</div>
+                  <div className="text-xl font-black text-white">₹70,000</div>
+                </div>
+                <div className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
+                  <div className="text-[10px] text-slate-400 uppercase tracking-wider mb-1">Third Place</div>
+                  <div className="text-xl font-black text-white">₹50,000</div>
                 </div>
               </div>
-              <div>
-                <h3 className="text-3xl font-black text-white uppercase italic mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-orange-500 transition-all">
-                  ₹2,20,000 Prize Pool
-                </h3>
-                <p className="text-gray-400 text-sm md:text-base max-w-lg leading-relaxed mb-2">
-                  <span className="text-pink-400 font-bold">1st Prize:</span> ₹1,00,000 | <span className="text-orange-400 font-bold">2nd Prize:</span> ₹70,000 | <span className="text-yellow-400 font-bold">3rd Prize:</span> ₹50,000
-                </p>
-                <p className="text-gray-500 text-xs">
-                  Plus side prizes (₹500-₹2,500), media spotlight for top 20, and internship pipeline for top 10.
-                </p>
+
+              {/* Achievements */}
+              <div className="flex flex-wrap gap-4 pt-4 border-t border-white/10">
+                {achievements.map((achievement, i) => {
+                  const IconComponent = achievement.icon;
+                  return (
+                    <div key={i} className="flex items-center gap-2">
+                      <IconComponent className={`w-4 h-4 ${achievement.color}`} />
+                      <span className="text-xs text-slate-300 font-medium">{achievement.text}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          </SpotlightCard>
+          </motion.div>
 
-          {/* 2. MENTORSHIP */}
-          <SpotlightCard label="NET_ACCESS" variants={itemVariants}>
-            <div className="p-8 h-full flex flex-col justify-between">
-              <div className="mb-6">
-                <div className="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center border border-orange-500/20 mb-6 group-hover:scale-110 transition-transform duration-300">
-                   <UserGroupIcon className="w-6 h-6 text-orange-500" />
+          {/* Smaller Vertical Benefit Cards */}
+          <div className="md:col-span-4 grid grid-cols-1 gap-4">
+            {benefits.slice(0, 2).map((b, i) => {
+              const IconComponent = b.icon;
+              return (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                  whileHover={{ y: -3, scale: 1.01 }}
+                  className="p-6 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-white to-slate-50 flex flex-col justify-between group hover:border-pink-300 hover:shadow-lg transition-all duration-300"
+                >
+                  <div>
+                    <div className={`w-12 h-12 ${b.bgColor} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                      <IconComponent className={`w-6 h-6 ${b.color}`} />
+                    </div>
+                    <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2">
+                      {b.tagline}
+                    </div>
+                    <h3 className="text-lg font-black text-slate-900 mb-2 leading-tight">
+                      {b.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed mb-3">
+                      {b.description}
+                    </p>
+                  </div>
+                  <div className="pt-3 border-t border-slate-100">
+                    <p className="text-[10px] text-slate-500 font-medium italic">
+                      {b.highlight}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* --- SECONDARY INFO ROW --- */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          {benefits.slice(2).map((b, i) => {
+            const IconComponent = b.icon;
+            return (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                whileHover={{ y: -4, scale: 1.01 }}
+                className="p-6 rounded-2xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg hover:border-pink-300 transition-all duration-300 relative overflow-hidden group"
+              >
+                {/* Hover gradient effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-pink-50/0 to-orange-50/0 group-hover:from-pink-50/50 group-hover:to-orange-50/50 transition-all duration-300" />
+                
+                <div className="relative z-10">
+                  <div className={`w-10 h-10 ${b.bgColor} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                    <IconComponent className={`w-5 h-5 ${b.color}`} />
+                  </div>
+                  <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2">
+                    {b.tagline}
+                  </div>
+                  <h4 className="text-lg font-black text-slate-900 mb-2 leading-tight">
+                    {b.title}
+                  </h4>
+                  <p className="text-xs text-slate-600 leading-relaxed mb-3">
+                    {b.description}
+                  </p>
+                  <div className="pt-3 border-t border-slate-100">
+                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider italic">
+                      {b.highlight}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white uppercase mb-2">Elite Mentors</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  1:1 uplink with Senior Engineers from FAANG. Debug your logic in real-time.
-                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* --- CALL TO ACTION SECTION --- */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 overflow-hidden shadow-xl"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-600/20 via-purple-600/20 to-orange-600/20" />
+          <div className="relative z-10 text-center text-white">
+            <h3 className="text-2xl md:text-3xl font-black mb-3">
+              Ready to Transform Your Career?
+            </h3>
+            <p className="text-sm md:text-base text-white/90 mb-6 max-w-2xl mx-auto">
+              Join hundreds of students building the future with AI. Register now and get your ₹19,999 AI starter kit absolutely free!
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <div className="flex items-center gap-1.5 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
+                <CheckCircleIcon className="w-4 h-4" />
+                <span className="text-xs font-bold">100% Beginner-Friendly</span>
               </div>
-              <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                <div className="h-full w-1/3 bg-orange-500 group-hover:w-full transition-all duration-700 ease-out"></div>
+              <div className="flex items-center gap-1.5 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
+                <CheckCircleIcon className="w-4 h-4" />
+                <span className="text-xs font-bold">IIT-BHU Certified</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
+                <CheckCircleIcon className="w-4 h-4" />
+                <span className="text-xs font-bold">Guaranteed Portfolio Project</span>
               </div>
             </div>
-          </SpotlightCard>
-
-          {/* 3. WORKSHOPS */}
-          <SpotlightCard label="SKILL_UPLOAD" variants={itemVariants}>
-            <div className="p-8 h-full flex flex-col justify-between">
-              <div className="mb-6">
-                <div className="w-12 h-12 rounded-lg bg-pink-500/10 flex items-center justify-center border border-pink-500/20 mb-6 group-hover:scale-110 transition-transform duration-300">
-                   <CpuChipIcon className="w-6 h-6 text-pink-500" />
-                </div>
-                <h3 className="text-xl font-bold text-white uppercase mb-2">Pre-Event Workshop</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Zero Code App Development Workshop. Live masterclasses on Job Finding with AI after the event.
-                </p>
-              </div>
-              <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                <div className="h-full w-1/3 bg-pink-500 group-hover:w-full transition-all duration-700 ease-out"></div>
-              </div>
-            </div>
-          </SpotlightCard>
-
-          {/* 4. CAREER */}
-          <SpotlightCard label="CAREER_MODE" variants={itemVariants}>
-            <div className="p-8 h-full flex flex-col justify-between">
-              <div className="mb-6">
-                <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center border border-purple-500/20 mb-6 group-hover:scale-110 transition-transform duration-300">
-                   <RocketLaunchIcon className="w-6 h-6 text-purple-500" />
-                </div>
-                <h3 className="text-xl font-bold text-white uppercase mb-2">Internship Pipeline</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Top 10 get internship interviews, skill evaluation, career mentoring, and industry exposure.
-                </p>
-              </div>
-              <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                <div className="h-full w-1/3 bg-purple-500 group-hover:w-full transition-all duration-700 ease-out"></div>
-              </div>
-            </div>
-          </SpotlightCard>
-
-          {/* 5. GAMING */}
-          <SpotlightCard span="md:col-span-1" label="LOOT_BOX" variants={itemVariants}>
-             <div className="p-8 h-full relative overflow-hidden flex flex-col justify-between">
-               <div className="absolute -bottom-6 -right-6 text-9xl font-black text-white/5 select-none pointer-events-none group-hover:text-white/10 transition-colors">XP</div>
-               <div className="relative z-10">
-                 <div className="flex items-center gap-4 mb-6">
-                   <div className="p-2 rounded bg-white/5 border border-white/10 group-hover:border-orange-500/50 transition-colors"><BoltIcon className="w-6 h-6 text-orange-400" /></div>
-                   <div className="p-2 rounded bg-white/5 border border-white/10 group-hover:border-pink-500/50 transition-colors"><GiftIcon className="w-6 h-6 text-pink-400" /></div>
-                 </div>
-                 <h3 className="text-xl font-bold text-white uppercase mb-2">Side Prizes</h3>
-                 <p className="text-gray-400 text-sm">₹500-₹2,500 for Best Meme, Best PPT, Best UI/UX, Best Team Name, Fastest Submission & more!</p>
-               </div>
-             </div>
-          </SpotlightCard>
-
+          </div>
         </motion.div>
       </div>
     </section>

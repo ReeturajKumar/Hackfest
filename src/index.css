@@ -1,151 +1,314 @@
 @import "tailwindcss";
 
-@layer base {
-  button {
-    @apply cursor-pointer;
-  }
-  
-  body {
-    background-color: #030712;
-    color: white;
-    margin: 0;
-    min-height: 100vh;
-  }
-}
-
 :root {
-  --mouse-x: 50vw;
-  --mouse-y: 50vh;
+  --brand-pink: #FF2D95;
+  --brand-purple: #7030A0;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
 }
 
-.global-bg-container {
+@layer base {
+  body {
+    @apply bg-[#05010a] text-white antialiased overflow-x-hidden;
+    margin: 0;
+  }
+}
+
+/* THE REACTIVE GRID: Visible only near cursor */
+.grid-overlay {
   position: fixed;
   inset: 0;
-  z-index: -10;
-  width: 100vw;
-  height: 100vh;
-  background-color: #030712;
-  overflow: hidden;
   pointer-events: none;
-}
-
-
-.grid-overlay {
-  position: absolute;
-  inset: 0;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.2;
-}
-
-
-.interactive-glow {
-  position: absolute;
-  left: var(--mouse-x);
-  top: var(--mouse-y);
-  transform: translate(-50%, -50%);
+    linear-gradient(to right, rgba(255, 45, 149, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 45, 149, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 1;
   
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  
-
-  background: radial-gradient(
-    circle, 
-    rgba(236, 72, 153, 0.4) 0%,
-    rgba(249, 115, 22, 0.2) 30%,
-    transparent 70%
+  /* Mask logic: creates a circle that reveals the grid only at the mouse pos */
+  mask-image: radial-gradient(
+    300px circle at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    transparent 100%
   );
-  
-  filter: blur(100px);
-  mix-blend-mode: screen; 
-  
-  pointer-events: none;
-  z-index: 1; 
+  -webkit-mask-image: radial-gradient(
+    300px circle at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    transparent 100%
+  );
 }
 
-
-
-.core-container {
-  perspective: 1000px;
-  width: 400px;
-  height: 400px;
+/* MARQUEE REFIX (CSS Animation) */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+}
+
+/* RING & CORE ANIMATIONS */
 .core-ring {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 20px var(--core-color);
-  transition: all 0.5s ease;
+  border: 1px solid var(--brand-pink);
+  box-shadow: 0 0 20px rgba(255, 45, 149, 0.2);
 }
-
-.ring-1 {
-  width: 100%;
-  height: 100%;
-  border-color: var(--core-color);
-  animation: spin 10s linear infinite;
-}
-
-.ring-2 {
-  width: 70%;
-  height: 70%;
-  border-style: dashed;
-  animation: spin 15s linear infinite reverse;
-}
-
-.ring-3 {
-  width: 40%;
-  height: 40%;
-  border: 4px solid var(--core-color);
-  opacity: 0.5;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.core-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  background: var(--core-color);
-  border-radius: 50%;
-  box-shadow: 0 0 50px 20px var(--core-color);
-}
-
-.analyzing .ring-1 {
-  animation-duration: 2s;
-}
-
-.analyzing .ring-2 {
-  animation-duration: 3s;
-}
-
 
 @keyframes spin {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-@keyframes pulse {
+.ring-spin { animation: spin 10s linear infinite; }
+.ring-spin-reverse { animation: spin 15s linear infinite reverse; }
+
+
+/* THE REACTIVE GRAPH GRID - Only visible on hover */
+.graph-reveal-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(255, 45, 149, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 45, 149, 0.2) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  /* This creates the flashlight effect that follows the cursor */
+  mask-image: radial-gradient(
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black 0%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black 0%,
+    transparent 100%
+  );
+}
+
+/* Show graph grid on hover */
+.group\/hero:hover .graph-reveal-bg {
+  opacity: 1;
+}
+
+/* SMOOTH INFINITE MARQUEE */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+/* Ensure the container is flex and doesn't shrink children */
+.animate-marquee-slow > div {
+  flex-shrink: 0;
+}
+
+/* GLASS CARD STYLING */
+.glass-card {
+  backdrop-filter: blur(10px);
+  background: rgba(12, 3, 20, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* CARD ANIMATIONS FOR HERO SECTION */
+
+/* Floating/Breathing Animation */
+@keyframes card-float {
   0%, 100% {
-    opacity: 0.3;
-    scale: 1;
+    transform: translateY(0px);
   }
   50% {
-    opacity: 0.8;
-    scale: 1.1;
+    transform: translateY(-8px);
   }
 }
 
+.animate-card-float {
+  animation: card-float 4s ease-in-out infinite;
+}
 
+/* Pulsing Glow Effect */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Shimmer/Shine Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 45, 149, 0.1) 45%,
+    rgba(160, 32, 240, 0.1) 50%,
+    rgba(255, 45, 149, 0.1) 55%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Animated Gradient Border Glow */
+@keyframes gradient-border {
+  0% {
+    box-shadow: 
+      0 0 20px rgba(255, 45, 149, 0.3),
+      inset 0 0 20px rgba(255, 45, 149, 0.1);
+  }
+  33% {
+    box-shadow: 
+      0 0 30px rgba(160, 32, 240, 0.4),
+      inset 0 0 20px rgba(160, 32, 240, 0.15);
+  }
+  66% {
+    box-shadow: 
+      0 0 25px rgba(112, 48, 160, 0.35),
+      inset 0 0 20px rgba(112, 48, 160, 0.12);
+  }
+  100% {
+    box-shadow: 
+      0 0 20px rgba(255, 45, 149, 0.3),
+      inset 0 0 20px rgba(255, 45, 149, 0.1);
+  }
+}
+
+.animate-gradient-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 1.5rem;
+  pointer-events: none;
+  z-index: 1;
+  animation: gradient-border 4s ease-in-out infinite;
+}
+
+/* Fade In Up Animation */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Pulse Text Animation */
+@keyframes pulse-text {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-text {
+  animation: pulse-text 2s ease-in-out infinite;
+}
+
+/* Number Glow Animation */
+@keyframes number-glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 45, 149, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 45, 149, 0.6), 0 0 30px rgba(160, 32, 240, 0.4);
+  }
+}
+
+.animate-number-glow {
+  animation: number-glow 3s ease-in-out infinite;
+}
+
+/* Blink Animation for Date */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-blink {
+  animation: blink 2s ease-in-out infinite;
+}
+
+/* CODE EDITOR STYLES */
+
+/* Cursor Blink Animation */
+@keyframes blink-cursor {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.animate-blink-cursor {
+  animation: blink-cursor 1s step-end infinite;
+}
+
+/* Custom Scrollbar for Code Editor */
+.code-editor-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.code-editor-scroll::-webkit-scrollbar-track {
+  background: rgba(12, 3, 20, 0.5);
+  border-radius: 4px;
+}
+
+.code-editor-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 45, 149, 0.3);
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.code-editor-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 45, 149, 0.5);
+}
+
+/* Code Editor Syntax Highlighting */
+.code-editor-scroll code {
+  font-family: 'Courier New', Courier, monospace;
+}

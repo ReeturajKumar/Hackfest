@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext.jsx";
 import {
   EnvelopeIcon,
   LockClosedIcon,
@@ -15,7 +15,6 @@ import {
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   // --- STATE ---
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -60,32 +59,20 @@ const Login = () => {
     setErrorMessage("");
     setValidationErrors([]);
 
-    try {
-      const result = await login(formData.email, formData.password);
-
-      if (result.success) {
-        setStatus("success");
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 1500);
-      } else {
-        setStatus("error");
-        // Handle validation errors
-        if (result.errors && Array.isArray(result.errors)) {
-          setValidationErrors(result.errors);
-          setErrorMessage(result.error || "Validation failed");
-        } else {
-          setErrorMessage(result.error || "Access Denied");
-        }
-      }
-    } catch (error) {
+    // Basic validation
+    if (!formData.email || !formData.password) {
       setStatus("error");
-      setErrorMessage(
-        error instanceof Error 
-          ? error.message 
-          : "Network error. Please check your connection."
-      );
+      setErrorMessage("Please fill in all fields");
+      return;
     }
+
+    // Simulate login process
+    setTimeout(() => {
+      setStatus("success");
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    }, 1000);
   };
 
   // Helper to determine theme color based on status

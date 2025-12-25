@@ -1,12 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/purity */
 import React, { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { User, Mail, Lock, ArrowRight, Loader2, CheckCircle } from 'lucide-react';
-import { useAuth } from '../context/AuthContext.jsx';
 
 const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { register } = useAuth();
   const plan = location.state?.plan || 'solo';
   
   const [formData, setFormData] = useState({
@@ -53,32 +53,13 @@ const Register = () => {
     setErrorMessage('');
     setValidationErrors([]);
 
-    try {
-      const result = await register({
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        mode: formData.mode,
-      });
-
-      if (result.success) {
-        setStatus('success');
-        setTimeout(() => {
-          navigate('/dashboard');
-        }, 1500);
-      } else {
-        setStatus('error');
-        if (result.errors && Array.isArray(result.errors)) {
-          setValidationErrors(result.errors);
-          setErrorMessage(result.error || 'Validation failed');
-        } else {
-          setErrorMessage(result.error || 'Registration failed. Please try again.');
-        }
-      }
-    } catch (error) {
-      setStatus('error');
-      setErrorMessage(error.message || 'An error occurred. Please try again.');
-    }
+    // Simulate registration process
+    setTimeout(() => {
+      setStatus('success');
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
+    }, 1000);
   };
 
   return (

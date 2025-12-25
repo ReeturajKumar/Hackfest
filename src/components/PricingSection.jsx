@@ -1,9 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { CheckIcon, UserIcon, UsersIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
-
+import { 
+  CheckCircleIcon,
+  UserIcon,
+  UserGroupIcon,
+  GiftIcon,
+  AcademicCapIcon,
+  RocketLaunchIcon,
+  StarIcon
+} from '@heroicons/react/24/solid';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -11,226 +17,368 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.15,
-      delayChildren: 0.2,
+      delayChildren: 0.2
     }
   }
 };
 
-const cardVariants = {
-  hidden: { y: 50, opacity: 0, scale: 0.95 },
+const itemVariants = {
+  hidden: { y: 30, opacity: 0, scale: 0.95 },
   visible: { 
     y: 0, 
     opacity: 1, 
     scale: 1,
-    transition: { type: "spring", stiffness: 50, damping: 15 } 
+    transition: { type: "spring", stiffness: 80, damping: 15 } 
   }
 };
 
-const featureVariants = {
-  hidden: { x: -10, opacity: 0 },
-  visible: { x: 0, opacity: 1, transition: { duration: 0.3 } }
-};
-
 const PricingSection = () => {
+  const plans = [
+    {
+      name: "Individual",
+      price: "₹499",
+      originalPrice: null,
+      icon: UserIcon,
+      color: "orange",
+      gradient: "from-orange-500 to-amber-500",
+      bgGradient: "from-orange-50 to-amber-50",
+      features: [
+        "24-Hour Hackathon Access",
+        "All Problem Statements Access",
+        "Beginner & Advanced Tracks",
+        "Live Mentor Support",
+        "IIT-BHU Co-branded Certificate",
+        "₹19,999 Free AI Starter Kit",
+        "Portfolio Project Guarantee"
+      ],
+      popular: false
+    },
+    {
+      name: "Team",
+      price: "₹999",
+      originalPrice: null,
+      icon: UserGroupIcon,
+      color: "pink",
+      gradient: "from-pink-500 to-rose-500",
+      bgGradient: "from-pink-50 to-rose-50",
+      features: [
+        "Everything in Individual Plan",
+        "Team of 2-4 Members",
+        "Team Collaboration Tools",
+        "Priority Support"
+      ],
+      popular: true,
+      savings: "Save ₹997"
+    }
+  ];
+
+  const benefits = [
+    {
+      icon: GiftIcon,
+      title: "Free ₹19,999 AI Kit",
+      description: "CloudBlitz Starter AI Kit with Python & AI fundamentals"
+    },
+    {
+      icon: AcademicCapIcon,
+      title: "IIT-BHU Certificate",
+      description: "Official co-branded participation certificate"
+    },
+    {
+      icon: RocketLaunchIcon,
+      title: "Portfolio Project",
+      description: "Guaranteed resume-ready project for every participant"
+    },
+    {
+      icon: StarIcon,
+      title: "Career Opportunities",
+      description: "Internships for Top 10, Media coverage for Top 20"
+    }
+  ];
+
   return (
-    <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-transparent z-10 overflow-hidden">
-      <style>{`
-        .bg-grid-pattern {
-          background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-                            linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-          background-size: 20px 20px;
-        }
-        .clip-corner {
-          clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
-        }
-      `}</style>
-
-      <motion.div 
-        className="max-w-7xl mx-auto mb-20 text-center relative z-20"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.5 }}
-        variants={containerVariants}
-      >
-        <motion.div variants={cardVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-xs font-bold uppercase tracking-widest mb-4">
-           <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></span>
-           Registration
-        </motion.div>
-        <motion.h2 variants={cardVariants} className="text-5xl md:text-7xl font-black uppercase text-white tracking-tighter leading-none">
-          Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500">Participation</span>
-        </motion.h2>
-        <motion.p variants={cardVariants} className="text-gray-400 mt-4 text-center">
-          31st January 2026 | Maharashtra Level | Online Continuous
-        </motion.p>
-      </motion.div>
-
-      {/* --- 7XL GRID CONTAINER --- */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 relative z-20">
-        
-        {/* === CARD 1: SOLO (ORANGE) === */}
-        <motion.div 
-          className="group relative h-full"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-          variants={cardVariants}
-        >
-          {/* Hover Glow Behind */}
-          <div className="absolute -inset-1 bg-gradient-to-b from-orange-500 to-transparent opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-500 rounded-[2rem]"></div>
-          
-          <div className="relative h-full bg-[#0a0a0a] border border-white/10 rounded-[2rem] p-1 overflow-hidden transition-transform duration-300 group-hover:-translate-y-2">
-            
-            {/* Inner Dark Container */}
-            <div className="relative h-full bg-[#0f111a] rounded-[1.8rem] p-8 md:p-12 overflow-hidden">
-              <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-transparent"></div>
-
-              {/* HUD Corners */}
-              <div className="absolute top-6 right-6 w-3 h-3 border-t-2 border-r-2 border-orange-500/30 group-hover:border-orange-500 transition-colors"></div>
-              <div className="absolute bottom-6 left-6 w-3 h-3 border-b-2 border-l-2 border-orange-500/30 group-hover:border-orange-500 transition-colors"></div>
-
-              {/* Content */}
-              <motion.div className="relative z-10" variants={containerVariants}>
-                <div className="flex justify-between items-start mb-8">
-                  <div className="p-4 rounded-2xl bg-orange-500/10 text-orange-500 border border-orange-500/20">
-                    <UserIcon className="w-10 h-10" />
-                  </div>
-                  <div className="text-right">
-                    <h3 className="text-2xl font-black text-white uppercase italic">Solo Operator</h3>
-                    <p className="text-orange-400 text-xs font-bold uppercase tracking-widest">Single Entry</p>
-                  </div>
-                </div>
-
-                <div className="mb-10 p-6 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm">
-                  <span className="text-6xl font-black text-white tracking-tighter">₹499</span>
-                  <span className="text-gray-400 font-mono text-sm ml-2">/ Individual</span>
-                </div>
-
-                <motion.ul className="space-y-4 mb-10" variants={containerVariants}>
-                  {['24-Hour Full Access', 'Official Certificate (IIT Co-branded)', 'CloudBlitz AI Kit (Worth ₹19,999)', 'Choose Category (AI/ML, Web3, Mobile, Web Dev, No-Code)', 'Mentor Access & Workshops', 'Portfolio Project Templates', 'Participation Gift Box'].map((item, i) => (
-                    <motion.li key={i} variants={featureVariants} className="flex items-center gap-3 group/item">
-                      <div className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover/item:bg-orange-500 transition-colors"></div>
-                      <span className="text-gray-300 font-medium group-hover/item:text-white transition-colors text-sm">{item}</span>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-
-                <Link 
-                  to="/register"
-                  state={{ plan: 'solo' }}
-                  className="block w-full py-5 bg-transparent border border-orange-500/30 text-white font-bold uppercase tracking-widest hover:bg-orange-500 hover:border-orange-500 hover:text-black transition-all duration-300 clip-corner text-center"
-                >
-                  Initialize Solo
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* === CARD 2: SQUAD (PINK) === */}
-        <motion.div 
-          className="group relative h-full"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-          variants={cardVariants}
-        >
-          {/* Best Value Floater */}
-          <motion.div 
-            className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg shadow-pink-500/40"
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            Most Popular
-          </motion.div>
-
-          <div className="absolute -inset-1 bg-gradient-to-b from-pink-500 to-transparent opacity-20 blur-2xl group-hover:opacity-50 transition-opacity duration-500 rounded-[2rem]"></div>
-          
-          <div className="relative h-full bg-[#0a0a0a] border border-white/10 rounded-[2rem] p-1 overflow-hidden transition-transform duration-300 group-hover:-translate-y-2">
-            
-            <div className="relative h-full bg-[#0f111a] rounded-[1.8rem] p-8 md:p-12 overflow-hidden">
-              <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 to-purple-500"></div>
-
-              {/* HUD Corners */}
-              <div className="absolute top-6 right-6 w-3 h-3 border-t-2 border-r-2 border-pink-500/30 group-hover:border-pink-500 transition-colors"></div>
-              <div className="absolute bottom-6 left-6 w-3 h-3 border-b-2 border-l-2 border-pink-500/30 group-hover:border-pink-500 transition-colors"></div>
-
-              <motion.div className="relative z-10" variants={containerVariants}>
-                <div className="flex justify-between items-start mb-8">
-                  <div className="p-4 rounded-2xl bg-pink-500/10 text-pink-500 border border-pink-500/20">
-                    <UsersIcon className="w-10 h-10" />
-                  </div>
-                  <div className="text-right">
-                    <h3 className="text-2xl font-black text-white uppercase italic">Team</h3>
-                    <p className="text-pink-400 text-xs font-bold uppercase tracking-widest">2-4 Members</p>
-                  </div>
-                </div>
-
-                <div className="mb-10 p-6 rounded-2xl bg-gradient-to-br from-pink-500/10 to-purple-500/10 border border-pink-500/20 backdrop-blur-sm relative overflow-hidden">
-                  <div className="relative z-10">
-                    <span className="text-6xl font-black text-white tracking-tighter">₹999</span>
-                    <span className="text-gray-400 font-mono text-sm ml-2">/ TEAM</span>
-                    <p className="text-xs text-green-400 font-mono mt-2">SAVINGS: ₹997 DETECTED (vs Individual)</p>
-                  </div>
-                </div>
-
-                <motion.ul className="space-y-4 mb-10" variants={containerVariants}>
-                  {['Everything in Solo', 'Team of 2-4 Members', 'Choose Category Together', 'Dedicated Team Workspace', 'Priority Mentor Channel', 'Team Badges & Certificates', 'Collaborative Portfolio Project', 'Team Gift Box'].map((item, i) => (
-                    <motion.li key={i} variants={featureVariants} className="flex items-center gap-3 group/item">
-                      <div className="w-1.5 h-1.5 rounded-full bg-pink-500 group-hover/item:shadow-[0_0_10px_#ec4899] transition-all"></div>
-                      <span className="text-white font-bold text-sm">{item}</span>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-
-                <Link 
-                  to="/register"
-                  state={{ plan: 'team' }}
-                  className="block w-full py-5 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold uppercase tracking-widest hover:shadow-[0_0_30px_rgba(236,72,153,0.4)] transition-all duration-300 clip-corner text-center"
-                >
-                  Initialize Team
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
-
-      </div>
-
-      {/* --- BOTTOM CTA (Full Width 7XL) --- */}
+    <section className="relative py-10 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
+      {/* Blueprint Grid Background */}
       <div 
-        className="max-w-7xl mx-auto mt-16 px-0 md:px-0"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.5 }}
-        variants={cardVariants}
-      >
-        <div className="relative group overflow-hidden rounded-[2rem]">
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-orange-500 to-pink-500 opacity-80 blur-sm group-hover:opacity-100 transition-opacity"></div>
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(#000 1.5px, transparent 1.5px), linear-gradient(90deg, #000 1.5px, transparent 1.5px)`,
+          backgroundSize: '40px 40px'
+        }}
+      />
+      
+      {/* Gradient overlays */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-pink-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-orange-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Header */}
+        <motion.div 
+          className="text-center mb-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+        >
+          <motion.span 
+            variants={itemVariants}
+            className="text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-3 block"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            Pricing & Registration
+          </motion.span>
           
-          <div className="relative m-[2px] bg-[#030712] rounded-[calc(2rem-2px)] py-12 px-6 md:px-16 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden">
-             
-             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-pink-500/20 to-transparent blur-[80px]"></div>
+          <motion.h1 
+            variants={itemVariants}
+            className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
+          >
+            Invest in Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500">Future</span>, Reap Unlimited Rewards
+          </motion.h1>
 
-             <div className="relative z-10 text-center md:text-left">
-               <h3 className="text-3xl md:text-4xl font-black text-white uppercase italic leading-none mb-2">
-                 Ready to Deploy?
-               </h3>
-               <p className="text-gray-400">Slots are filling up. Secure your access token now.</p>
-             </div>
+          <motion.p 
+            variants={itemVariants}
+            className="text-base md:text-lg text-slate-600 font-medium mb-3 max-w-2xl mx-auto"
+          >
+            Start with just ₹499 and unlock ₹19,999 worth of premium resources, IIT certification, and career-transforming opportunities
+          </motion.p>
 
-             <Link 
-               to="/register"
-               className="relative z-10 flex items-center gap-4 px-10 py-5 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:bg-gray-200 hover:scale-105 transition-all duration-300 shadow-xl shadow-white/10"
-             >
-               Register Today
-               <ArrowRightIcon className="w-6 h-6" />
-             </Link>
+          <motion.p 
+            variants={itemVariants}
+            className="text-sm text-slate-500 max-w-2xl mx-auto"
+          >
+            Registration Period: <span className="font-bold text-slate-700">January 1 to January 20, 2026</span>
+          </motion.p>
+        </motion.div>
+
+        {/* Pricing Cards */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 max-w-5xl mx-auto"
+        >
+          {plans.map((plan, index) => {
+            const IconComponent = plan.icon;
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ y: -4, scale: 1.01 }}
+                className={`relative p-6 rounded-2xl border-2 shadow-sm hover:shadow-lg transition-all duration-300 ${
+                  plan.popular 
+                    ? 'border-pink-300 bg-gradient-to-br from-pink-50 to-rose-50' 
+                    : 'border-slate-200 bg-white hover:border-orange-300'
+                }`}
+              >
+                {/* Popular Badge */}
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black text-[10px] uppercase tracking-widest shadow-lg">
+                    Most Popular
+                  </div>
+                )}
+
+                {/* Savings Badge */}
+                {plan.savings && (
+                  <div className="absolute top-5 right-5 px-2.5 py-0.5 rounded-full bg-green-500 text-white text-[10px] font-black">
+                    {plan.savings}
+                  </div>
+                )}
+
+                {/* Icon */}
+                <div className={`w-12 h-12 ${
+                  plan.color === 'pink' ? 'bg-pink-100' : 'bg-orange-100'
+                } rounded-xl flex items-center justify-center mb-4`}>
+                  <IconComponent className={`w-6 h-6 ${
+                    plan.color === 'pink' ? 'text-pink-600' : 'text-orange-600'
+                  }`} />
+                </div>
+
+                {/* Plan Name */}
+                <h3 className="text-2xl font-black text-slate-900 mb-3">
+                  {plan.name}
+                </h3>
+
+                {/* Price */}
+                <div className="mb-5">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl font-black text-slate-900">
+                      {plan.price}
+                    </span>
+                    {plan.originalPrice && (
+                      <span className="text-lg text-slate-400 line-through">
+                        {plan.originalPrice}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {plan.name === "Individual" ? "Per person" : "Per team (2-4 members)"}
+                  </p>
+                </div>
+
+                {/* Features */}
+                <ul className="space-y-2.5 mb-6">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2.5">
+                      <CheckCircleIcon className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
+                        plan.color === 'pink' ? 'text-pink-500' : 'text-orange-500'
+                      }`} />
+                      <span className="text-xs text-slate-700 leading-relaxed font-medium">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA Button */}
+                <button className={`w-full py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-300 ${
+                  plan.popular
+                    ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white hover:shadow-lg hover:shadow-pink-500/50 hover:scale-105'
+                    : 'bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:shadow-lg hover:shadow-orange-500/50 hover:scale-105'
+                }`}>
+                  Register Now
+                </button>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Value Proposition */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-8"
+        >
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
+              What You Get
+            </h2>
+            <p className="text-sm text-slate-600 max-w-2xl mx-auto">
+              Incredible value included with every registration
+            </p>
           </div>
-        </div>
-      </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -3 }}
+                  className="p-5 rounded-xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg transition-all"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-100 to-orange-100 flex items-center justify-center mb-3">
+                    <IconComponent className="w-5 h-5 text-pink-600" />
+                  </div>
+                  <h3 className="text-base font-black text-slate-900 mb-2">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Eligibility & Additional Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"
+        >
+          {/* Eligibility Card */}
+          <div className="p-6 rounded-xl bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-200">
+            <h3 className="text-xl font-black text-slate-900 mb-3">
+              Eligibility
+            </h3>
+            <ul className="space-y-2.5">
+              <li className="flex items-start gap-2.5">
+                <CheckCircleIcon className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-700">BE / BTech / BCA / BCS / BSc (CS) / MCA students</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckCircleIcon className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-700">No percentage requirement</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckCircleIcon className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-700">No gap restriction</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckCircleIcon className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-700">Beginners & non-coders welcome</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Additional Benefits Card */}
+          <div className="p-6 rounded-xl bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200">
+            <h3 className="text-xl font-black text-slate-900 mb-3">
+              Additional Benefits
+            </h3>
+            <ul className="space-y-2.5">
+              <li className="flex items-start gap-2.5">
+                <CheckCircleIcon className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-700">Physical participation gift box delivered</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckCircleIcon className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-700">Side prizes (₹500 - ₹2,500) for various categories</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckCircleIcon className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-700">Guest lectures by IIT experts</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <CheckCircleIcon className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-700">Job search guidance using AI</span>
+              </li>
+            </ul>
+          </div>
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-8 text-center"
+        >
+          <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-600/20 via-purple-600/20 to-orange-600/20" />
+            <div className="relative z-10 text-white">
+              <h3 className="text-2xl md:text-3xl font-black mb-3">
+                Ready to Start Your Journey?
+              </h3>
+              <p className="text-sm md:text-base text-white/90 mb-6 max-w-2xl mx-auto">
+                Join hundreds of students building the future with AI. Register now and get your ₹19,999 AI starter kit absolutely free!
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <button className="px-6 py-3 bg-white text-pink-600 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gray-100 hover:scale-105 transition-all shadow-lg">
+                  Register Individual
+                </button>
+                <button className="px-6 py-3 bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-white/30 hover:scale-105 transition-all">
+                  Register Team
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };
