@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
   CheckCircleIcon,
   UserIcon,
@@ -47,7 +48,7 @@ const PricingSection = () => {
         "All Problem Statements Access",
         "Beginner & Advanced Tracks",
         "Live Mentor Support",
-        "IIT-BHU Co-branded Certificate",
+        "Official Certificate (Co-branded with IIT-BHU)",
         "₹19,999 Free AI Starter Kit",
         "Portfolio Project Guarantee"
       ],
@@ -80,7 +81,7 @@ const PricingSection = () => {
     },
     {
       icon: AcademicCapIcon,
-      title: "IIT-BHU Certificate",
+      title: "Official Certificate (Co-branded with IIT-BHU)",
       description: "Official co-branded participation certificate"
     },
     {
@@ -106,9 +107,6 @@ const PricingSection = () => {
         }}
       />
       
-      {/* Gradient overlays */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-pink-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-orange-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -135,14 +133,14 @@ const PricingSection = () => {
             variants={itemVariants}
             className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
           >
-            Invest in Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500">Future</span>, Reap Unlimited Rewards
+            Invest in Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">Future</span>, Get Unlimited<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]"> Rewards</span>
           </motion.h1>
 
           <motion.p 
             variants={itemVariants}
             className="text-base md:text-lg text-slate-600 font-medium mb-3 max-w-2xl mx-auto"
           >
-            Start with just ₹499 and unlock ₹19,999 worth of premium resources, IIT certification, and career-transforming opportunities
+            Start with just ₹499 and unlock ₹19,999 worth of premium resources, Official Certificate (Co-branded with IIT-BHU), and career-transforming opportunities
           </motion.p>
 
           <motion.p 
@@ -168,31 +166,31 @@ const PricingSection = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -4, scale: 1.01 }}
-                className={`relative p-6 rounded-2xl border-2 shadow-sm hover:shadow-lg transition-all duration-300 ${
+                className={`relative p-6 rounded-2xl border-2 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full ${
                   plan.popular 
-                    ? 'border-pink-300 bg-gradient-to-br from-pink-50 to-rose-50' 
-                    : 'border-slate-200 bg-white hover:border-orange-300'
+                    ? 'border-pink-300 bg-white' 
+                    : 'border-slate-200 bg-white hover:border-pink-300'
                 }`}
               >
                 {/* Popular Badge */}
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black text-[10px] uppercase tracking-widest shadow-lg">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white font-black text-[10px] uppercase tracking-widest shadow-lg">
                     Most Popular
                   </div>
                 )}
 
                 {/* Savings Badge */}
                 {plan.savings && (
-                  <div className="absolute top-5 right-5 px-2.5 py-0.5 rounded-full bg-green-500 text-white text-[10px] font-black">
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-green-500 text-white text-[10px] font-black shadow-md">
                     {plan.savings}
                   </div>
                 )}
 
                 {/* Icon */}
-                <div className={`w-12 h-12 ${
+                <div className={`w-14 h-14 ${
                   plan.color === 'pink' ? 'bg-pink-100' : 'bg-orange-100'
-                } rounded-xl flex items-center justify-center mb-4`}>
-                  <IconComponent className={`w-6 h-6 ${
+                } rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <IconComponent className={`w-7 h-7 ${
                     plan.color === 'pink' ? 'text-pink-600' : 'text-orange-600'
                   }`} />
                 </div>
@@ -203,9 +201,9 @@ const PricingSection = () => {
                 </h3>
 
                 {/* Price */}
-                <div className="mb-5">
+                <div className="mb-6">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-black text-slate-900">
+                    <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">
                       {plan.price}
                     </span>
                     {plan.originalPrice && (
@@ -214,19 +212,17 @@ const PricingSection = () => {
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-slate-500 mt-1.5">
                     {plan.name === "Individual" ? "Per person" : "Per team (2-4 members)"}
                   </p>
                 </div>
 
                 {/* Features */}
-                <ul className="space-y-2.5 mb-6">
+                <ul className="space-y-3 mb-6 flex-grow">
                   {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <CheckCircleIcon className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
-                        plan.color === 'pink' ? 'text-pink-500' : 'text-orange-500'
-                      }`} />
-                      <span className="text-xs text-slate-700 leading-relaxed font-medium">
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5 text-pink-500" />
+                      <span className="text-sm text-slate-700 leading-relaxed">
                         {feature}
                       </span>
                     </li>
@@ -234,62 +230,17 @@ const PricingSection = () => {
                 </ul>
 
                 {/* CTA Button */}
-                <button className={`w-full py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-300 ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white hover:shadow-lg hover:shadow-pink-500/50 hover:scale-105'
-                    : 'bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:shadow-lg hover:shadow-orange-500/50 hover:scale-105'
-                }`}>
+                <Link 
+                  to="/register"
+                  className="w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-300 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white hover:shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 mt-auto flex items-center justify-center"
+                >
                   Register Now
-                </button>
+                </Link>
               </motion.div>
             );
           })}
         </motion.div>
 
-        {/* Value Proposition */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
-        >
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
-              What You Get
-            </h2>
-            <p className="text-sm text-slate-600 max-w-2xl mx-auto">
-              Incredible value included with every registration
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {benefits.map((benefit, index) => {
-              const IconComponent = benefit.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -3 }}
-                  className="p-5 rounded-xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg transition-all"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-100 to-orange-100 flex items-center justify-center mb-3">
-                    <IconComponent className="w-5 h-5 text-pink-600" />
-                  </div>
-                  <h3 className="text-base font-black text-slate-900 mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
 
         {/* Eligibility & Additional Info */}
         <motion.div
@@ -300,54 +251,74 @@ const PricingSection = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"
         >
           {/* Eligibility Card */}
-          <div className="p-6 rounded-xl bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-200">
-            <h3 className="text-xl font-black text-slate-900 mb-3">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ y: -2 }}
+            className="p-6 rounded-xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg hover:border-pink-300 transition-all duration-300"
+          >
+            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+              <CheckCircleIcon className="w-6 h-6 text-purple-600" />
+            </div>
+            <h3 className="text-xl font-black text-slate-900 mb-4">
               Eligibility
             </h3>
-            <ul className="space-y-2.5">
-              <li className="flex items-start gap-2.5">
-                <CheckCircleIcon className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-slate-700">BE / BTech / BCA / BCS / BSc (CS) / MCA students</span>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3">
+                <CheckCircleIcon className="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-slate-700 leading-relaxed">BE / BTech / BCA / BCS / BSc (CS) / MCA students</span>
               </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircleIcon className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-slate-700">No percentage requirement</span>
+              <li className="flex items-start gap-3">
+                <CheckCircleIcon className="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-slate-700 leading-relaxed">No percentage requirement</span>
               </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircleIcon className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-slate-700">No gap restriction</span>
+              <li className="flex items-start gap-3">
+                <CheckCircleIcon className="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-slate-700 leading-relaxed">No gap restriction</span>
               </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircleIcon className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-slate-700">Beginners & non-coders welcome</span>
+              <li className="flex items-start gap-3">
+                <CheckCircleIcon className="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-slate-700 leading-relaxed">Beginners & non-coders welcome</span>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Additional Benefits Card */}
-          <div className="p-6 rounded-xl bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200">
-            <h3 className="text-xl font-black text-slate-900 mb-3">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ y: -2 }}
+            className="p-6 rounded-xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg hover:border-pink-300 transition-all duration-300"
+          >
+            <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
+              <GiftIcon className="w-6 h-6 text-orange-600" />
+            </div>
+            <h3 className="text-xl font-black text-slate-900 mb-4">
               Additional Benefits
             </h3>
-            <ul className="space-y-2.5">
-              <li className="flex items-start gap-2.5">
-                <CheckCircleIcon className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-slate-700">Physical participation gift box delivered</span>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3">
+                <CheckCircleIcon className="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-slate-700 leading-relaxed">Physical participation gift box delivered</span>
               </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircleIcon className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-slate-700">Side prizes (₹500 - ₹2,500) for various categories</span>
+              <li className="flex items-start gap-3">
+                <CheckCircleIcon className="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-slate-700 leading-relaxed">Side prizes (₹500 - ₹2,500) for various categories</span>
               </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircleIcon className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-slate-700">Guest lectures by IIT experts</span>
+              <li className="flex items-start gap-3">
+                <CheckCircleIcon className="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-slate-700 leading-relaxed">Guest lectures by IIT experts</span>
               </li>
-              <li className="flex items-start gap-2.5">
-                <CheckCircleIcon className="w-4 h-4 text-orange-600 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-slate-700">Job search guidance using AI</span>
+              <li className="flex items-start gap-3">
+                <CheckCircleIcon className="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" />
+                <span className="text-sm text-slate-700 leading-relaxed">Job search guidance using AI</span>
               </li>
             </ul>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* CTA Section */}
@@ -358,8 +329,7 @@ const PricingSection = () => {
           transition={{ duration: 0.6 }}
           className="mt-8 text-center"
         >
-          <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 overflow-hidden relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-600/20 via-purple-600/20 to-orange-600/20" />
+          <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-r from-[#FF2D95] to-[#7030A0] overflow-hidden relative">
             <div className="relative z-10 text-white">
               <h3 className="text-2xl md:text-3xl font-black mb-3">
                 Ready to Start Your Journey?
@@ -368,12 +338,18 @@ const PricingSection = () => {
                 Join hundreds of students building the future with AI. Register now and get your ₹19,999 AI starter kit absolutely free!
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
-                <button className="px-6 py-3 bg-white text-pink-600 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gray-100 hover:scale-105 transition-all shadow-lg">
+                <Link 
+                  to="/register"
+                  className="px-6 py-3 bg-white text-pink-600 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gray-100 hover:scale-105 transition-all shadow-lg inline-block"
+                >
                   Register Individual
-                </button>
-                <button className="px-6 py-3 bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-white/30 hover:scale-105 transition-all">
+                </Link>
+                <Link 
+                  to="/register"
+                  className="px-6 py-3 bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-white/30 hover:scale-105 transition-all inline-block"
+                >
                   Register Team
-                </button>
+                </Link>
               </div>
             </div>
           </div>

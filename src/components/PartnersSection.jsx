@@ -86,7 +86,7 @@ const PartnersSection = () => {
                   alt={partner.name}
                   animate={{ scale: hoveredCard === i ? 1.05 : 1 }}
                   className="max-h-full w-auto object-contain"
-                  style={{ height: '50px', width: 'auto', maxWidth: '120px' }}
+                  style={{ height: '80px', width: 'auto', maxWidth: '180px' }}
                   onError={(e) => {
                     const target = e.target;
                     if (partner.altLogos && partner.altLogos.length > 0) {

@@ -103,9 +103,6 @@ const ScheduleSection = () => {
         }}
       />
       
-      {/* Gradient overlays */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-pink-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-orange-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -132,7 +129,8 @@ const ScheduleSection = () => {
             variants={itemVariants}
             className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
           >
-            Master the <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500">Timeline</span>, Win the Future
+            Master the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">Timeline</span>, Win the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]"> Future
+               </span>
           </motion.h1>
 
           <motion.p 
@@ -194,12 +192,7 @@ const ScheduleSection = () => {
                     </h3>
 
                     {/* Period */}
-                    <p className={`text-xs font-bold mb-4 ${
-                      phase.color === 'pink' ? 'text-pink-600' :
-                      phase.color === 'purple' ? 'text-purple-600' :
-                      phase.color === 'orange' ? 'text-orange-600' :
-                      'text-blue-600'
-                    }`}>
+                    <p className="text-xs font-bold mb-4 text-slate-600">
                       {phase.period}
                     </p>
 

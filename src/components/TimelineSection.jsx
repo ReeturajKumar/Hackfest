@@ -7,7 +7,7 @@ const TimelineSection = () => {
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Timeline Image */}
-        <div className="relative w-full max-w-6xl mx-auto"
+        <div className="relative w-full max-w-7xl mx-auto"
         >
           <img 
             src="/timeline3.png" 

@@ -48,7 +48,7 @@ const WhyParticipate = () => {
       icon: AcademicCapIcon,
       color: "text-purple-600",
       bgColor: "bg-purple-50",
-      title: "IIT-BHU Certificate",
+      title: "Official Certificate (Co-branded with IIT-BHU)",
       description: "Official co-branded participation certificate and physical gift box delivered to your doorstep.",
       highlight: "Guaranteed portfolio-ready projects.",
       tagline: "Credibility Meets Excellence"
@@ -99,9 +99,6 @@ const WhyParticipate = () => {
         }}
       />
       
-      {/* Subtle gradient overlays */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-pink-100/20 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-orange-100/20 to-transparent rounded-full blur-3xl pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -128,14 +125,14 @@ const WhyParticipate = () => {
             variants={itemVariants} 
             className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
           >
-            Your Path to <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500">Excellence</span>
+            Build Real Solutions, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">Launch Your Career</span>
           </motion.h1>
 
           <motion.p 
             variants={itemVariants}
             className="text-base md:text-lg text-slate-600 font-medium mb-6 max-w-2xl mx-auto"
           >
-            Transform your career with industry-driven projects, IIT certification, and real-world AI experience
+            Join India's most rewarding AI hackathon. Solve real industry problems, earn IIT-BHU certification, and unlock career opportunities with ₹2.2L+ prizes
           </motion.p>
 
           {/* Value Proposition Tagline */}
@@ -149,7 +146,7 @@ const WhyParticipate = () => {
             </div>
             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 rounded-full border border-purple-200">
               <CheckCircleIcon className="w-3.5 h-3.5 text-purple-600" />
-              <span>IIT Certification</span>
+              <span>IIT-BHU Certificate</span>
             </div>
             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 rounded-full border border-orange-200">
               <CheckCircleIcon className="w-3.5 h-3.5 text-orange-600" />
@@ -159,7 +156,7 @@ const WhyParticipate = () => {
         </motion.div>
 
         {/* --- MAIN CONTENT BENTO GRID --- */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
           
           {/* Prize Pool Card - Featured */}
           <motion.div 
@@ -182,9 +179,9 @@ const WhyParticipate = () => {
               </div>
               
               <h2 className="text-4xl md:text-5xl font-black mb-3 leading-tight">
-                ₹2,20,000+
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">₹2,20,000+</span>
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-orange-400">Prize Pool</span>
+                <span className="text-white">Prize Pool</span>
               </h2>
               
               <p className="text-slate-300 max-w-lg text-sm font-medium mb-6 leading-relaxed">
@@ -275,8 +272,6 @@ const WhyParticipate = () => {
                 whileHover={{ y: -4, scale: 1.01 }}
                 className="p-6 rounded-2xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg hover:border-pink-300 transition-all duration-300 relative overflow-hidden group"
               >
-                {/* Hover gradient effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-50/0 to-orange-50/0 group-hover:from-pink-50/50 group-hover:to-orange-50/50 transition-all duration-300" />
                 
                 <div className="relative z-10">
                   <div className={`w-10 h-10 ${b.bgColor} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
@@ -303,14 +298,13 @@ const WhyParticipate = () => {
         </div>
 
         {/* --- CALL TO ACTION SECTION --- */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 overflow-hidden shadow-xl"
+          className="relative p-6 md:p-8 rounded-2xl bg-gradient-to-r from-[#FF2D95] to-[#7030A0] overflow-hidden shadow-xl"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-600/20 via-purple-600/20 to-orange-600/20" />
           <div className="relative z-10 text-center text-white">
             <h3 className="text-2xl md:text-3xl font-black mb-3">
               Ready to Transform Your Career?
@@ -333,7 +327,7 @@ const WhyParticipate = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate,Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { XMarkIcon, Bars3Icon, UserCircleIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
@@ -110,18 +110,18 @@ const Navbar = () => {
                     className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 relative group"
                   >
                     {link.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 ) : (
-                  <a
+                  <Link
                     key={link.name}
-                    href={link.href}
+                    to={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
                     className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 relative group"
                   >
                     {link.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                  </a>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
                 )
               ))}
             </div>
@@ -132,7 +132,7 @@ const Navbar = () => {
                 onClick={() => navigate('/register')}
                 className="relative px-6 py-2.5 rounded-full text-sm font-bold text-white overflow-hidden group"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-pink-600 to-orange-600 transition-all duration-300 group-hover:scale-105"></span>
+                <span className="absolute inset-0 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:scale-105"></span>
                 <span className="relative flex items-center gap-2">
                   Register
                   <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,9 +198,9 @@ const Navbar = () => {
                   </svg>
                 </Link>
               ) : (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   onClick={(e) => {
                     handleNavClick(e, link.href);
                     setIsMobileMenuOpen(false);
@@ -217,7 +217,7 @@ const Navbar = () => {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                   </svg>
-                </a>
+                </Link>
               )
             ))}
           </div>
@@ -231,7 +231,7 @@ const Navbar = () => {
               }}
               className="w-full relative px-6 py-3 rounded-xl text-base font-bold text-white overflow-hidden group"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-pink-600 to-orange-600 transition-all duration-300 group-hover:scale-105"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:scale-105"></span>
               <span className="relative flex items-center justify-center gap-2">
                 Register Now
                 <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -247,20 +247,30 @@ const HeroSection = () => {
 
           <motion.h1 variants={itemVariants} className="text-6xl sm:text-7xl lg:text-9xl font-black leading-[0.9] tracking-tighter mb-8">
             <span className="block text-white glitch-text" data-text="DEPLOY">DEPLOY</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-500 glitch-text" data-text="YOUR">YOUR</span>
-            <span className="block text-white glitch-text" data-text="VISION">VISION</span>
+            <span className="block text-white glitch-text" data-text="YOUR">YOUR</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0] glitch-text" data-text="VISION">VISION</span>
           </motion.h1>
 
-          <motion.p variants={itemVariants} className="text-xl text-gray-400 max-w-lg mb-4 border-l-4 border-pink-500 pl-6 py-1">
-            CloudBlitz AI HackFest - 2026 | 31st January 2026 | 24-Hour Continuous Online Hackathon
-          </motion.p>
-          <motion.p variants={itemVariants} className="text-sm text-gray-500 mb-10 max-w-lg">
-            Maharashtra Level • Individual or Team of 2-4 Members • No coding experience required
-          </motion.p>
+          {/* Clear Value Proposition Section */}
+          <motion.div variants={itemVariants} className="w-full max-w-2xl mb-10">
+            <div className="border-l-4 border-pink-500 pl-6 py-2">
+              <p className="text-white text-xl font-bold mb-2 leading-tight">
+                24-Hour Online AI Hackathon • <span className="text-pink-400">No Coding Required</span>
+              </p>
+              <p className="text-gray-300 text-base leading-relaxed">
+                Win <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0] font-bold">₹2 LAC</span> + <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0] font-bold">₹19,999 AI Starter Kit</span>. 
+                Every participant gets <span className="text-pink-400 font-semibold">Official Certificate (Co-branded with IIT-BHU)</span>, internships & career acceleration.
+              </p>
+            </div>
+          </motion.div>
 
           <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
-            <button className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest hover:bg-gray-200 transition-colors rounded-sm">Start_Hacking</button>
-            <button className="px-8 py-4 bg-transparent border border-white/20 text-white font-bold uppercase tracking-widest hover:border-pink-500 hover:text-pink-500 transition-colors rounded-sm">Read_Docs</button>
+            <button className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest hover:bg-gray-200 transition-colors rounded-sm shadow-lg hover:shadow-pink-500/50">
+              Launch Your Solution
+            </button>
+            <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold uppercase tracking-widest hover:border-pink-500 hover:text-pink-500 transition-colors rounded-sm">
+              Learn More
+            </button>
           </motion.div>
         </div>
 

@@ -1,6 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { 
+  EnvelopeIcon, 
+  PhoneIcon, 
+  MapPinIcon,
+  CalendarIcon,
+  AcademicCapIcon,
+  BuildingOfficeIcon,
+  RocketLaunchIcon
+} from '@heroicons/react/24/outline';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,17 +17,26 @@ const Footer = () => {
   const location = useLocation();
 
   const socialLinks = [
-    { name: 'X', path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' },
-    { name: 'GitHub', path: 'M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z' },
-    { name: 'Discord', path: 'M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419z' },
-    { name: 'LinkedIn', path: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' }
+    { name: 'X', href: '#', path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' },
+    { name: 'LinkedIn', href: '#', path: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' },
+    { name: 'Instagram', href: '#', path: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z' },
+    { name: 'YouTube', href: '#', path: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z' }
   ];
 
-  const navigationLinks = [
+  const quickLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
+    { name: 'Why Participate', href: '#about' },
     { name: 'Schedule', href: '#schedule' },
-    { name: 'Pricing', href: '#pricing' }
+    { name: 'Problem Statements', href: '#problems' },
+    { name: 'Pricing', href: '#pricing' },
+    { name: 'Partners', href: '#partners' }
+  ];
+
+  const resources = [
+    { name: 'Registration Guide', href: '/' },
+    { name: 'Problem Statements', href: '/' },
+    { name: 'Judging Criteria', href: '/' },
+    { name: 'FAQ', href: '/' }
   ];
 
   // Smart navigation function
@@ -83,7 +101,7 @@ const Footer = () => {
       >
         
         {/* --- MAIN GRID --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 mb-16">
           
           {/* 1. BRAND AREA */}
           <motion.div className="lg:col-span-4" variants={itemVariants}>
@@ -91,122 +109,128 @@ const Footer = () => {
               <div className="w-16 h-16 flex-shrink-0">
                 <img 
                   src="/logo.png" 
-                  alt="AI Hackfest Logo" 
+                  alt="CloudBlitz AI HackFest Logo" 
                   className="w-full h-full object-contain object-center"
                   loading="eager"
                 />
               </div>
               <div className="flex flex-col">
                 <div className="text-3xl font-black tracking-tight leading-tight mb-1">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-300" style={{ textShadow: '0 0 8px rgba(255, 255, 255, 0.2), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.2)' }}>
+                  <span className="text-white" style={{ 
+                    textShadow: '0 0 10px rgba(255, 45, 149, 0.5), 0 0 20px rgba(112, 48, 160, 0.3)'
+                  }}>
                     AI Hackfest
                   </span>
                 </div>
                 <div className="text-sm font-medium tracking-wide leading-tight">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 via-purple-300 to-purple-400" style={{ textShadow: '0 0 10px rgba(249, 115, 22, 0.9), 0 0 20px rgba(249, 115, 22, 0.6), 0 0 30px rgba(249, 115, 22, 0.4)' }}>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400" style={{ 
+                    textShadow: '0 0 8px rgba(249, 115, 22, 0.6), 0 0 16px rgba(236, 72, 153, 0.4)'
+                  }}>
                     by CloudBlitz
                   </span>
                 </div>
               </div>
             </div>
-            <p className="text-gray-400 mb-8 leading-relaxed max-w-sm">
-              CloudBlitz AI HackFest - 2026 | 31st January 2026 | Maharashtra Level | 24-Hour Continuous Online Hackathon. Build AI solutions, win ₹2.2L+ prizes, and launch your career.
+            <p className="text-gray-400 mb-6 leading-relaxed text-sm">
+              A 24-hour online AI hackathon empowering students to build real-world solutions. Win ₹2.2L+ prizes, earn IIT-BHU co-branded certificates, and accelerate your career with industry-driven projects.
             </p>
-            <div className="flex gap-4">
+            <div className="mb-6 space-y-2">
+              <div className="flex items-center gap-2 text-gray-400 text-xs">
+                <CalendarIcon className="w-4 h-4 text-[#FF2D95]" />
+                <span>Jan 31 - Feb 1, 2026 | Online 24H</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-400 text-xs">
+                <MapPinIcon className="w-4 h-4 text-[#FF2D95]" />
+                <span>Maharashtra Level Hackathon</span>
+              </div>
+            </div>
+            <div className="flex gap-3">
               {socialLinks.map((social, i) => (
                 <a 
                   key={i} 
-                  href="#" 
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="group relative w-10 h-10 flex items-center justify-center border border-white/10 hover:border-pink-500 transition-colors bg-white/5"
+                  className="group relative w-10 h-10 flex items-center justify-center border border-white/10 hover:border-[#FF2D95] transition-all bg-white/5 hover:bg-white/10 rounded-lg"
                 >
-                  <div className="absolute inset-0 bg-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity blur-md"></div>
-                  <svg className="w-4 h-4 fill-gray-400 group-hover:fill-white transition-colors" viewBox="0 0 24 24"><path d={social.path} /></svg>
+                  <svg className="w-5 h-5 fill-gray-400 group-hover:fill-[#FF2D95] transition-colors" viewBox="0 0 24 24"><path d={social.path} /></svg>
                 </a>
               ))}
             </div>
           </motion.div>
 
-          {/* 2. NAVIGATION LINKS */}
-          <motion.div className="lg:col-span-2 lg:pl-8" variants={itemVariants}>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 border-l-2 border-pink-500 pl-3">Explore</h4>
-            <ul className="space-y-3">
-              {navigationLinks.map((link) => (
-                <li key={link.name}>
-                  {link.type === 'route' ? (
-                    <Link 
-                      to={link.href}
-                      className="text-gray-500 hover:text-white transition-colors text-sm font-mono flex items-center gap-2 group cursor-pointer"
-                    >
-                      <span className="w-1 h-1 bg-gray-700 group-hover:bg-pink-500 transition-colors"></span>
-                      {link.name}
-                    </Link>
-                  ) : (
-                    <a 
-                      href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      className="text-gray-500 hover:text-white transition-colors text-sm font-mono flex items-center gap-2 group cursor-pointer"
-                    >
-                      <span className="w-1 h-1 bg-gray-700 group-hover:bg-pink-500 transition-colors"></span>
-                      {link.name}
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* 3. LEGAL LINKS */}
+          {/* 2. QUICK LINKS */}
           <motion.div className="lg:col-span-2" variants={itemVariants}>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 border-l-2 border-orange-500 pl-3">Legal</h4>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 border-l-2 border-[#FF2D95] pl-3">Quick Links</h4>
             <ul className="space-y-3">
-              {['Privacy Policy', 'Terms of Service', 'Code of Conduct'].map((link) => (
-                <li key={link}>
+              {quickLinks.map((link) => (
+                <li key={link.name}>
                   <Link 
-                    to={`/${link.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="text-gray-500 hover:text-white transition-colors text-sm font-mono group flex items-center gap-2"
+                    to="/"
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 bg-gray-700 group-hover:bg-orange-500 transition-colors"></span>
-                    {link}
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-[#FF2D95] transition-colors"></span>
+                    {link.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </motion.div>
 
-          {/* 4. NEWSLETTER */}
+          {/* 3. RESOURCES */}
+          <motion.div className="lg:col-span-2" variants={itemVariants}>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 border-l-2 border-[#7030A0] pl-3">Resources</h4>
+            <ul className="space-y-3">
+              {resources.map((resource) => (
+                <li key={resource.name}>
+                  <Link 
+                    to={resource.href}
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-[#7030A0] transition-colors"></span>
+                    {resource.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* 4. CONTACT & PARTNERS */}
           <motion.div className="lg:col-span-4" variants={itemVariants}>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Stay Updated</h4>
-            <form 
-              onSubmit={(e) => {
-                e.preventDefault();
-                // Handle newsletter signup
-                const email = e.target.email.value;
-                console.log('Newsletter signup:', email);
-                // Add your newsletter logic here
-              }}
-              className="relative group"
-            >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-orange-500 opacity-30 group-hover:opacity-100 transition duration-500 blur-sm"></div>
-              <div className="relative flex bg-[#0a0a0a]">
-                <input 
-                  type="email" 
-                  name="email"
-                  placeholder="Enter email address" 
-                  required
-                  className="w-full bg-transparent text-white px-4 py-3 outline-none placeholder:text-gray-600 text-sm font-mono"
-                />
-                <button 
-                  type="submit"
-                  className="px-6 py-2 bg-white text-black font-bold uppercase text-xs tracking-wider hover:bg-gray-200 transition-colors"
-                >
-                  Join
-                </button>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 border-l-2 border-[#FF2D95] pl-3">Contact & Support</h4>
+            <div className="space-y-4 mb-6">
+              <div className="flex items-start gap-3">
+                <EnvelopeIcon className="w-5 h-5 text-[#FF2D95] flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-gray-400 text-xs mb-1">Email Support</p>
+                  <a href="mailto:support@cloudblitz.in" className="text-white text-sm hover:text-[#FF2D95] transition-colors">
+                    support@cloudblitz.in
+                  </a>
+                </div>
               </div>
-            </form>
-            <div className="mt-4 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-[10px] text-gray-500 font-mono uppercase">System Status: Operational</span>
+              <div className="flex items-start gap-3">
+                <PhoneIcon className="w-5 h-5 text-[#FF2D95] flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-gray-400 text-xs mb-1">Registration Help</p>
+                  <a href="tel:+919876543210" className="text-white text-sm hover:text-[#FF2D95] transition-colors">
+                    +91 98765 43210
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div className="pt-4 border-t border-white/10">
+              <h5 className="text-white font-semibold text-xs mb-4 uppercase tracking-wider">Organized By</h5>
+              <div className="flex items-center gap-3 mb-4">
+                <img src="/cloudblitz_logo.png" alt="CloudBlitz" className="h-8 object-contain opacity-80 hover:opacity-100 transition-opacity" />
+                <span className="text-gray-400 text-xs">CloudBlitz - EdTech & Cloud & AI Training</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <img src="/greamio.png" alt="Greamio Technologies" className="h-6 object-contain opacity-80 hover:opacity-100 transition-opacity" />
+                <span className="text-gray-400 text-xs">Powered by Greamio Technologies</span>
+              </div>
             </div>
           </motion.div>
 
@@ -214,21 +238,23 @@ const Footer = () => {
 
         {/* --- BOTTOM BAR --- */}
         <motion.div 
-          className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+          className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
           variants={itemVariants}
         >
-          <p className="text-gray-600 text-xs font-mono">
-            © {currentYear} Hackathon. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6 text-xs font-mono">
-            <Link to="/privacy-policy" className="text-gray-600 hover:text-white transition-colors">
-              Privacy
+          <div className="flex flex-col md:flex-row items-center gap-4 text-xs text-gray-500">
+            <p>© {currentYear} CloudBlitz AI HackFest. All rights reserved.</p>
+            <span className="hidden md:inline">•</span>
+            <p>In partnership with <span className="text-white">IIT-BHU</span> & <span className="text-white">Greamio Technologies</span></p>
+          </div>
+          <div className="flex items-center gap-6 text-xs">
+            <Link to="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">
+              Privacy Policy
             </Link>
-            <Link to="/terms-of-service" className="text-gray-600 hover:text-white transition-colors">
-              Terms
+            <Link to="/terms-of-service" className="text-gray-500 hover:text-white transition-colors">
+              Terms of Service
             </Link>
-            <Link to="/support" className="text-gray-600 hover:text-white transition-colors">
-              Support
+            <Link to="/code-of-conduct" className="text-gray-500 hover:text-white transition-colors">
+              Code of Conduct
             </Link>
           </div>
         </motion.div>

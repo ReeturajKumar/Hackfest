@@ -112,9 +112,6 @@ const ProblemStatementsSection = () => {
         }}
       />
       
-      {/* Subtle gradient overlays */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-pink-100/20 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-orange-100/20 to-transparent rounded-full blur-3xl pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -141,14 +138,14 @@ const ProblemStatementsSection = () => {
             variants={itemVariants} 
             className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
           >
-            Solve Real <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 pr-2">Industry Problems</span>
+            Transform Ideas Into <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">Real Impact</span>
           </motion.h1>
 
           <motion.p 
             variants={itemVariants}
             className="text-base md:text-lg text-slate-700 font-medium mb-4 max-w-2xl mx-auto leading-relaxed"
           >
-            Build solutions that matter. Work on actual EdTech challenges from real organizations and create portfolio projects that showcase your skills.
+            Build portfolio-ready solutions for real EdTech challenges
           </motion.p>
 
           {/* Key Features */}
@@ -188,8 +185,6 @@ const ProblemStatementsSection = () => {
                 whileHover={{ y: -4, scale: 1.01 }}
                 className="relative p-6 rounded-2xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg hover:border-pink-300 transition-all duration-300 group h-full flex flex-col"
               >
-                {/* Hover gradient effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-50/0 to-orange-50/0 group-hover:from-pink-50/60 group-hover:to-orange-50/60 transition-all duration-300 rounded-2xl" />
                 
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon and Number */}
@@ -203,7 +198,7 @@ const ProblemStatementsSection = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-black text-slate-900 mb-3 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-600 group-hover:to-orange-500 transition-all">
+                  <h3 className="text-lg font-black text-slate-900 mb-3 leading-tight">
                     {problem.title}
                   </h3>
 
@@ -221,7 +216,7 @@ const ProblemStatementsSection = () => {
                       {problem.tracks.map((track, i) => (
                         <span 
                           key={i}
-                          className="px-2.5 py-1 text-[10px] font-bold rounded-lg bg-slate-100 text-slate-700 border border-slate-200 group-hover:bg-gradient-to-r group-hover:from-pink-50 group-hover:to-orange-50 group-hover:border-pink-200 transition-all"
+                          className="px-2.5 py-1 text-[10px] font-bold rounded-lg bg-slate-100 text-slate-700 border border-slate-200"
                         >
                           {track}
                         </span>
@@ -238,7 +233,7 @@ const ProblemStatementsSection = () => {
                       {problem.skills.map((skill, i) => (
                         <span 
                           key={i}
-                          className="px-2 py-0.5 text-[9px] font-bold rounded-md bg-gradient-to-r from-pink-50 to-orange-50 text-slate-700 border border-pink-100"
+                          className="px-2 py-0.5 text-[9px] font-bold rounded-md bg-slate-100 text-slate-700 border border-slate-200"
                         >
                           {skill}
                         </span>
