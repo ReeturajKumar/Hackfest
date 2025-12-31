@@ -35,69 +35,69 @@ const ProblemStatementsSection = () => {
   const problemStatements = [
     {
       id: 1,
-      icon: UserGroupIcon,
+      icon: BuildingLibraryIcon,
       iconColor: "text-pink-600",
       iconBg: "bg-pink-50",
-      title: "AI-Powered Lead Management & Follow-Up Intelligence",
-      description: "Build intelligent systems to track, manage, and follow up with leads automatically using AI-powered insights and automation. Transform sales processes with smart lead scoring and personalized follow-up strategies.",
+      title: "EdTech Operations & Automation",
+      description: "Build intelligent systems for lead management, student engagement tracking, and dropout prediction & analytics. Transform educational operations with automation and data-driven insights.",
       tracks: ["Beginner/No-Code Track", "Advanced/AI Track"],
-      skills: ["CRM Systems", "Automation", "AI Integration", "Data Analytics"],
-      impact: "Streamline sales operations and increase conversion rates"
+      skills: ["Lead Management Systems", "Student Engagement Tracking", "Dropout Prediction", "Analytics"],
+      impact: "Streamline EdTech operations and improve student outcomes"
     },
     {
       id: 2,
       icon: AcademicCapIcon,
       iconColor: "text-purple-600",
       iconBg: "bg-purple-50",
-      title: "Student Study Tracking & Dropout Prediction",
-      description: "Develop predictive analytics systems to track student progress and identify at-risk students for early intervention. Help educational institutions reduce dropout rates through data-driven insights.",
+      title: "Learning, Assessment & Academic Integrity",
+      description: "Develop AI-driven interview systems, online exam monitoring, and cheating detection systems. Ensure academic integrity while enhancing the learning and assessment experience.",
       tracks: ["Beginner/No-Code Track", "Advanced/AI Track"],
-      skills: ["Predictive Analytics", "Student Analytics", "Machine Learning", "Data Visualization"],
-      impact: "Improve student retention and academic success rates"
+      skills: ["AI-Driven Interviews", "Online Exam Monitoring", "Cheating Detection", "Academic Integrity"],
+      impact: "Enhance learning assessment and maintain academic standards"
     },
     {
       id: 3,
-      icon: Cog6ToothIcon,
+      icon: DocumentTextIcon,
       iconColor: "text-orange-600",
       iconBg: "bg-orange-50",
-      title: "Smart Fee Collection & Defaulter Detection",
-      description: "Create automated fee management systems with intelligent defaulter detection and payment reminders. Simplify financial operations for educational institutions with AI-powered payment tracking.",
+      title: "Content Creation & Knowledge Automation",
+      description: "Create automated notes generation systems and quiz & question bank creation tools. Revolutionize educational content creation with intelligent automation and knowledge management.",
       tracks: ["Beginner/No-Code Track", "Advanced/AI Track"],
-      skills: ["Payment Systems", "Automation", "Notification Systems", "Financial Analytics"],
-      impact: "Reduce payment delays and improve cash flow management"
+      skills: ["Automated Notes Generation", "Quiz Creation", "Question Bank Systems", "Content Automation"],
+      impact: "Save time and enhance educational content quality"
     },
     {
       id: 4,
       icon: CodeBracketIcon,
       iconColor: "text-blue-600",
       iconBg: "bg-blue-50",
-      title: "Automated Notes, Quiz & Question Bank Generator",
-      description: "Build AI-driven content generation systems that create study notes, quizzes, and comprehensive question banks automatically. Revolutionize educational content creation with intelligent automation.",
+      title: "Digital Credentials & Verification Systems",
+      description: "Build blockchain-based certificate systems and career credential verification platforms. Ensure authenticity and trust in digital credentials and professional qualifications.",
       tracks: ["Beginner/No-Code Track", "Advanced/AI Track"],
-      skills: ["Content Generation", "NLP", "Educational Technology", "AI Models"],
-      impact: "Save hours of manual content creation and enhance learning materials"
+      skills: ["Blockchain Technology", "Certificate Systems", "Credential Verification", "Digital Security"],
+      impact: "Establish trust and authenticity in digital credentials"
     },
     {
       id: 5,
-      icon: BuildingLibraryIcon,
+      icon: SparklesIcon,
       iconColor: "text-emerald-600",
       iconBg: "bg-emerald-50",
-      title: "Job Vacancy Aggregator & Placement Intelligence Platform",
-      description: "Develop intelligent job aggregation platforms with placement analytics and career matching algorithms. Connect students with opportunities through AI-powered job recommendations.",
+      title: "AI-Driven Platforms & Intelligent Systems",
+      description: "Develop decision-support systems and predictive analytics platforms. Create intelligent systems that help organizations make data-driven decisions and predictions.",
       tracks: ["Beginner/No-Code Track", "Advanced/AI Track"],
-      skills: ["Job Matching", "Data Aggregation", "Career Analytics", "Recommendation Systems"],
-      impact: "Bridge the gap between students and employment opportunities"
+      skills: ["Decision-Support Systems", "Predictive Analytics", "AI Platforms", "Intelligent Systems"],
+      impact: "Enable smarter decision-making through AI-powered insights"
     },
     {
       id: 6,
-      icon: DocumentTextIcon,
+      icon: UserGroupIcon,
       iconColor: "text-indigo-600",
       iconBg: "bg-indigo-50",
-      title: "Automated Attendance & Performance Analytics System",
-      description: "Create comprehensive attendance tracking systems with performance analytics and automated reporting. Help institutions monitor student engagement and identify patterns for better academic outcomes.",
+      title: "Career Intelligence & Job Automation",
+      description: "Build AI-powered resume screening & skill mapping, job vacancy discovery & aggregation, candidate-job matching systems, and placement analytics & hiring insights platforms.",
       tracks: ["Beginner/No-Code Track", "Advanced/AI Track"],
-      skills: ["Attendance Systems", "Performance Analytics", "Automated Reporting", "Data Insights"],
-      impact: "Improve student engagement tracking and academic performance monitoring"
+      skills: ["Resume Screening", "Job Matching", "Placement Analytics", "Hiring Insights"],
+      impact: "Bridge the gap between candidates and career opportunities"
     }
   ];
 
@@ -131,7 +131,7 @@ const ProblemStatementsSection = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            Problem Statements
+            Hackathon Problem Domains
           </motion.span>
           
           <motion.h1 
@@ -145,7 +145,7 @@ const ProblemStatementsSection = () => {
             variants={itemVariants}
             className="text-base md:text-lg text-slate-700 font-medium mb-4 max-w-2xl mx-auto leading-relaxed"
           >
-            Build portfolio-ready solutions for real EdTech challenges
+            Final statements revealed at hackathon start. Work on real-world problem
           </motion.p>
 
           {/* Key Features */}
@@ -187,20 +187,20 @@ const ProblemStatementsSection = () => {
               >
                 
                 <div className="relative z-10 flex flex-col h-full">
-                  {/* Icon and Number */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className={`w-12 h-12 ${problem.iconBg} rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                      <IconComponent className={`w-6 h-6 ${problem.iconColor}`} />
+                  {/* Icon, Title and Number */}
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-3 flex-1">
+                      <div className={`w-10 h-10 ${problem.iconBg} rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`}>
+                        <IconComponent className={`w-5 h-5 ${problem.iconColor}`} />
+                      </div>
+                      <h3 className="text-lg font-black text-slate-900 leading-tight">
+                        {problem.title}
+                      </h3>
                     </div>
-                    <div className="px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200">
+                    <div className="px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 flex-shrink-0 ml-2">
                       <span className="text-[10px] font-black text-slate-600">#{problem.id}</span>
                     </div>
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-lg font-black text-slate-900 mb-3 leading-tight">
-                    {problem.title}
-                  </h3>
 
                   {/* Description */}
                   <p className="text-xs text-slate-600 leading-relaxed mb-4 flex-grow">

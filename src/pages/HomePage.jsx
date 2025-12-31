@@ -4,8 +4,10 @@ import PartnersSection from '../components/PartnersSection'
 import WhyParticipate from '../components/WhyParticipate'
 import ProblemStatementsSection from '../components/ProblemStatementsSection'
 import ScheduleSection from '../components/ScheduleSection'
+import DeliverablesSection from '../components/DeliverablesSection'
 import TimelineSection from '../components/TimelineSection'
 import PricingSection from '../components/PricingSection'
+import FAQSection from '../components/FAQSection'
 
 const HomePage = () => {
   return (
@@ -27,6 +29,13 @@ const HomePage = () => {
       </section>
       <section id="timeline">
         <TimelineSection />
+      </section>
+          <section id="deliverables">
+        <DeliverablesSection />
+      </section>
+
+          <section id="faq">
+        <FAQSection />
       </section>
       <section id="pricing">
         <PricingSection />

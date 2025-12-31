@@ -57,6 +57,15 @@ const HeroSection = () => {
   const [charIndex, setCharIndex] = useState(0);
   const [isWaiting, setIsWaiting] = useState(false);
 
+  // --- ROTATING HEADING STATE ---
+  const rotatingTexts = [
+    "Smarter Building Without Code",
+    "Beginner-Friendly AI Hackathon",
+    "Learning Builds Career Opportunities"
+  ];
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
   // --- 1. PHYSICS LOOP ---
   useEffect(() => {
     let animationFrameId;
@@ -129,6 +138,23 @@ const HeroSection = () => {
     }, 30);
     return () => clearTimeout(timeout);
   }, [charIndex, lineIndex, isWaiting]);
+
+  // --- 5. ROTATING TEXT ANIMATION ---
+  useEffect(() => {
+    // Mark first render as complete after a short delay
+    const initialTimeout = setTimeout(() => {
+      setIsFirstRender(false);
+    }, 100);
+    
+    const interval = setInterval(() => {
+      setCurrentTextIndex((prev) => (prev + 1) % rotatingTexts.length);
+    }, 5000); // Change text every 5 seconds
+    
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(interval);
+    };
+  }, [rotatingTexts.length]);
 
   // --- RENDER HELPER ---
   const renderCode = () => {
@@ -210,16 +236,98 @@ const HeroSection = () => {
         .syntax-orange { color: #fb923c; }
         .cursor-blink { display: inline-block; width: 10px; height: 18px; background: #ec4899; animation: blink 1s step-end infinite; vertical-align: middle; margin-bottom: 2px; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        .glitch-text { position: relative; color: white; mix-blend-mode: lighten; }
-        .glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; width: 100%; background: #030712; clip: rect(0, 0, 0, 0); }
-        .glitch-text::before { left: -2px; text-shadow: 2px 0 #ec4899; animation: glitch-1 2s infinite linear alternate-reverse; }
-        .glitch-text::after { left: 2px; text-shadow: -2px 0 #f97316; animation: glitch-2 3s infinite linear alternate-reverse; }
-        @keyframes glitch-1 { 0% { clip: rect(20px, 9999px, 15px, 0); } 100% { clip: rect(70px, 9999px, 80px, 0); } }
-        @keyframes glitch-2 { 0% { clip: rect(80px, 9999px, 90px, 0); } 100% { clip: rect(30px, 9999px, 40px, 0); } }
+        .glitch-text { 
+          position: relative; 
+          color: white; 
+          display: inline-block;
+          text-shadow: 2px 0 white;
+        }
+        .glitch-text::before, 
+        .glitch-text::after { 
+          content: attr(data-text); 
+          position: absolute; 
+          top: 0; 
+          left: 0;
+          width: 100%; 
+          height: 100%;
+          background: transparent;
+          overflow: hidden;
+        }
+        .glitch-text::before { 
+          left: -2px; 
+          color: #ec4899;
+          text-shadow: 2px 0 #ec4899;
+          animation: glitch-1 2.5s infinite linear alternate-reverse; 
+          z-index: -1;
+          clip-path: inset(0 0 0 0);
+        }
+        .glitch-text::after { 
+          left: 2px; 
+          color: #f97316;
+          text-shadow: -2px 0 #f97316;
+          animation: glitch-2 2s infinite linear alternate-reverse; 
+          z-index: -2;
+          clip-path: inset(0 0 0 0);
+        }
+        @keyframes glitch-1 { 
+          0% { clip-path: inset(40% 0 61% 0); transform: translate(0); }
+          10% { clip-path: inset(92% 0 1% 0); transform: translate(-2px, 2px); }
+          20% { clip-path: inset(43% 0 1% 0); transform: translate(-2px, -2px); }
+          30% { clip-path: inset(25% 0 58% 0); transform: translate(2px, 0px); }
+          40% { clip-path: inset(54% 0 7% 0); transform: translate(-1px, 2px); }
+          50% { clip-path: inset(58% 0 43% 0); transform: translate(1px, -2px); }
+          60% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
+          70% { clip-path: inset(75% 0 5% 0); transform: translate(2px, -1px); }
+          80% { clip-path: inset(35% 0 65% 0); transform: translate(-1px, -2px); }
+          90% { clip-path: inset(88% 0 2% 0); transform: translate(1px, 2px); }
+          100% { clip-path: inset(50% 0 50% 0); transform: translate(0); }
+        }
+        @keyframes glitch-2 { 
+          0% { clip-path: inset(80% 0 1% 0); transform: translate(0); }
+          10% { clip-path: inset(54% 0 1% 0); transform: translate(2px, 2px); }
+          20% { clip-path: inset(60% 0 1% 0); transform: translate(2px, -2px); }
+          30% { clip-path: inset(10% 0 1% 0); transform: translate(-2px, 2px); }
+          40% { clip-path: inset(28% 0 1% 0); transform: translate(-2px, -2px); }
+          50% { clip-path: inset(80% 0 1% 0); transform: translate(2px, 2px); }
+          60% { clip-path: inset(15% 0 85% 0); transform: translate(-1px, -1px); }
+          70% { clip-path: inset(65% 0 35% 0); transform: translate(1px, 1px); }
+          80% { clip-path: inset(45% 0 55% 0); transform: translate(-2px, 1px); }
+          90% { clip-path: inset(90% 0 10% 0); transform: translate(1px, -2px); }
+          100% { clip-path: inset(30% 0 70% 0); transform: translate(0); }
+        }
         .binary-column { position: absolute; top: -50%; color: #ec4899; font-family: monospace; font-weight: bold; font-size: 16px; line-height: 28px; letter-spacing: 6px; white-space: pre; animation: binary-fall linear infinite; user-select: none; pointer-events: none; z-index: 0; }
         @keyframes binary-fall { 0% { transform: translateY(0); } 100% { transform: translateY(150vh); } }
         .cyber-floor { position: absolute; bottom: -20%; left: -50%; width: 200%; height: 80%; background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px); background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); -webkit-mask-image: linear-gradient(to top, black, transparent 80%); mask-image: linear-gradient(to top, black, transparent 80%); animation: move-grid 10s linear infinite; z-index: 0; }
         @keyframes move-grid { 0% { background-position: 0 0; } 100% { background-position: 0 60px; } }
+        .rotating-heading { 
+          position: relative; 
+          width: 100%; 
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+          will-change: transform, opacity;
+          z-index: 10;
+          display: block;
+        }
+        .rotating-heading.slide-in { 
+          animation: slideInFromBottom 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
+        }
+        @keyframes slideInFromBottom { 
+          0% { 
+            transform: translateY(50%); 
+            opacity: 0; 
+            filter: blur(6px);
+          } 
+          60% {
+            opacity: 1;
+            filter: blur(2px);
+          }
+          100% { 
+            transform: translateY(0); 
+            opacity: 1; 
+            filter: blur(0);
+          } 
+        }
       `}</style>
 
       {/* --- LAYERS --- */}
@@ -245,11 +353,21 @@ const HeroSection = () => {
         {/* Left Column */}
         <div className="flex flex-col items-start pt-10 lg:pt-0">
 
-          <motion.h1 variants={itemVariants} className="text-6xl sm:text-7xl lg:text-9xl font-black leading-[0.9] tracking-tighter mb-8">
-            <span className="block text-white glitch-text" data-text="DEPLOY">DEPLOY</span>
-            <span className="block text-white glitch-text" data-text="YOUR">YOUR</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0] glitch-text" data-text="VISION">VISION</span>
-          </motion.h1>
+          <motion.div variants={itemVariants} className="mb-8">
+            <div className="relative min-h-[200px] sm:min-h-[240px] lg:min-h-[300px] overflow-visible">
+              <div 
+                key={currentTextIndex}
+                className={`rotating-heading ${!isFirstRender ? 'slide-in' : ''} text-5xl sm:text-6xl lg:text-8xl font-black leading-[1.1] tracking-tighter`}
+              >
+                <span 
+                  className="block text-white glitch-text relative z-10" 
+                  data-text={rotatingTexts[currentTextIndex]}
+                >
+                  {rotatingTexts[currentTextIndex]}
+                </span>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Clear Value Proposition Section */}
           <motion.div variants={itemVariants} className="w-full max-w-2xl mb-10">
@@ -258,7 +376,7 @@ const HeroSection = () => {
                 24-Hour Online AI Hackathon • <span className="text-pink-400">No Coding Required</span>
               </p>
               <p className="text-gray-300 text-base leading-relaxed">
-                Win <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0] font-bold">₹2 LAC</span> + <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0] font-bold">₹19,999 AI Starter Kit</span>. 
+                Win <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0] font-bold">₹2.2 LAC</span> + <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0] font-bold">₹19,999 AI Starter Kit</span>. 
                 Every participant gets <span className="text-pink-400 font-semibold">Official Certificate (Co-branded with IIT-BHU)</span>, internships & career acceleration.
               </p>
             </div>

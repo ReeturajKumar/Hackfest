@@ -61,8 +61,8 @@ const PartnersSection = () => {
           </h2>
         </motion.div>
 
-        {/* Partners Grid - Matching reference design */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+        {/* Partners Logos - Without Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 mb-6 items-start justify-items-center">
           {partners.map((partner, i) => (
             <motion.div
               key={i}
@@ -72,21 +72,22 @@ const PartnersSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="relative bg-white rounded-lg border border-gray-200 p-3 shadow-sm hover:shadow-md transition-all duration-300"
+              className="flex flex-col items-center justify-start gap-3 w-full"
             >
-              {/* Category Label */}
-              <p className="text-[8px] font-bold text-gray-600 uppercase tracking-wider mb-3">
-                {partner.category}
-              </p>
-
-              {/* Logo Container */}
-              <div className="h-14 flex items-center justify-center mb-2">
+              {/* Category Label - Fixed Height */}
+              <div className="h-4 flex items-center justify-center w-full">
+                <p className="text-[10px] font-bold text-gray-600 uppercase tracking-wider text-center leading-tight">
+                  {partner.category}
+                </p>
+              </div>
+              
+              {/* Logo Container - Fixed Height */}
+              <div className="h-20 md:h-24 w-full flex items-center justify-center">
                 <motion.img 
                   src={partner.logo} 
                   alt={partner.name}
-                  animate={{ scale: hoveredCard === i ? 1.05 : 1 }}
-                  className="max-h-full w-auto object-contain"
-                  style={{ height: '80px', width: 'auto', maxWidth: '180px' }}
+                  animate={{ scale: hoveredCard === i ? 1.1 : 1 }}
+                  className="h-full w-auto max-w-[200px] object-contain transition-all duration-300"
                   onError={(e) => {
                     const target = e.target;
                     if (partner.altLogos && partner.altLogos.length > 0) {
@@ -103,12 +104,7 @@ const PartnersSection = () => {
                     }
                   }}
                 />
-                <div className="hidden text-sm font-bold text-gray-700">{partner.name}</div>
               </div>
-              
-              {/* Name and Description */}
-              <h3 className="text-sm font-bold text-gray-900 mb-1">{partner.name}</h3>
-              <p className="text-[10px] text-gray-600 leading-tight">{partner.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -121,31 +117,34 @@ const PartnersSection = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            whileHover={{ y: -2 }}
-            className="lg:col-span-7 bg-gray-900 rounded-xl p-5 text-white relative overflow-hidden"
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 bg-gray-900 rounded-xl p-5 text-white relative overflow-hidden group"
           >
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 border border-white/10 mb-4">
-              <span className="text-[9px] font-bold uppercase tracking-wider">TOTAL PRIZE POOL</span>
-            </div>
 
-            {/* Prize Amount */}
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-2">
-              ₹2,20,000<span className="text-pink-400">+</span>
+            {/* Registration Date */}
+            <h3 className="text-2xl md:text-3xl lg:text-5xl font-black tracking-tight mb-3">
+              Registration Date
             </h3>
+            <p className="text-xl md:text-2xl lg:text-3xl font-bold text-pink-400 mb-4">
+              1st Jan to 20th Jan
+            </p>
 
-            {/* Description */}
-            <p className="text-gray-400 text-xs mb-4 max-w-md leading-relaxed">
-              Rewarding the most disruptive solutions with cash, cloud credits, and exclusive perks.
+            {/* Urgency Text */}
+            <p className="text-white text-base md:text-lg font-bold mb-4 leading-relaxed">
+              Hurry up. <span className="text-pink-400">Limited Time.</span>
             </p>
 
             {/* Button */}
-            <button className="bg-white text-gray-900 px-4 py-2 rounded-lg font-bold text-[10px] hover:bg-gray-100 transition-colors">
-              Prize Details
+            <button className="w-full md:w-auto md:min-w-[250px] bg-white text-gray-900 px-10 py-2 md:px-12 md:py-2 rounded-lg font-bold text-sm md:text-base hover:bg-gray-100 transition-colors">
+              Register Now
             </button>
 
             {/* Background decorative element */}
-            <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-pink-500/20 rounded-full blur-3xl" />
+            {/* Animated background elements */}
+            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-pink-500/10 to-transparent rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-orange-500/10 to-transparent rounded-full blur-3xl" />
+            
+            <TrophyIcon className="absolute -right-12 -bottom-12 w-56 h-56 text-white/5 group-hover:text-white/10 transition-all duration-1000 group-hover:rotate-12" />
           </motion.div>
 
           {/* Event Details Card - Light Card on Right */}

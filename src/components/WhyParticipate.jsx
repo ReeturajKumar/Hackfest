@@ -40,53 +40,123 @@ const WhyParticipate = () => {
       color: "text-orange-600",
       bgColor: "bg-orange-50",
       title: "Free ₹19,999 AI Kit",
-      description: "Starter AI Kit with Python fundamentals, project ideas, and premium resume/LinkedIn templates.",
+      description: "",
       highlight: "Includes IIT expert guest lectures.",
-      tagline: "Learn. Build. Excel."
+      tagline: "Learn. Build. Excel.",
+      items: [
+        "Python Fundamentals (Videos + PDFs)",
+        "Mastering with AI (Videos + PDFs)",
+        "10 Beginner AI Project Ideas",
+        "Resume & LinkedIn Templates",
+        "No-Code AI Tools Guide"
+      ]
+    },
+    {
+      icon: GiftIcon,
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+      title: "Participation Gift Box",
+      description: "",
+      highlight: "Delivered to your doorstep.",
+      tagline: "Premium Recognition Package",
+      items: [
+        "Official Certificate (Co-branded with IIT)",
+        "IIT logo",
+        "CloudBlitz logo",
+        "QR Verification",
+        "Official Learning Partner – IIT mentioned clearly",
+        "Official Hackathon Badge (Magnet/Pinned)",
+        "AI & DevOps Sticker Pack",
+        "Motivational Card"
+      ]
     },
     {
       icon: AcademicCapIcon,
       color: "text-purple-600",
       bgColor: "bg-purple-50",
       title: "Official Certificate (Co-branded with IIT-BHU)",
-      description: "Official co-branded participation certificate and physical gift box delivered to your doorstep.",
+      description: "",
       highlight: "Guaranteed portfolio-ready projects.",
-      tagline: "Credibility Meets Excellence"
+      tagline: "Credibility Meets Excellence",
+      items: [
+        "Official co-branded participation certificate",
+        "Physical gift box delivered to your doorstep",
+        "IIT-BHU verified credentials",
+        "Digital certificate for LinkedIn",
+        "Lifetime validity and recognition"
+      ]
     },
     {
       icon: RocketLaunchIcon,
       color: "text-pink-600",
       bgColor: "bg-pink-50",
-      title: "Career Acceleration",
-      description: "Build resume-ready projects solving actual business problems from the EdTech industry.",
-      highlight: "Bridge the gap between academia & industry.",
-      tagline: "From Student to Industry Pro"
+      title: "Live Masterclasses After the Event",
+      description: "",
+      highlight: "Continuous learning opportunities.",
+      tagline: "Post-Event Excellence",
+      items: [
+        "Job Finding with AI (Hands-on session)",
+        "Guest Lectures by IIT Experts & Industry Leaders",
+        "Side Prizes (₹500 – ₹2,500 vouchers/cash)",
+        "Best Meme about Hackathon",
+        "Best Team Intro Video",
+        "Best LinkedIn Post About Hackathon",
+        "And Many More..."
+      ]
     },
     {
       icon: SparklesIcon,
       color: "text-amber-600",
       bgColor: "bg-amber-50",
-      title: "Beginner-Friendly",
-      description: "No coding? No problem. Zero-Code AI Workshop provided 7 days before the event starts.",
-      highlight: "Value for everyone, not just winners.",
-      tagline: "Start Your Journey Here"
+      title: "Media Spotlight for Top 20",
+      description: "",
+      highlight: "Get recognized nationally and internationally.",
+      tagline: "National Recognition",
+      items: [
+        "National and International Media Coverage"
+      ]
     },
     {
       icon: BuildingLibraryIcon,
       color: "text-blue-600",
       bgColor: "bg-blue-50",
-      title: "Industry Problems",
-      description: "Real-world challenges like Placement Intelligence and Content Automation tracking.",
-      highlight: "Multiple tracks for No-Code & AI.",
-      tagline: "Solve Real Challenges"
+      title: "Guaranteed Portfolio Project",
+      description: "",
+      highlight: "Build your portfolio with professional templates.",
+      tagline: "Portfolio Ready",
+      items: [
+        "An AI Project Template",
+        "GitHub README Template",
+        "PPT Template",
+        "Submission Format"
+      ]
+    },
+    {
+      icon: BriefcaseIcon,
+      color: "text-green-600",
+      bgColor: "bg-green-50",
+      title: "Career Acceleration",
+      description: "Build resume-ready projects solving actual business problems from the EdTech industry.",
+      highlight: "Bridge the gap between academia & industry.",
+      tagline: "From Student to Industry Pro"
     }
   ];
 
   const achievements = [
     { icon: StarIcon, text: "Top 10 get internship interviews", color: "text-yellow-500" },
     { icon: FireIcon, text: "Top 20 get national media coverage", color: "text-orange-500" },
-    { icon: BoltIcon, text: "Portfolio project for every participant", color: "text-pink-500" }
+    { icon: BoltIcon, text: "Portfolio project for every participant", color: "text-pink-500" },
+    { icon: GiftIcon, text: "Free ₹19,999 AI Starter Kit for all", color: "text-orange-400" },
+    { icon: AcademicCapIcon, text: "IIT-BHU Co-branded Certificate", color: "text-purple-400" },
+    { icon: BriefcaseIcon, text: "Direct internship opportunities", color: "text-blue-400" },
+    { icon: RocketLaunchIcon, text: "Career mentorship sessions", color: "text-pink-400" },
+    { icon: SparklesIcon, text: "Exclusive networking events", color: "text-amber-400" },
+    { icon: UserGroupIcon, text: "IIT Expert Guest Lectures", color: "text-indigo-400" },
+    { icon: TrophyIcon, text: "Side Prizes ₹500-₹2,500", color: "text-green-400" },
+    { icon: BuildingLibraryIcon, text: "Physical Gift Box Delivery", color: "text-cyan-400" },
+    { icon: CheckCircleIcon, text: "No Coding Required", color: "text-emerald-400" },
   ];
+
 
   return (
     <section className="relative py-10 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
@@ -132,7 +202,7 @@ const WhyParticipate = () => {
             variants={itemVariants}
             className="text-base md:text-lg text-slate-600 font-medium mb-6 max-w-2xl mx-auto"
           >
-            Join India's most rewarding AI hackathon. Solve real industry problems, earn IIT-BHU certification, and unlock career opportunities with ₹2.2L+ prizes
+            Solve real industry problems. Earn IIT-BHU certification. Win ₹2.2L+ prizes.
           </motion.p>
 
           {/* Value Proposition Tagline */}
@@ -156,7 +226,7 @@ const WhyParticipate = () => {
         </motion.div>
 
         {/* --- MAIN CONTENT BENTO GRID --- */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-6">
           
           {/* Prize Pool Card - Featured */}
           <motion.div 
@@ -164,7 +234,7 @@ const WhyParticipate = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-8 p-8 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden group shadow-xl"
+            className="md:col-span-8 p-5 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden group shadow-xl"
           >
             {/* Animated background elements */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-pink-500/10 to-transparent rounded-full blur-3xl" />
@@ -173,55 +243,56 @@ const WhyParticipate = () => {
             <TrophyIcon className="absolute -right-12 -bottom-12 w-56 h-56 text-white/5 group-hover:text-white/10 transition-all duration-1000 group-hover:rotate-12" />
             
             <div className="relative z-10">
-              <div className="flex items-center gap-2 text-orange-400 font-bold text-[10px] uppercase tracking-widest mb-4">
-                <StarIcon className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-orange-400 font-bold text-[9px] uppercase tracking-widest mb-2">
+                <StarIcon className="w-3.5 h-3.5" />
                 <span>Most Rewarding Track</span>
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-black mb-3 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-black mb-2 leading-tight">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">₹2,20,000+</span>
                 <br />
                 <span className="text-white">Prize Pool</span>
               </h2>
               
-              <p className="text-slate-300 max-w-lg text-sm font-medium mb-6 leading-relaxed">
+              <p className="text-slate-300 max-w-lg text-xs font-medium mb-4 leading-snug">
                 Compete for massive cash prizes while building your portfolio. Top performers get direct internship opportunities and national recognition.
               </p>
 
               {/* Prize breakdown */}
-              <div className="flex flex-wrap gap-3 mb-6">
-                <div className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
-                  <div className="text-[10px] text-slate-400 uppercase tracking-wider mb-1">First Place</div>
-                  <div className="text-xl font-black text-white">₹1,00,000</div>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <div className="px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
+                  <div className="text-[9px] text-slate-400 uppercase tracking-wider mb-0.5">First Place</div>
+                  <div className="text-lg font-black text-white">₹1,00,000</div>
                 </div>
-                <div className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
-                  <div className="text-[10px] text-slate-400 uppercase tracking-wider mb-1">Second Place</div>
-                  <div className="text-xl font-black text-white">₹70,000</div>
+                <div className="px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
+                  <div className="text-[9px] text-slate-400 uppercase tracking-wider mb-0.5">Second Place</div>
+                  <div className="text-lg font-black text-white">₹70,000</div>
                 </div>
-                <div className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
-                  <div className="text-[10px] text-slate-400 uppercase tracking-wider mb-1">Third Place</div>
-                  <div className="text-xl font-black text-white">₹50,000</div>
+                <div className="px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
+                  <div className="text-[9px] text-slate-400 uppercase tracking-wider mb-0.5">Third Place</div>
+                  <div className="text-lg font-black text-white">₹50,000</div>
                 </div>
               </div>
 
               {/* Achievements */}
-              <div className="flex flex-wrap gap-4 pt-4 border-t border-white/10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-3 border-t border-white/10 mb-0">
                 {achievements.map((achievement, i) => {
                   const IconComponent = achievement.icon;
                   return (
-                    <div key={i} className="flex items-center gap-2">
-                      <IconComponent className={`w-4 h-4 ${achievement.color}`} />
+                    <div key={i} className="flex items-center gap-2 px-3 py-2">
+                      <IconComponent className={`w-4 h-4 ${achievement.color} shrink-0`} />
                       <span className="text-xs text-slate-300 font-medium">{achievement.text}</span>
                     </div>
                   );
                 })}
               </div>
+
             </div>
           </motion.div>
 
           {/* Smaller Vertical Benefit Cards */}
-          <div className="md:col-span-4 grid grid-cols-1 gap-4">
-            {benefits.slice(0, 2).map((b, i) => {
+          <div className="md:col-span-4 grid grid-cols-1 gap-3">
+            {benefits.slice(0, 3).map((b, i) => {
               const IconComponent = b.icon;
               return (
                 <motion.div 
@@ -231,24 +302,33 @@ const WhyParticipate = () => {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   whileHover={{ y: -3, scale: 1.01 }}
-                  className="p-6 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-white to-slate-50 flex flex-col justify-between group hover:border-pink-300 hover:shadow-lg transition-all duration-300"
+                  className="p-3 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-white to-slate-50 flex flex-col justify-between "
                 >
                   <div>
-                    <div className={`w-12 h-12 ${b.bgColor} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <IconComponent className={`w-6 h-6 ${b.color}`} />
-                    </div>
-                    <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2">
+                    <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                       {b.tagline}
                     </div>
-                    <h3 className="text-lg font-black text-slate-900 mb-2 leading-tight">
-                      {b.title}
-                    </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed mb-3">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className={`w-8 h-8 ${b.bgColor} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
+                        <IconComponent className={`w-3.5 h-3.5 ${b.color}`} />
+                      </div>
+                      <h3 className="text-sm font-black text-slate-900 leading-tight">
+                        {b.title}
+                      </h3>
+                    </div>
+                    <p className="text-[10px] text-slate-600 leading-snug mb-1.5">
                       {b.description}
                     </p>
+                    {b.items && (
+                      <div className="mt-1.5 mb-1.5">
+                        <p className="text-[10px] text-slate-600 font-semibold leading-tight">
+                          {b.items.join(', ')}.
+                        </p>
+                      </div>
+                    )}
                   </div>
-                  <div className="pt-3 border-t border-slate-100">
-                    <p className="text-[10px] text-slate-500 font-medium italic">
+                  <div className="pt-1.5 border-t border-slate-100">
+                    <p className="text-[11px] text-slate-500 font-bold italic">
                       {b.highlight}
                     </p>
                   </div>
@@ -259,8 +339,8 @@ const WhyParticipate = () => {
         </div>
 
         {/* --- SECONDARY INFO ROW --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          {benefits.slice(2).map((b, i) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {benefits.slice(2, 6).map((b, i) => {
             const IconComponent = b.icon;
             return (
               <motion.div 
@@ -274,19 +354,35 @@ const WhyParticipate = () => {
               >
                 
                 <div className="relative z-10">
-                  <div className={`w-10 h-10 ${b.bgColor} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                    <IconComponent className={`w-5 h-5 ${b.color}`} />
-                  </div>
-                  <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2">
+                  <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
                     {b.tagline}
                   </div>
-                  <h4 className="text-lg font-black text-slate-900 mb-2 leading-tight">
-                    {b.title}
-                  </h4>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-3">
-                    {b.description}
-                  </p>
-                  <div className="pt-3 border-t border-slate-100">
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <div className={`w-9 h-9 ${b.bgColor} rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`}>
+                      <IconComponent className={`w-4 h-4 ${b.color}`} />
+                    </div>
+                    <h4 className="text-base font-black text-slate-900 leading-tight">
+                      {b.title}
+                    </h4>
+                  </div>
+                  {b.items && (
+                    <div className="mb-2">
+                      <ul className="space-y-1">
+                        {b.items.slice(0, 4).map((item, idx) => (
+                          <li key={idx} className="text-[10px] text-slate-600 leading-tight flex items-start gap-1.5">
+                            <span className="text-slate-400 mt-0.5 shrink-0">•</span>
+                            <span className="font-medium">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {!b.items && b.description && (
+                    <p className="text-[11px] text-slate-600 leading-relaxed mb-2">
+                      {b.description}
+                    </p>
+                  )}
+                  <div className="pt-2 border-t border-slate-100">
                     <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider italic">
                       {b.highlight}
                     </p>
@@ -334,3 +430,4 @@ const WhyParticipate = () => {
 };
 
 export default WhyParticipate;
+
