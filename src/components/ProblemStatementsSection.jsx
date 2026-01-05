@@ -24,10 +24,10 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
+  visible: {
+    y: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 100, damping: 15 } 
+    transition: { type: "spring", stiffness: 100, damping: 15 }
   }
 };
 
@@ -104,28 +104,28 @@ const ProblemStatementsSection = () => {
   return (
     <section className="relative py-10 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
       {/* Blueprint Grid Background */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(#000 1.5px, transparent 1.5px), linear-gradient(90deg, #000 1.5px, transparent 1.5px)`,
           backgroundSize: '40px 40px'
         }}
       />
-      
-      
+
+
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         {/* Header Section */}
-        <motion.div 
+        <motion.div
           className="text-center mb-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
         >
-          <motion.span 
+          <motion.span
             variants={itemVariants}
-            className="text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-3 block"
+            className="text-overline text-pink-500 mb-3 block"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -133,25 +133,25 @@ const ProblemStatementsSection = () => {
           >
             Hackathon Problem Domains
           </motion.span>
-          
-          <motion.h1 
-            variants={itemVariants} 
-            className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
+
+          <motion.h1
+            variants={itemVariants}
+            className="text-display-md text-slate-900 mb-2"
           >
             Transform Ideas Into <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">Real Impact</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             variants={itemVariants}
-            className="text-base md:text-lg text-slate-700 font-medium mb-4 max-w-2xl mx-auto leading-relaxed"
+            className="text-body-xl text-slate-700 font-medium mb-4 max-w-2xl mx-auto"
           >
             Final statements revealed at hackathon start. Work on real-world problem
           </motion.p>
 
           {/* Key Features */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 text-xs font-bold text-slate-700"
+            className="flex flex-wrap items-center justify-center gap-3 text-label-sm font-bold text-slate-700"
           >
             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-50 rounded-full border border-pink-200">
               <span>No-Code Track Available</span>
@@ -169,7 +169,7 @@ const ProblemStatementsSection = () => {
         </motion.div>
 
         {/* Problem Statements Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"
           initial="hidden"
           whileInView="visible"
@@ -185,7 +185,7 @@ const ProblemStatementsSection = () => {
                 whileHover={{ y: -4, scale: 1.01 }}
                 className="relative p-6 rounded-2xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg hover:border-pink-300 transition-all duration-300 group h-full flex flex-col"
               >
-                
+
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon, Title and Number */}
                   <div className="flex items-start justify-between mb-3">
@@ -193,30 +193,30 @@ const ProblemStatementsSection = () => {
                       <div className={`w-10 h-10 ${problem.iconBg} rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`}>
                         <IconComponent className={`w-5 h-5 ${problem.iconColor}`} />
                       </div>
-                      <h3 className="text-lg font-black text-slate-900 leading-tight">
+                      <h3 className="text-heading-xs font-black text-slate-900">
                         {problem.title}
                       </h3>
                     </div>
                     <div className="px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 flex-shrink-0 ml-2">
-                      <span className="text-[10px] font-black text-slate-600">#{problem.id}</span>
+                      <span className="text-caption-sm font-black text-slate-600">#{problem.id}</span>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs text-slate-600 leading-relaxed mb-4 flex-grow">
+                  <p className="text-label-sm text-slate-600 mb-4 flex-grow">
                     {problem.description}
                   </p>
 
                   {/* Tracks */}
                   <div className="mb-4">
-                    <div className="text-[9px] font-black text-slate-500 uppercase tracking-wider mb-2">
+                    <div className="text-caption-sm font-black text-slate-500 uppercase tracking-wider mb-2">
                       Available Tracks
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {problem.tracks.map((track, i) => (
-                        <span 
+                        <span
                           key={i}
-                          className="px-2.5 py-1 text-[10px] font-bold rounded-lg bg-slate-100 text-slate-700 border border-slate-200"
+                          className="px-2.5 py-1 text-caption-sm font-bold rounded-lg bg-slate-100 text-slate-700 border border-slate-200"
                         >
                           {track}
                         </span>
@@ -226,14 +226,14 @@ const ProblemStatementsSection = () => {
 
                   {/* Skills */}
                   <div className="pt-4 border-t border-slate-100 mt-auto">
-                    <div className="text-[9px] font-black text-slate-500 uppercase tracking-wider mb-2">
+                    <div className="text-caption-sm font-black text-slate-500 uppercase tracking-wider mb-2">
                       Key Skills You'll Build
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {problem.skills.map((skill, i) => (
-                        <span 
+                        <span
                           key={i}
-                          className="px-2 py-0.5 text-[9px] font-bold rounded-md bg-slate-100 text-slate-700 border border-slate-200"
+                          className="px-2 py-0.5 text-caption-sm font-bold rounded-md bg-slate-100 text-slate-700 border border-slate-200"
                         >
                           {skill}
                         </span>

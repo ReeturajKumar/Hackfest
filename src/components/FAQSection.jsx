@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import {
   ChevronDownIcon
 } from '@heroicons/react/24/solid';
 
@@ -18,10 +18,10 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
+  visible: {
+    y: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 100, damping: 15 } 
+    transition: { type: "spring", stiffness: 100, damping: 15 }
   }
 };
 
@@ -116,27 +116,27 @@ const FAQSection = () => {
   return (
     <section className="relative py-10 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
       {/* Blueprint Grid Background */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(#000 1.5px, transparent 1.5px), linear-gradient(90deg, #000 1.5px, transparent 1.5px)`,
           backgroundSize: '40px 40px'
         }}
       />
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         {/* Header Section */}
-        <motion.div 
+        <motion.div
           className="text-center mb-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
         >
-          <motion.span 
+          <motion.span
             variants={itemVariants}
-            className="text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-3 block"
+            className="text-overline text-pink-500 mb-3 block"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -144,24 +144,24 @@ const FAQSection = () => {
           >
             Everything You Need to Know
           </motion.span>
-          
-          <motion.h1 
-            variants={itemVariants} 
-            className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
+
+          <motion.h1
+            variants={itemVariants}
+            className="text-display-md text-slate-900 mb-2"
           >
             Your Questions, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">Answered</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             variants={itemVariants}
-            className="text-base md:text-lg text-slate-600 font-medium mb-6 max-w-2xl mx-auto leading-relaxed"
+            className="text-body-xl text-slate-600 font-medium mb-6 max-w-2xl mx-auto"
           >
             Get clarity on participation, requirements, prizes, and everything.
           </motion.p>
         </motion.div>
 
         {/* FAQ Items Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
           initial="hidden"
           whileInView="visible"
@@ -180,19 +180,18 @@ const FAQSection = () => {
               >
                 <div className="flex items-start gap-3 flex-1 min-w-0">
                   <div className="w-10 h-10 bg-pink-50 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-base font-black text-pink-600">{index + 1}</span>
+                    <span className="text-body-lg font-black text-pink-600">{index + 1}</span>
                   </div>
-                  <h3 className="text-sm font-black text-slate-900 leading-tight pr-2">
+                  <h3 className="text-body-md font-black text-slate-900 pr-2">
                     {faq.question}
                   </h3>
                 </div>
-                <ChevronDownIcon 
-                  className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-300 mt-0.5 ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
+                <ChevronDownIcon
+                  className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-300 mt-0.5 ${openIndex === index ? 'rotate-180' : ''
+                    }`}
                 />
               </button>
-              
+
               <motion.div
                 initial={false}
                 animate={{
@@ -204,19 +203,19 @@ const FAQSection = () => {
               >
                 <div className="px-5 pb-5 pl-[68px]">
                   {faq.answer && !faq.points && (
-                    <p className="text-xs text-slate-600 leading-relaxed">
+                    <p className="text-label-sm text-slate-600">
                       {faq.answer}
                     </p>
                   )}
                   {faq.answer && faq.points && (
-                    <p className="text-xs text-slate-600 leading-relaxed mb-2">
+                    <p className="text-label-sm text-slate-600 mb-2">
                       {faq.answer}
                     </p>
                   )}
                   {faq.points && (
                     <ul className="space-y-1.5 mb-2">
                       {faq.points.map((point, idx) => (
-                        <li key={idx} className="text-xs text-slate-600 leading-relaxed flex items-start gap-2">
+                        <li key={idx} className="text-label-sm text-slate-600 flex items-start gap-2">
                           <span className="text-pink-500 mt-1.5 flex-shrink-0">•</span>
                           <span>{point}</span>
                         </li>
@@ -224,7 +223,7 @@ const FAQSection = () => {
                     </ul>
                   )}
                   {faq.note && (
-                    <p className="text-xs text-slate-500 italic leading-relaxed mt-2">
+                    <p className="text-label-sm text-slate-500 italic mt-2">
                       {faq.note}
                     </p>
                   )}

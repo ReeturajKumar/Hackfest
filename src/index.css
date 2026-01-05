@@ -11,6 +11,395 @@
   body {
     @apply bg-[#05010a] text-white antialiased overflow-x-hidden;
     margin: 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* HTML Tag-Based Typography Defaults */
+  h1 {
+    font-size: 4.5rem;
+    /* 72px */
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+  }
+
+  h2 {
+    font-size: 3rem;
+    /* 48px */
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 2rem;
+    /* 32px */
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    /* 24px */
+    line-height: 1.3;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+    /* 20px */
+    line-height: 1.35;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+  }
+
+  h6 {
+    font-size: 1.125rem;
+    /* 18px */
+    line-height: 1.4;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1rem;
+    /* 16px */
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  button {
+    font-size: 0.875rem;
+    /* 14px */
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  a {
+    font-size: 0.875rem;
+    /* 14px */
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  label {
+    font-size: 0.875rem;
+    /* 14px */
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  span {
+    font-size: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+  }
+
+  /* Responsive Typography for HTML Tags */
+  @media (max-width: 1024px) {
+    h1 {
+      font-size: 3.5rem;
+    }
+
+    /* 56px */
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    /* 40px */
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    /* 28px */
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    /* 40px */
+    h2 {
+      font-size: 2rem;
+    }
+
+    /* 32px */
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    /* 24px */
+    h4 {
+      font-size: 1.25rem;
+    }
+
+    /* 20px */
+  }
+}
+
+/* ============================================
+   TYPOGRAPHY SCALE SYSTEM - Semantic Classes
+   ============================================ */
+
+@layer components {
+
+  /* ==================
+     DISPLAY TEXT (Hero Sections, Major Headings)
+     ================== */
+
+  .text-display-xl {
+    font-size: 4.5rem;
+    /* 72px */
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+  }
+
+  .text-display-lg {
+    font-size: 3.5rem;
+    /* 56px */
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+  }
+
+  .text-display-md {
+    font-size: 3rem;
+    /* 48px */
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+  }
+
+  /* ==================
+     HEADINGS (Section Titles)
+     ================== */
+
+  .text-heading-xl {
+    font-size: 2.5rem;
+    /* 40px */
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+  }
+
+  .text-heading-lg {
+    font-size: 2rem;
+    /* 32px */
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+  }
+
+  .text-heading-md {
+    font-size: 1.5rem;
+    /* 24px */
+    line-height: 1.3;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+  }
+
+  .text-heading-sm {
+    font-size: 1.25rem;
+    /* 20px */
+    line-height: 1.35;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+  }
+
+  .text-heading-xs {
+    font-size: 1.125rem;
+    /* 18px */
+    line-height: 1.4;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ==================
+     BODY TEXT (Main Content)
+     ================== */
+
+  .text-body-xl {
+    font-size: 1.125rem;
+    /* 18px */
+    line-height: 1.7;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  .text-body-lg {
+    font-size: 1rem;
+    /* 16px */
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  .text-body-md {
+    font-size: 0.875rem;
+    /* 14px */
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  .text-body-sm {
+    font-size: 0.8125rem;
+    /* 13px */
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  /* ==================
+     LABELS & UI TEXT
+     ================== */
+
+  .text-label-lg {
+    font-size: 0.875rem;
+    /* 14px */
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  .text-label-md {
+    font-size: 0.8125rem;
+    /* 13px */
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  .text-label-sm {
+    font-size: 0.75rem;
+    /* 12px */
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ==================
+     CAPTIONS & SMALL TEXT
+     ================== */
+
+  .text-caption-lg {
+    font-size: 0.75rem;
+    /* 12px */
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+
+  .text-caption-md {
+    font-size: 0.6875rem;
+    /* 11px */
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+
+  .text-caption-sm {
+    font-size: 0.625rem;
+    /* 10px */
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+
+  /* ==================
+     OVERLINE TEXT (Eyebrow, Category Labels)
+     ================== */
+
+  .text-overline {
+    font-size: 0.75rem;
+    /* 12px */
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ==================
+     RESPONSIVE TYPOGRAPHY
+     ================== */
+
+  @media (max-width: 1024px) {
+    .text-display-xl {
+      font-size: 3.5rem;
+    }
+
+    /* 56px */
+    .text-display-lg {
+      font-size: 3rem;
+    }
+
+    /* 48px */
+    .text-display-md {
+      font-size: 2.5rem;
+    }
+
+    /* 40px */
+    .text-heading-xl {
+      font-size: 2rem;
+    }
+
+    /* 32px */
+    .text-heading-lg {
+      font-size: 1.75rem;
+    }
+
+    /* 28px */
+  }
+
+  @media (max-width: 640px) {
+    .text-display-xl {
+      font-size: 2.5rem;
+    }
+
+    /* 40px */
+    .text-display-lg {
+      font-size: 2.25rem;
+    }
+
+    /* 36px */
+    .text-display-md {
+      font-size: 2rem;
+    }
+
+    /* 32px */
+    .text-heading-xl {
+      font-size: 1.75rem;
+    }
+
+    /* 28px */
+    .text-heading-lg {
+      font-size: 1.5rem;
+    }
+
+    /* 24px */
+    .text-heading-md {
+      font-size: 1.25rem;
+    }
+
+    /* 20px */
   }
 }
 
@@ -19,29 +408,30 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 45, 149, 0.15) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 45, 149, 0.15) 1px, transparent 1px);
   background-size: 50px 50px;
   z-index: 1;
-  
+
   /* Mask logic: creates a circle that reveals the grid only at the mouse pos */
-  mask-image: radial-gradient(
-    300px circle at var(--mouse-x) var(--mouse-y),
-    black 0%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    300px circle at var(--mouse-x) var(--mouse-y),
-    black 0%,
-    transparent 100%
-  );
+  mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y),
+      black 0%,
+      transparent 100%);
+  -webkit-mask-image: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y),
+      black 0%,
+      transparent 100%);
 }
 
 /* MARQUEE REFIX (CSS Animation) */
 @keyframes marquee-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee-infinite {
@@ -62,12 +452,22 @@
 }
 
 @keyframes spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
-.ring-spin { animation: spin 10s linear infinite; }
-.ring-spin-reverse { animation: spin 15s linear infinite reverse; }
+.ring-spin {
+  animation: spin 10s linear infinite;
+}
+
+.ring-spin-reverse {
+  animation: spin 15s linear infinite reverse;
+}
 
 
 /* THE REACTIVE GRAPH GRID - Only visible on hover */
@@ -75,7 +475,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 45, 149, 0.2) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 45, 149, 0.2) 1px, transparent 1px);
   background-size: 40px 40px;
@@ -83,16 +483,12 @@
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   /* This creates the flashlight effect that follows the cursor */
-  mask-image: radial-gradient(
-    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    black 0%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    black 0%,
-    transparent 100%
-  );
+  mask-image: radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      black 0%,
+      transparent 100%);
+  -webkit-mask-image: radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      black 0%,
+      transparent 100%);
 }
 
 /* Show graph grid on hover */
@@ -102,8 +498,13 @@
 
 /* SMOOTH INFINITE MARQUEE */
 @keyframes marquee-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee-slow {
@@ -113,7 +514,7 @@
 }
 
 /* Ensure the container is flex and doesn't shrink children */
-.animate-marquee-slow > div {
+.animate-marquee-slow>div {
   flex-shrink: 0;
 }
 
@@ -128,9 +529,12 @@
 
 /* Floating/Breathing Animation */
 @keyframes card-float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-8px);
   }
@@ -142,10 +546,13 @@
 
 /* Pulsing Glow Effect */
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.3;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.6;
     transform: scale(1.1);
@@ -161,20 +568,19 @@
   0% {
     background-position: -200% center;
   }
+
   100% {
     background-position: 200% center;
   }
 }
 
 .shimmer-effect {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 45, 149, 0.1) 45%,
-    rgba(160, 32, 240, 0.1) 50%,
-    rgba(255, 45, 149, 0.1) 55%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 45, 149, 0.1) 45%,
+      rgba(160, 32, 240, 0.1) 50%,
+      rgba(255, 45, 149, 0.1) 55%,
+      transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 3s linear infinite;
   transition: opacity 0.5s ease-in-out;
@@ -183,22 +589,25 @@
 /* Animated Gradient Border Glow */
 @keyframes gradient-border {
   0% {
-    box-shadow: 
+    box-shadow:
       0 0 20px rgba(255, 45, 149, 0.3),
       inset 0 0 20px rgba(255, 45, 149, 0.1);
   }
+
   33% {
-    box-shadow: 
+    box-shadow:
       0 0 30px rgba(160, 32, 240, 0.4),
       inset 0 0 20px rgba(160, 32, 240, 0.15);
   }
+
   66% {
-    box-shadow: 
+    box-shadow:
       0 0 25px rgba(112, 48, 160, 0.35),
       inset 0 0 20px rgba(112, 48, 160, 0.12);
   }
+
   100% {
-    box-shadow: 
+    box-shadow:
       0 0 20px rgba(255, 45, 149, 0.3),
       inset 0 0 20px rgba(255, 45, 149, 0.1);
   }
@@ -219,6 +628,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -232,9 +642,12 @@
 
 /* Pulse Text Animation */
 @keyframes pulse-text {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.7;
   }
@@ -246,9 +659,12 @@
 
 /* Number Glow Animation */
 @keyframes number-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 10px rgba(255, 45, 149, 0.3);
   }
+
   50% {
     text-shadow: 0 0 20px rgba(255, 45, 149, 0.6), 0 0 30px rgba(160, 32, 240, 0.4);
   }
@@ -260,9 +676,12 @@
 
 /* Blink Animation for Date */
 @keyframes blink {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -276,10 +695,14 @@
 
 /* Cursor Blink Animation */
 @keyframes blink-cursor {
-  0%, 50% {
+
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+
+  51%,
+  100% {
     opacity: 0;
   }
 }

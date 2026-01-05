@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  CheckCircleIcon, 
+import {
+  CheckCircleIcon,
   PresentationChartBarIcon,
   VideoCameraIcon,
   DocumentTextIcon,
@@ -24,10 +24,10 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
+  visible: {
+    y: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 100, damping: 15 } 
+    transition: { type: "spring", stiffness: 100, damping: 15 }
   }
 };
 
@@ -78,27 +78,27 @@ const DeliverablesSection = () => {
   return (
     <section className="relative py-10 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
       {/* Blueprint Grid Background */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(#000 1.5px, transparent 1.5px), linear-gradient(90deg, #000 1.5px, transparent 1.5px)`,
           backgroundSize: '40px 40px'
         }}
       />
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         {/* Header Section */}
-        <motion.div 
+        <motion.div
           className="text-center mb-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
         >
-          <motion.span 
+          <motion.span
             variants={itemVariants}
-            className="text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-3 block"
+            className="text-overline text-pink-500 mb-3 block"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -106,24 +106,24 @@ const DeliverablesSection = () => {
           >
             Deliverables & Submission Format
           </motion.span>
-          
-          <motion.h1 
-            variants={itemVariants} 
-            className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
+
+          <motion.h1
+            variants={itemVariants}
+            className="text-display-md text-slate-900 mb-2"
           >
             Submission <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">Requirements</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             variants={itemVariants}
-            className="text-base md:text-lg text-slate-600 font-medium mb-6 max-w-2xl mx-auto leading-relaxed"
+            className="text-body-xl text-slate-600 font-medium mb-6 max-w-2xl mx-auto"
           >
             Submit your demo-ready prototype with all required documentation.
           </motion.p>
         </motion.div>
 
         {/* Visual Deliverables Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8"
           initial="hidden"
           whileInView="visible"
@@ -142,24 +142,24 @@ const DeliverablesSection = () => {
                 <div className="relative p-5 rounded-2xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg hover:border-pink-300 transition-all duration-300 h-full flex flex-col items-center text-center">
                   {/* Number Badge */}
                   <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white flex items-center justify-center shadow-lg">
-                    <span className="text-[10px] font-black">{index + 1}</span>
+                    <span className="text-caption-sm font-black">{index + 1}</span>
                   </div>
-                  
+
                   {/* Large Icon */}
                   <div className={`w-14 h-14 ${deliverable.iconBg} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                     <IconComponent className={`w-7 h-7 ${deliverable.iconColor}`} />
                   </div>
-                  
+
                   {/* Title */}
-                  <h3 className="text-sm font-black text-slate-900 leading-tight mb-2">
+                  <h3 className="text-body-md font-black text-slate-900 mb-2">
                     {deliverable.title.split('(')[0].trim()}
                   </h3>
-                  
+
                   {/* Description */}
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed mb-3 flex-grow">
+                  <p className="text-label-sm text-slate-600 font-medium mb-3 flex-grow">
                     {deliverable.description}
                   </p>
-                  
+
                   {/* Visual Indicator Dots */}
                   <div className="mt-auto flex items-center gap-1">
                     <div className={`w-1.5 h-1.5 rounded-full ${deliverable.dotColor}`}></div>
@@ -187,9 +187,9 @@ const DeliverablesSection = () => {
                 <div className="w-10 h-10 bg-pink-500 rounded-xl flex items-center justify-center">
                   <ExclamationCircleIcon className="w-6 h-6 text-white" />
                 </div>
-                <h4 className="text-sm font-black text-slate-900">Important</h4>
+                <h4 className="text-body-md font-black text-slate-900">Important</h4>
               </div>
-              <p className="text-sm text-slate-700 font-medium leading-relaxed">
+              <p className="text-body-md text-slate-700 font-medium">
                 All deliverables must be included in a single public GitHub repository and submitted through the official submission portal.
               </p>
             </div>
@@ -202,9 +202,9 @@ const DeliverablesSection = () => {
                 <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center">
                   <CheckCircleIcon className="w-6 h-6 text-white" />
                 </div>
-                <h4 className="text-sm font-black text-slate-900">Note</h4>
+                <h4 className="text-body-md font-black text-slate-900">Note</h4>
               </div>
-              <p className="text-sm text-slate-700 font-medium leading-relaxed">
+              <p className="text-body-md text-slate-700 font-medium">
                 No-code and partial implementations are allowed. Teams will be evaluated based on idea clarity, execution, and impact, not code complexity.
               </p>
             </div>

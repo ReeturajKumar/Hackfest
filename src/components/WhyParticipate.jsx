@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { motion } from 'framer-motion'; 
-import { 
-  TrophyIcon, 
-  UserGroupIcon, 
-  RocketLaunchIcon, 
+import { motion } from 'framer-motion';
+import {
+  TrophyIcon,
+  UserGroupIcon,
+  RocketLaunchIcon,
   GiftIcon,
   AcademicCapIcon,
   BriefcaseIcon,
@@ -26,10 +26,10 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
+  visible: {
+    y: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 100, damping: 15 } 
+    transition: { type: "spring", stiffness: 100, damping: 15 }
   }
 };
 
@@ -161,28 +161,28 @@ const WhyParticipate = () => {
   return (
     <section className="relative py-10 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
       {/* Blueprint Grid Background */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(#000 1.5px, transparent 1.5px), linear-gradient(90deg, #000 1.5px, transparent 1.5px)`,
           backgroundSize: '40px 40px'
         }}
       />
-      
-      
+
+
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         {/* --- HERO HEADER --- */}
-        <motion.div 
+        <motion.div
           className="text-center mb-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
         >
-          <motion.span 
+          <motion.span
             variants={itemVariants}
-            className="text-[12px] font-bold text-pink-500 uppercase tracking-widest mb-3 block"
+            className="text-overline text-pink-500 mb-3 block"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -190,25 +190,25 @@ const WhyParticipate = () => {
           >
             Why Participate
           </motion.span>
-          
-          <motion.h1 
-            variants={itemVariants} 
-            className="text-2xl sm:text-3xl lg:text-5xl font-black tracking-tighter text-slate-900 mb-2 leading-tight"
+
+          <motion.h1
+            variants={itemVariants}
+            className="text-display-md text-slate-900 mb-2"
           >
             Build Real Solutions, <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">Launch Your Career</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             variants={itemVariants}
-            className="text-base md:text-lg text-slate-600 font-medium mb-6 max-w-2xl mx-auto"
+            className="text-body-xl text-slate-600 font-medium mb-6 max-w-2xl mx-auto"
           >
             Solve real industry problems. Earn IIT-BHU certification. Win ₹2.2L+ prizes.
           </motion.p>
 
           {/* Value Proposition Tagline */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-3 text-xs font-bold text-slate-700"
+            className="flex flex-wrap items-center justify-center gap-3 text-label-sm font-bold text-slate-700"
           >
             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-pink-50 rounded-full border border-pink-200">
               <CheckCircleIcon className="w-3.5 h-3.5 text-pink-600" />
@@ -227,9 +227,9 @@ const WhyParticipate = () => {
 
         {/* --- MAIN CONTENT BENTO GRID --- */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-6">
-          
+
           {/* Prize Pool Card - Featured */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -239,38 +239,38 @@ const WhyParticipate = () => {
             {/* Animated background elements */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-pink-500/10 to-transparent rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-orange-500/10 to-transparent rounded-full blur-3xl" />
-            
+
             <TrophyIcon className="absolute -right-12 -bottom-12 w-56 h-56 text-white/5 group-hover:text-white/10 transition-all duration-1000 group-hover:rotate-12" />
-            
+
             <div className="relative z-10">
-              <div className="flex items-center gap-2 text-orange-400 font-bold text-[9px] uppercase tracking-widest mb-2">
+              <div className="flex items-center gap-2 text-orange-400 font-bold text-caption-sm uppercase tracking-widest mb-2">
                 <StarIcon className="w-3.5 h-3.5" />
                 <span>Most Rewarding Track</span>
               </div>
-              
-              <h2 className="text-3xl md:text-4xl font-black mb-2 leading-tight">
+
+              <h2 className="text-heading-xl mb-2">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2D95] to-[#7030A0]">₹2,20,000+</span>
                 <br />
                 <span className="text-white">Prize Pool</span>
               </h2>
-              
-              <p className="text-slate-300 max-w-lg text-xs font-medium mb-4 leading-snug">
+
+              <p className="text-slate-300 max-w-lg text-label-sm font-medium mb-4">
                 Compete for massive cash prizes while building your portfolio. Top performers get direct internship opportunities and national recognition.
               </p>
 
               {/* Prize breakdown */}
               <div className="flex flex-wrap gap-2 mb-4">
                 <div className="px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
-                  <div className="text-[9px] text-slate-400 uppercase tracking-wider mb-0.5">First Place</div>
-                  <div className="text-lg font-black text-white">₹1,00,000</div>
+                  <div className="text-caption-sm text-slate-400 uppercase tracking-wider mb-0.5">First Place</div>
+                  <div className="text-heading-xs font-black text-white">₹1,00,000</div>
                 </div>
                 <div className="px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
-                  <div className="text-[9px] text-slate-400 uppercase tracking-wider mb-0.5">Second Place</div>
-                  <div className="text-lg font-black text-white">₹70,000</div>
+                  <div className="text-caption-sm text-slate-400 uppercase tracking-wider mb-0.5">Second Place</div>
+                  <div className="text-heading-xs font-black text-white">₹70,000</div>
                 </div>
                 <div className="px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all">
-                  <div className="text-[9px] text-slate-400 uppercase tracking-wider mb-0.5">Third Place</div>
-                  <div className="text-lg font-black text-white">₹50,000</div>
+                  <div className="text-caption-sm text-slate-400 uppercase tracking-wider mb-0.5">Third Place</div>
+                  <div className="text-heading-xs font-black text-white">₹50,000</div>
                 </div>
               </div>
 
@@ -281,7 +281,7 @@ const WhyParticipate = () => {
                   return (
                     <div key={i} className="flex items-center gap-2 px-3 py-2">
                       <IconComponent className={`w-4 h-4 ${achievement.color} shrink-0`} />
-                      <span className="text-xs text-slate-300 font-medium">{achievement.text}</span>
+                      <span className="text-label-sm text-slate-300 font-medium">{achievement.text}</span>
                     </div>
                   );
                 })}
@@ -295,8 +295,8 @@ const WhyParticipate = () => {
             {benefits.slice(0, 3).map((b, i) => {
               const IconComponent = b.icon;
               return (
-                <motion.div 
-                  key={i} 
+                <motion.div
+                  key={i}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -305,30 +305,30 @@ const WhyParticipate = () => {
                   className="p-3 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-white to-slate-50 flex flex-col justify-between "
                 >
                   <div>
-                    <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                    <div className="text-caption-sm font-bold text-slate-400 uppercase tracking-widest mb-1">
                       {b.tagline}
                     </div>
                     <div className="flex items-center gap-2 mb-1.5">
                       <div className={`w-8 h-8 ${b.bgColor} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
                         <IconComponent className={`w-3.5 h-3.5 ${b.color}`} />
                       </div>
-                      <h3 className="text-sm font-black text-slate-900 leading-tight">
+                      <h3 className="text-body-md font-black text-slate-900">
                         {b.title}
                       </h3>
                     </div>
-                    <p className="text-[10px] text-slate-600 leading-snug mb-1.5">
+                    <p className="text-caption-sm text-slate-600 mb-1.5">
                       {b.description}
                     </p>
                     {b.items && (
                       <div className="mt-1.5 mb-1.5">
-                        <p className="text-[10px] text-slate-600 font-semibold leading-tight">
+                        <p className="text-caption-sm text-slate-600 font-semibold">
                           {b.items.join(', ')}.
                         </p>
                       </div>
                     )}
                   </div>
                   <div className="pt-1.5 border-t border-slate-100">
-                    <p className="text-[11px] text-slate-500 font-bold italic">
+                    <p className="text-caption-md text-slate-500 font-bold italic">
                       {b.highlight}
                     </p>
                   </div>
@@ -343,7 +343,7 @@ const WhyParticipate = () => {
           {benefits.slice(2, 6).map((b, i) => {
             const IconComponent = b.icon;
             return (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -352,16 +352,16 @@ const WhyParticipate = () => {
                 whileHover={{ y: -4, scale: 1.01 }}
                 className="p-6 rounded-2xl bg-white border-2 border-slate-200 shadow-sm hover:shadow-lg hover:border-pink-300 transition-all duration-300 relative overflow-hidden group"
               >
-                
+
                 <div className="relative z-10">
-                  <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
+                  <div className="text-caption-sm font-bold text-slate-400 uppercase tracking-widest mb-1.5">
                     {b.tagline}
                   </div>
                   <div className="flex items-center gap-2.5 mb-2">
                     <div className={`w-9 h-9 ${b.bgColor} rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0`}>
                       <IconComponent className={`w-4 h-4 ${b.color}`} />
                     </div>
-                    <h4 className="text-base font-black text-slate-900 leading-tight">
+                    <h4 className="text-body-lg font-black text-slate-900">
                       {b.title}
                     </h4>
                   </div>
@@ -369,7 +369,7 @@ const WhyParticipate = () => {
                     <div className="mb-2">
                       <ul className="space-y-1">
                         {b.items.slice(0, 4).map((item, idx) => (
-                          <li key={idx} className="text-[10px] text-slate-600 leading-tight flex items-start gap-1.5">
+                          <li key={idx} className="text-caption-sm text-slate-600 flex items-start gap-1.5">
                             <span className="text-slate-400 mt-0.5 shrink-0">•</span>
                             <span className="font-medium">{item}</span>
                           </li>
@@ -378,12 +378,12 @@ const WhyParticipate = () => {
                     </div>
                   )}
                   {!b.items && b.description && (
-                    <p className="text-[11px] text-slate-600 leading-relaxed mb-2">
+                    <p className="text-caption-md text-slate-600 mb-2">
                       {b.description}
                     </p>
                   )}
                   <div className="pt-2 border-t border-slate-100">
-                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider italic">
+                    <p className="text-caption-sm font-bold text-slate-500 uppercase tracking-wider italic">
                       {b.highlight}
                     </p>
                   </div>
