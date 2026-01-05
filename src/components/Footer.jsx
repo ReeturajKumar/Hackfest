@@ -152,7 +152,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="group relative w-10 h-10 flex items-center justify-center border border-white/10 hover:border-[#FF2D95] transition-all bg-white/5 hover:bg-white/10 rounded-lg"
+                  className="group relative w-10 h-10 flex items-center justify-center border border-white/10 hover:border-[#FF2D95] transition-all bg-white/5 hover:bg-white/10 rounded-lg cursor-pointer"
                 >
                   <svg className="w-5 h-5 fill-gray-400 group-hover:fill-[#FF2D95] transition-colors" viewBox="0 0 24 24"><path d={social.path} /></svg>
                 </a>
@@ -169,7 +169,7 @@ const Footer = () => {
                   <Link 
                     to="/"
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group"
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-[#FF2D95] transition-colors"></span>
                     {link.name}
@@ -187,7 +187,7 @@ const Footer = () => {
                 <li key={resource.name}>
                   <Link 
                     to={resource.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group"
+                    className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-[#7030A0] transition-colors"></span>
                     {resource.name}
@@ -247,13 +247,13 @@ const Footer = () => {
             <p>In partnership with <span className="text-white">IIT-BHU</span> & <span className="text-white">Greamio Technologies</span></p>
           </div>
           <div className="flex items-center gap-6 text-xs">
-            <Link to="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">
+            <Link to="/privacy-policy" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
               Privacy Policy
             </Link>
-            <Link to="/terms-of-service" className="text-gray-500 hover:text-white transition-colors">
+            <Link to="/terms-of-service" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
               Terms of Service
             </Link>
-            <Link to="/code-of-conduct" className="text-gray-500 hover:text-white transition-colors">
+            <Link to="/code-of-conduct" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
               Code of Conduct
             </Link>
           </div>

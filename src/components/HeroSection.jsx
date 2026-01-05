@@ -383,10 +383,10 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
-            <button className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest hover:bg-gray-200 transition-colors rounded-sm shadow-lg hover:shadow-pink-500/50">
+            <button className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest hover:bg-gray-200 transition-colors rounded-sm shadow-lg hover:shadow-pink-500/50 cursor-pointer">
               Launch Your Solution
             </button>
-            <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold uppercase tracking-widest hover:border-pink-500 hover:text-pink-500 transition-colors rounded-sm">
+            <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold uppercase tracking-widest hover:border-pink-500 hover:text-pink-500 transition-colors rounded-sm cursor-pointer">
               Learn More
             </button>
           </motion.div>

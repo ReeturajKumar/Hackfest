@@ -176,7 +176,7 @@ const FAQSection = () => {
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full p-5 flex items-start justify-between text-left group flex-grow"
+                className="w-full p-5 flex items-start justify-between text-left group flex-grow cursor-pointer"
               >
                 <div className="flex items-start gap-3 flex-1 min-w-0">
                   <div className="w-10 h-10 bg-pink-50 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">

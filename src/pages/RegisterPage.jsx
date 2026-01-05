@@ -1,319 +1,266 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/purity */
 import React, { useState } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { User, Mail, Lock, ArrowRight, Loader2, CheckCircle } from 'lucide-react';
+import { useLocation, Link } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import Step1BasicDetails from '../components/registration/Step1BasicDetails';
+import Step2AcademicDetails from '../components/registration/Step2AcademicDetails';
+import Step3ParticipationDetails from '../components/registration/Step3ParticipationDetails';
+import Step4SkillLevels from '../components/registration/Step4SkillLevels';
+import Step5Consent from '../components/registration/Step5Consent';
 
 const Register = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const plan = location.state?.plan || 'solo';
-  
+
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
+    // Step 1
     name: '',
     email: '',
-    password: '',
-    mode: plan,
+    mobile: '',
+    gender: '',
+    // Step 2
+    college: '',
+    city: '',
+    state: 'Maharashtra',
+    course: '',
+    year: '',
+    // Step 3
+    participationType: plan === 'team' ? 'team' : 'individual',
+    teamName: '',
+    member2Name: '',
+    member2Email: '',
+    member2Mobile: '',
+    member3Name: '',
+    member3Email: '',
+    member3Mobile: '',
+    member4Name: '',
+    member4Email: '',
+    member4Mobile: '',
+    // Step 4
+    skillLevel: '',
+    interests: [],
+    referralSource: '',
+    // Step 5
+    communicationConsent: false,
+    declaration: false,
   });
-  const [status, setStatus] = useState('idle');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [validationErrors, setValidationErrors] = useState([]);
+  const [errors, setErrors] = useState({});
 
-  const fieldsCompleted = [
-    formData.name.length > 0,
-    formData.email.includes('@') && formData.email.includes('.'),
-    formData.password.length >= 6,
-  ].filter(Boolean).length;
-  
-  const animationSpeed = Math.max(8, 20 - (fieldsCompleted * 4));
-  const primaryHex = '#c084fc';
+  const totalSteps = 5;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear errors when user starts typing
-    if (status === 'error') {
-      setStatus('assembling');
-      setErrorMessage('');
-      setValidationErrors([]);
+    // Clear error for this field
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
-  const handleSubmit = async (e) => {
-    e?.preventDefault();
-    
-    if (fieldsCompleted < 3) {
-      setStatus('error');
-      setErrorMessage('All parameters required for transmission.');
-      return;
+  const validateStep = (step) => {
+    const newErrors = {};
+
+    if (step === 1) {
+      if (!formData.name.trim()) newErrors.name = 'Full name is required';
+      if (!formData.email.trim()) newErrors.email = 'Email is required';
+      else if (!formData.email.includes('@') || !formData.email.includes('.')) {
+        newErrors.email = 'Please enter a valid email';
+      }
+      if (!formData.mobile.trim()) newErrors.mobile = 'Mobile number is required';
+      else if (formData.mobile.length < 10) {
+        newErrors.mobile = 'Please enter a valid mobile number';
+      }
     }
 
-    setStatus('verifying');
-    setErrorMessage('');
-    setValidationErrors([]);
+    if (step === 2) {
+      if (!formData.college.trim()) newErrors.college = 'College/Institute name is required';
+      if (!formData.city.trim()) newErrors.city = 'City is required';
+      if (!formData.course) newErrors.course = 'Course is required';
+      if (!formData.year) newErrors.year = 'Year of study is required';
+    }
 
-    // Simulate registration process
-    setTimeout(() => {
-      setStatus('success');
-      setTimeout(() => {
-        navigate('/');
-      }, 1500);
-    }, 1000);
+    if (step === 3) {
+      if (!formData.participationType) {
+        newErrors.participationType = 'Please select participation type';
+      } else if (formData.participationType === 'team') {
+        if (!formData.teamName.trim()) newErrors.teamName = 'Team name is required';
+        if (!formData.member2Name.trim()) newErrors.member2Name = 'Team member 2 name is required';
+        if (!formData.member2Email.trim()) newErrors.member2Email = 'Team member 2 email is required';
+        if (!formData.member2Mobile.trim()) newErrors.member2Mobile = 'Team member 2 mobile is required';
+      }
+    }
+
+    if (step === 4) {
+      if (!formData.skillLevel) newErrors.skillLevel = 'Skill level is required';
+      if (!formData.referralSource) newErrors.referralSource = 'Referral source is required';
+    }
+
+    if (step === 5) {
+      if (!formData.communicationConsent) {
+        newErrors.communicationConsent = 'Communication consent is required';
+      }
+      if (!formData.declaration) {
+        newErrors.declaration = 'Declaration is required';
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validateStep(currentStep)) {
+      if (currentStep < totalSteps) {
+        setCurrentStep(currentStep + 1);
+      }
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateStep(5)) {
+      // Form is valid - handle submission logic here
+      console.log('Registration data:', formData);
+      // Navigate or show success message
+      alert('Registration successful! (This is a demo - integrate with your backend)');
+    }
+  };
+
+  const steps = [
+    { number: 1, title: 'Basic Details' },
+    { number: 2, title: 'Academic Details' },
+    { number: 3, title: 'Participation' },
+    { number: 4, title: 'Skills & Interests' },
+    { number: 5, title: 'Consent' },
+  ];
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <Step1BasicDetails formData={formData} handleChange={handleChange} errors={errors} />;
+      case 2:
+        return <Step2AcademicDetails formData={formData} handleChange={handleChange} errors={errors} />;
+      case 3:
+        return <Step3ParticipationDetails formData={formData} handleChange={handleChange} errors={errors} />;
+      case 4:
+        return <Step4SkillLevels formData={formData} handleChange={handleChange} setFormData={setFormData} errors={errors} />;
+      case 5:
+        return <Step5Consent formData={formData} handleChange={handleChange} setFormData={setFormData} errors={errors} />;
+      default:
+        return null;
+    }
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#050014] text-white relative overflow-hidden flex items-center justify-center font-mono py-10">
-      
-      <style>{`
-        .grid-container {
-          perspective: 1200px;
-          width: 400px;
-          height: 400px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .octahedron-core {
-          position: relative;
-          width: 300px;
-          height: 300px;
-          transform-style: preserve-3d;
-          animation: rotate-octahedron ${animationSpeed}s linear infinite;
-        }
-
-        .octahedron-face {
-          position: absolute;
-          width: 300px;
-          height: 300px;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          background: rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 30px ${primaryHex}15;
-          opacity: 0.7;
-        }
-
-        .octa-1 { transform: rotateX(45deg) rotateY(45deg); }
-        .octa-2 { transform: rotateX(45deg) rotateY(-45deg); }
-        .octa-3 { transform: rotateX(-45deg) rotateY(45deg); }
-        .octa-4 { transform: rotateX(-45deg) rotateY(-45deg); }
-
-        .stream-line {
-          position: absolute;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, ${primaryHex}, transparent);
-          box-shadow: 0 0 10px ${primaryHex};
-          animation: data-flow 10s linear infinite;
-          opacity: 0;
-        }
-
-        .data-node {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: ${primaryHex};
-          box-shadow: 0 0 15px ${primaryHex};
-        }
-
-        .input-field {
-          width: 100%;
-          background: #0a0515;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 0.5rem;
-          padding: 0.75rem 1rem 0.75rem 2.75rem;
-          color: white;
-          outline: none;
-          transition: all 0.3s;
-          font-size: 0.875rem;
-        }
-
-        .input-field::placeholder {
-          color: #4b5563;
-        }
-
-        .input-field:focus {
-          border-color: ${primaryHex};
-          box-shadow: 0 0 15px ${primaryHex}50;
-        }
-
-        .input-name {
-          text-transform: uppercase;
-        }
-
-        @keyframes rotate-octahedron {
-          from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-          to { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
-        }
-
-        @keyframes data-flow {
-          0% { transform: translateY(0); opacity: 0.5; }
-          50% { transform: translateY(300px); opacity: 0; }
-          100% { transform: translateY(600px); opacity: 0; }
-        }
-      `}</style>
-
-      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-0 relative z-10 bg-black/80 rounded-3xl shadow-2xl border border-white/10 overflow-hidden">
-        
-        <div className="flex flex-col justify-center px-8 lg:px-14 py-12 border-r border-white/10">
-          
-          <div className="mb-10">
-            <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight leading-tight">
-              Initialize{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Transmitter</span>
-            </h1>
-            <p className="text-gray-500 text-xs uppercase tracking-widest mt-3">
-              Securely injecting parameters into the data field.
-            </p>
+    <div 
+      className="min-h-screen w-full bg-white flex items-start justify-center pt-24 pb-12 px-4 sm:px-6 lg:px-8"
+      style={{
+        backgroundImage: `
+          linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px)
+        `,
+        backgroundSize: '24px 24px'
+      }}
+    >
+      <div className="max-w-7xl w-full">
+        <div className="bg-white rounded-xl shadow-2xl border border-gray-200 p-6 md:p-8">
+          {/* Step Indicator */}
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-4">
+              {steps.map((step, index) => (
+                <React.Fragment key={step.number}>
+                  <div className="flex flex-col items-center flex-1">
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all ${
+                        currentStep > step.number
+                          ? 'bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white'
+                          : currentStep === step.number
+                          ? 'bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white ring-4 ring-pink-100'
+                          : 'bg-gray-200 text-gray-500'
+                      }`}
+                    >
+                      {currentStep > step.number ? (
+                        <Check className="w-5 h-5" />
+                      ) : (
+                        step.number
+                      )}
+                    </div>
+                    <span
+                      className={`mt-2 text-xs font-medium hidden sm:block ${
+                        currentStep >= step.number ? 'text-gray-900' : 'text-gray-400'
+                      }`}
+                    >
+                      {step.title}
+                    </span>
+                  </div>
+                  {index < steps.length - 1 && (
+                    <div
+                      className={`h-0.5 flex-1 mx-2 ${
+                        currentStep > step.number ? 'bg-gradient-to-r from-[#FF2D95] to-[#7030A0]' : 'bg-gray-200'
+                      }`}
+                    />
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit}>
-            <div className="mb-6">
-              <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 block">
-                / Parameter 01: OPERATIVE ID
-              </label>
-              <div className="relative">
-                <User className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none z-10" />
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="OPERATIVE IDENTIFIER"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="input-field input-name"
-                />
+          {/* Form Content */}
+          <form onSubmit={currentStep === 5 ? handleSubmit : (e) => { e.preventDefault(); handleNext(); }}>
+            {renderStep()}
+
+            {/* Navigation Buttons */}
+            <div className="mt-6 flex items-center justify-between pt-5 border-t border-gray-200">
+              <button
+                type="button"
+                onClick={handlePrevious}
+                disabled={currentStep === 1}
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all ${
+                  currentStep === 1
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer'
+                }`}
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="text-sm text-gray-500">
+                Step {currentStep} of {totalSteps}
               </div>
-            </div>
 
-            <div className="mb-6">
-              <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 block">
-                / Parameter 02: UPLINK ADDRESS
-              </label>
-              <div className="relative">
-                <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none z-10" />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="uplink@grid.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="input-field"
-                />
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 block">
-                / Parameter 03: SECURITY KEY
-              </label>
-              <div className="relative">
-                <Lock className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none z-10" />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="••••••••••••"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="input-field"
-                />
-              </div>
-            </div>
-
-            {status === 'error' && (
-              <div className="bg-red-500/10 border border-red-500 text-red-300 text-xs p-3 rounded mb-6 animate-pulse">
-                <span className="font-bold">ERROR:</span> {errorMessage}
-              </div>
-            )}
-
-            
-
-            <button
-              type="submit"
-              disabled={status === 'verifying' || status === 'success' || fieldsCompleted < 3}
-              className={`w-full py-4 text-sm font-bold uppercase tracking-widest rounded-lg transition-all flex items-center justify-center gap-2 ${
-                status === 'success' 
-                  ? 'bg-green-500 text-black' 
-                  : fieldsCompleted < 3
-                  ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
-                  : 'bg-white text-black hover:bg-gray-200 cursor-pointer'
-              }`}
-            >
-              {status === 'verifying' ? (
-                <>Verifying Data <Loader2 className="w-4 h-4 animate-spin"/></>
-              ) : status === 'success' ? (
-                <>Signature Transmitted <CheckCircle className="w-4 h-4"/></>
+              {currentStep < totalSteps ? (
+                <button
+                  type="submit"
+                  className="relative flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden group"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:scale-105"></span>
+                  <span className="relative flex items-center gap-2">
+                    Next
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </button>
               ) : (
-                <>Transmit Signature <ArrowRight className="w-4 h-4" /></>
+                <button
+                  type="submit"
+                  className="relative flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden group"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:scale-105"></span>
+                  <span className="relative flex items-center gap-2">
+                    Submit Registration
+                  </span>
+                </button>
               )}
-            </button>
+            </div>
           </form>
-
-          <div className="mt-8 text-center text-xs text-gray-500">
-            <span>Already have an account?</span>
-            <Link to="/login" className="ml-2 text-pink-500 hover:text-pink-400 font-bold underline">
-              Access Login Terminal
-            </Link>
-          </div>
         </div>
-
-        <div className="hidden lg:flex flex-col relative h-full min-h-[600px] bg-[#0a0515] items-center justify-center overflow-hidden">
-          
-          <div className="absolute inset-0" style={{ 
-            background: 'radial-gradient(circle at 50% 50%, rgba(192, 132, 252, 0.08) 0%, transparent 60%)'
-          }}></div>
-
-          <div className="absolute inset-0">
-            {[...Array(12)].map((_, i) => (
-              <div 
-                key={i} 
-                className="stream-line" 
-                style={{ 
-                  animationDelay: `${i * 0.4}s`,
-                  top: `${Math.random() * 100}%`,
-                  opacity: Math.random() * 0.5
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="grid-container relative z-20">
-            <div className="octahedron-core">
-              <div className="octahedron-face octa-1"></div>
-              <div className="octahedron-face octa-2"></div>
-              <div className="octahedron-face octa-3"></div>
-              <div className="octahedron-face octa-4"></div>
-              
-              <div 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full animate-pulse" 
-                style={{ 
-                  backgroundColor: primaryHex, 
-                  boxShadow: `0 0 40px ${primaryHex}` 
-                }}
-              />
-              
-              {fieldsCompleted >= 1 && (
-                <div className="data-node" style={{top: '5%', left: '5%'}} />
-              )}
-              {fieldsCompleted >= 2 && (
-                <div className="data-node" style={{top: '5%', right: '5%'}} />
-              )}
-              {fieldsCompleted >= 3 && (
-                <div className="data-node" style={{bottom: '5%', left: '5%'}} />
-              )}
-            </div>
-          </div>
-
-          <div className="absolute bottom-10 text-center z-20">
-            <div className="text-xl font-bold uppercase tracking-widest text-white">
-              PHASE: <span style={{ color: primaryHex }}>{status.toUpperCase()}</span>
-            </div>
-            <div className="text-xs text-gray-500 mt-1">
-              ALIGNMENT: {Math.round((fieldsCompleted / 3) * 100)}% COMPLETE
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   );

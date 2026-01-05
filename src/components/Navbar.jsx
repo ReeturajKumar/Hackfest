@@ -64,10 +64,10 @@ const Navbar = () => {
   return (
     <>
       <nav 
-        className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 border-b ${
+        className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 border-b bg-[#030712]/90 ${
           scrolled 
             ? 'bg-[#030712]/90 backdrop-blur-md border-white/10 shadow-lg shadow-pink-500/5' 
-            : 'bg-transparent border-transparent'
+            : 'bg-[#030712]/90 border-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,7 +107,7 @@ const Navbar = () => {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 relative group"
+                    className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 relative group cursor-pointer"
                   >
                     {link.name}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:w-full"></span>
@@ -117,7 +117,7 @@ const Navbar = () => {
                     key={link.name}
                     to={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 relative group"
+                    className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 relative group cursor-pointer"
                   >
                     {link.name}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:w-full"></span>
@@ -130,7 +130,7 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center space-x-4">
               <button 
                 onClick={() => navigate('/register')}
-                className="relative px-6 py-2.5 rounded-full text-sm font-bold text-white overflow-hidden group"
+                className="relative px-6 py-2.5 rounded-full text-sm font-bold text-white overflow-hidden group cursor-pointer"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:scale-105"></span>
                 <span className="relative flex items-center gap-2">
@@ -146,7 +146,7 @@ const Navbar = () => {
             <div className="flex items-center lg:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors duration-200"
+                className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors duration-200 cursor-pointer"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? (
@@ -184,7 +184,7 @@ const Navbar = () => {
                   key={link.name}
                   to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 group"
+                  className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 group cursor-pointer"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <span className="text-base font-medium">{link.name}</span>
@@ -205,7 +205,7 @@ const Navbar = () => {
                     handleNavClick(e, link.href);
                     setIsMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 group"
+                  className="flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 group cursor-pointer"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <span className="text-base font-medium">{link.name}</span>
@@ -229,7 +229,7 @@ const Navbar = () => {
                 setIsMobileMenuOpen(false);
                 navigate('/register');
               }}
-              className="w-full relative px-6 py-3 rounded-xl text-base font-bold text-white overflow-hidden group"
+              className="w-full relative px-6 py-3 rounded-xl text-base font-bold text-white overflow-hidden group cursor-pointer"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:scale-105"></span>
               <span className="relative flex items-center justify-center gap-2">

@@ -232,7 +232,7 @@ const PricingSection = () => {
                 {/* CTA Button */}
                 <Link 
                   to="/register"
-                  className="w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-300 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white hover:shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 mt-auto flex items-center justify-center"
+                  className="w-full py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-300 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white hover:shadow-lg hover:shadow-pink-500/50 hover:scale-105 active:scale-95 mt-auto flex items-center justify-center cursor-pointer"
                 >
                   Register Now
                 </Link>
