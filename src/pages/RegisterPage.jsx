@@ -51,7 +51,7 @@ const Register = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
+
     // Clear error for this field
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -123,13 +123,71 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateStep(5)) {
-      // Form is valid - handle submission logic here
-      console.log('Registration data:', formData);
-      // Navigate or show success message
-      alert('Registration successful! (This is a demo - integrate with your backend)');
+      try {
+        // Show loading state
+        const submitButton = e.target.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+
+        // Call backend API
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          // Prepare payment URL with user data for auto-fill
+          const baseUrl = data.data.participationType === 'individual'
+            ? 'https://smartpay.easebuzz.in/142077/Indi_HackFest2026'
+            : 'https://smartpay.easebuzz.in/142077/Team_HackFest2026';
+
+          // Build URL parameters
+          const urlParams = {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.mobile,
+            amount: data.data.paymentAmount,
+            txnid: data.data.registrationId,
+          };
+
+          // Add team name if team registration (try multiple parameter names)
+          if (data.data.participationType === 'team' && formData.teamName) {
+            urlParams.teamName = formData.teamName;
+            urlParams.team_name = formData.teamName;
+            urlParams['Team Name'] = formData.teamName;
+            urlParams.udf1 = formData.teamName; // User Defined Field 1
+          }
+
+          const params = new URLSearchParams(urlParams);
+          const paymentUrl = `${baseUrl}?${params.toString()}`;
+
+          // Log URL for debugging
+          console.log('Payment URL:', paymentUrl);
+
+          // Redirect to payment page immediately
+          window.location.href = paymentUrl;
+        } else {
+          // Error from backend
+          alert(`❌ Registration Failed\n\n${data.message || 'Please try again.'}`);
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        }
+      } catch (error) {
+        console.error('Registration error:', error);
+        alert('❌ Registration Failed\n\nUnable to connect to server. Please check your internet connection and try again.');
+        const submitButton = e.target.querySelector('button[type="submit"]');
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit Registration';
+      }
     }
   };
 
@@ -159,7 +217,7 @@ const Register = () => {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen w-full bg-white flex items-start justify-center pt-24 pb-12 px-4 sm:px-6 lg:px-8"
       style={{
         backgroundImage: `
@@ -178,13 +236,12 @@ const Register = () => {
                 <React.Fragment key={step.number}>
                   <div className="flex flex-col items-center flex-1">
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all ${
-                        currentStep > step.number
-                          ? 'bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white'
-                          : currentStep === step.number
+                      className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all ${currentStep > step.number
+                        ? 'bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white'
+                        : currentStep === step.number
                           ? 'bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white ring-4 ring-pink-100'
                           : 'bg-gray-200 text-gray-500'
-                      }`}
+                        }`}
                     >
                       {currentStep > step.number ? (
                         <Check className="w-5 h-5" />
@@ -193,18 +250,16 @@ const Register = () => {
                       )}
                     </div>
                     <span
-                      className={`mt-2 text-xs font-medium hidden sm:block ${
-                        currentStep >= step.number ? 'text-gray-900' : 'text-gray-400'
-                      }`}
+                      className={`mt-2 text-xs font-medium hidden sm:block ${currentStep >= step.number ? 'text-gray-900' : 'text-gray-400'
+                        }`}
                     >
                       {step.title}
                     </span>
                   </div>
                   {index < steps.length - 1 && (
                     <div
-                      className={`h-0.5 flex-1 mx-2 ${
-                        currentStep > step.number ? 'bg-gradient-to-r from-[#FF2D95] to-[#7030A0]' : 'bg-gray-200'
-                      }`}
+                      className={`h-0.5 flex-1 mx-2 ${currentStep > step.number ? 'bg-gradient-to-r from-[#FF2D95] to-[#7030A0]' : 'bg-gray-200'
+                        }`}
                     />
                   )}
                 </React.Fragment>
@@ -222,11 +277,10 @@ const Register = () => {
                 type="button"
                 onClick={handlePrevious}
                 disabled={currentStep === 1}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all ${
-                  currentStep === 1
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer'
-                }`}
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all ${currentStep === 1
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer'
+                  }`}
               >
                 <ArrowLeft className="w-4 h-4" />
                 Previous
