@@ -9,6 +9,7 @@ loglevel.log*
 
 # Dependencies
 node_modules/
+.env
 
 # Environment variables
 .env

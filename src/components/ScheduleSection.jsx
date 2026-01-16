@@ -38,7 +38,7 @@ const ScheduleSection = () => {
     {
       phase: "Phase 1",
       title: "Registration & Onboarding",
-      period: "Jan 1 - 20, 2026",
+      period: "Jan 20 - Feb 19, 2026",
       icon: CalendarIcon,
       color: "pink",
       items: [
@@ -63,7 +63,7 @@ const ScheduleSection = () => {
     {
       phase: "Phase 3",
       title: "24-Hour Hackathon",
-      period: "Jan 31 - Feb 1, 2026",
+      period: "Feb 28 - Mar 1, 2026",
       icon: CodeBracketIcon,
       color: "orange",
       items: [

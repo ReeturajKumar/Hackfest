@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 const timelineEvents = [
   {
     time: "10:00 - 10:30 AM",
-    date: "31 Jan 2026",
+    date: "28 Feb 2026",
     title: "Hackathon Opening",
     icon: Flag,
     color: "bg-pink-500",
@@ -14,7 +14,7 @@ const timelineEvents = [
   },
   {
     time: "10:30 AM",
-    date: "31 Jan 2026",
+    date: "28 Feb 2026",
     title: "Problem Statement Release",
     icon: CheckCircle,
     color: "bg-blue-500",
@@ -23,7 +23,7 @@ const timelineEvents = [
   },
   {
     time: "12:00 - 1:00 PM",
-    date: "31 Jan 2026",
+    date: "28 Feb 2026",
     title: "Mentor Check-In 1",
     icon: Users,
     color: "bg-purple-600",
@@ -32,7 +32,7 @@ const timelineEvents = [
   },
   {
     time: "6:00 - 7:00 PM",
-    date: "31 Jan 2026",
+    date: "28 Feb 2026",
     title: "Mentor Check-In 2",
     icon: TrendingUp,
     color: "bg-orange-500",
@@ -41,7 +41,7 @@ const timelineEvents = [
   },
   {
     time: "11:59 PM",
-    date: "31 Jan 2026",
+    date: "28 Feb 2026",
     title: "Midnight Check-In",
     icon: Clock,
     color: "bg-yellow-500",
@@ -50,7 +50,7 @@ const timelineEvents = [
   },
   {
     time: "7:00 - 8:00 AM",
-    date: "1 Feb 2026",
+    date: "1 Mar 2026",
     title: "Mentor Check-In 3",
     icon: Flame,
     color: "bg-red-600",
@@ -59,7 +59,7 @@ const timelineEvents = [
   },
   {
     time: "10:00 AM",
-    date: "1 Feb 2026",
+    date: "1 Mar 2026",
     title: "Hackathon Ends",
     icon: Trophy,
     color: "bg-yellow-200", // Adjusted for contrast based on image cream color
@@ -68,7 +68,7 @@ const timelineEvents = [
   },
   {
     time: "12:00 PM",
-    date: "7 Feb 2026",
+    date: "8 Mar 2026",
     title: "Result Announced",
     icon: Award,
     color: "bg-indigo-900",

@@ -340,7 +340,7 @@ const WhyParticipate = () => {
 
         {/* --- SECONDARY INFO ROW --- */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {benefits.slice(2, 6).map((b, i) => {
+          {benefits.slice(3, 7).map((b, i) => {
             const IconComponent = b.icon;
             return (
               <motion.div

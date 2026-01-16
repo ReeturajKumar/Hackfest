@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { 
-  EnvelopeIcon, 
-  PhoneIcon, 
+import {
+  EnvelopeIcon,
+  PhoneIcon,
   MapPinIcon,
   CalendarIcon,
   AcademicCapIcon,
@@ -42,7 +42,7 @@ const Footer = () => {
   // Smart navigation function
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
-    
+
     if (location.pathname !== '/') {
       navigate('/');
       setTimeout(() => {
@@ -78,7 +78,7 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-[#030712] pt-24 pb-12 border-t border-white/10 overflow-hidden w-full z-10">
-      
+
       {/* --- INJECTED STYLES --- */}
       <style>{`
         .scan-line {
@@ -92,42 +92,42 @@ const Footer = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-900/10 via-[#030712] to-[#030712] pointer-events-none"></div>
       <div className="scan-line"></div>
 
-      <motion.div 
+      <motion.div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false }}
       >
-        
+
         {/* --- MAIN GRID --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 mb-16">
-          
+
           {/* 1. BRAND AREA */}
           <motion.div className="lg:col-span-4" variants={itemVariants}>
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 flex-shrink-0">
-                <img 
-                  src="/logo.png" 
-                  alt="CloudBlitz AI HackFest Logo" 
+                <img
+                  src="/logo.png"
+                  alt="CloudBlitz AI HackFest Logo"
                   className="w-full h-full object-contain object-center"
                   loading="eager"
                 />
               </div>
               <div className="flex flex-col">
                 <div className="text-3xl font-black tracking-tight leading-tight mb-1">
-                  <span className="text-white" style={{ 
+                  <span className="text-white" style={{
                     textShadow: '0 0 10px rgba(255, 45, 149, 0.5), 0 0 20px rgba(112, 48, 160, 0.3)'
                   }}>
                     AI Hackfest
                   </span>
                 </div>
                 <div className="text-sm font-medium tracking-wide leading-tight">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400" style={{ 
+                  <a href="https://cloudblitz.in/" target="_blank" rel="noopener noreferrer" className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 hover:opacity-80 transition-opacity" style={{
                     textShadow: '0 0 8px rgba(249, 115, 22, 0.6), 0 0 16px rgba(236, 72, 153, 0.4)'
                   }}>
                     by CloudBlitz
-                  </span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -137,7 +137,7 @@ const Footer = () => {
             <div className="mb-6 space-y-2">
               <div className="flex items-center gap-2 text-gray-400 text-xs">
                 <CalendarIcon className="w-4 h-4 text-[#FF2D95]" />
-                <span>Jan 31 - Feb 1, 2026 | Online 24H</span>
+                <span>Feb 28 - Mar 1, 2026 | Online 24H</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400 text-xs">
                 <MapPinIcon className="w-4 h-4 text-[#FF2D95]" />
@@ -146,8 +146,8 @@ const Footer = () => {
             </div>
             <div className="flex gap-3">
               {socialLinks.map((social, i) => (
-                <a 
-                  key={i} 
+                <a
+                  key={i}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -166,7 +166,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link 
+                  <Link
                     to="/"
                     onClick={(e) => handleNavClick(e, link.href)}
                     className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
@@ -185,7 +185,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {resources.map((resource) => (
                 <li key={resource.name}>
-                  <Link 
+                  <Link
                     to={resource.href}
                     className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
                   >
@@ -220,16 +220,24 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="pt-4 border-t border-white/10">
               <h5 className="text-white font-semibold text-xs mb-4 uppercase tracking-wider">Organized By</h5>
               <div className="flex items-center gap-3 mb-4">
-                <img src="/cloudblitz_logo.png" alt="CloudBlitz" className="h-8 object-contain opacity-80 hover:opacity-100 transition-opacity" />
-                <span className="text-gray-400 text-xs">CloudBlitz - EdTech & Cloud & AI Training</span>
+                <a href="https://cloudblitz.in/" target="_blank" rel="noopener noreferrer">
+                  <img src="/cloudblitz_logo.png" alt="CloudBlitz" className="h-8 object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                </a>
+                <a href="https://cloudblitz.in/" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-xs hover:text-white transition-colors">
+                  CloudBlitz - EdTech & Cloud & AI Training
+                </a>
               </div>
               <div className="flex items-center gap-3">
-                <img src="/greamio.png" alt="Greamio Technologies" className="h-6 object-contain opacity-80 hover:opacity-100 transition-opacity" />
-                <span className="text-gray-400 text-xs">Powered by Greamio Technologies</span>
+                <a href="https://greamio.com/" target="_blank" rel="noopener noreferrer">
+                  <img src="/greamio.png" alt="Greamio Technologies" className="h-6 object-contain opacity-80 hover:opacity-100 transition-opacity cursor-pointer" />
+                </a>
+                <a href="https://greamio.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-xs hover:text-white transition-colors">
+                  Powered by Greamio Technologies
+                </a>
               </div>
             </div>
           </motion.div>
@@ -237,7 +245,7 @@ const Footer = () => {
         </div>
 
         {/* --- BOTTOM BAR --- */}
-        <motion.div 
+        <motion.div
           className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
           variants={itemVariants}
         >
@@ -247,13 +255,13 @@ const Footer = () => {
             <p>In partnership with <span className="text-white">IIT-BHU</span> & <span className="text-white">Greamio Technologies</span></p>
           </div>
           <div className="flex items-center gap-6 text-xs">
-            <Link to="/privacy-policy" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
+            <Link to="/" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
               Privacy Policy
             </Link>
-            <Link to="/terms-of-service" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
+            <Link to="/" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
               Terms of Service
             </Link>
-            <Link to="/code-of-conduct" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
+            <Link to="/" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
               Code of Conduct
             </Link>
           </div>

@@ -5,7 +5,7 @@ import { XMarkIcon, Bars3Icon, UserCircleIcon } from '@heroicons/react/24/outlin
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const Navbar = () => {
   // Smart navigation function
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
-    
+
     if (location.pathname !== '/') {
       navigate('/');
       setTimeout(() => {
@@ -63,25 +63,24 @@ const Navbar = () => {
 
   return (
     <>
-      <nav 
-        className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 border-b bg-[#030712]/90 ${
-          scrolled 
-            ? 'bg-[#030712]/90 backdrop-blur-md border-white/10 shadow-lg shadow-pink-500/5' 
+      <nav
+        className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 border-b bg-[#030712]/90 ${scrolled
+            ? 'bg-[#030712]/90 backdrop-blur-md border-white/10 shadow-lg shadow-pink-500/5'
             : 'bg-[#030712]/90 border-transparent'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-20">
-            
+
             {/* Logo */}
-            <div 
-              className="flex-shrink-0 flex items-center gap-1 cursor-pointer" 
+            <div
+              className="flex-shrink-0 flex items-center gap-1 cursor-pointer"
               onClick={(e) => handleNavClick(e, '#home')}
             >
               <div className="w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0">
-                <img 
-                  src="/logo.png" 
-                  alt="AI Hackfest Logo" 
+                <img
+                  src="/logo.png"
+                  alt="AI Hackfest Logo"
                   className="w-full h-full object-contain object-center"
                   loading="eager"
                 />
@@ -93,9 +92,9 @@ const Navbar = () => {
                   </span>
                 </div>
                 <div className="text-xs sm:text-sm font-medium tracking-wide leading-tight -mt-0.5">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 via-purple-300 to-purple-400" style={{ textShadow: '0 0 8px rgba(249, 115, 22, 0.8), 0 0 16px rgba(249, 115, 22, 0.5), 0 0 24px rgba(249, 115, 22, 0.3)' }}>
+                  <a href="https://cloudblitz.in/" target="_blank" rel="noopener noreferrer" className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 via-purple-300 to-purple-400 hover:opacity-80 transition-opacity" style={{ textShadow: '0 0 8px rgba(249, 115, 22, 0.8), 0 0 16px rgba(249, 115, 22, 0.5), 0 0 24px rgba(249, 115, 22, 0.3)' }}>
                     by CloudBlitz
-                  </span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -128,7 +127,7 @@ const Navbar = () => {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center space-x-4">
-              <button 
+              <button
                 onClick={() => navigate('/register')}
                 className="relative px-6 py-2.5 rounded-full text-sm font-bold text-white overflow-hidden group cursor-pointer"
               >
@@ -162,20 +161,18 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300 ${
-          isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Mobile Menu Panel */}
       <div
-        className={`fixed top-16 sm:top-20 right-0 h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full sm:w-80 bg-[#030712] border-l border-white/10 z-40 lg:hidden transform transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`fixed top-16 sm:top-20 right-0 h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] w-full sm:w-80 bg-[#030712] border-l border-white/10 z-40 lg:hidden transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className="flex flex-col h-full p-6 overflow-y-auto">
-          
+
           {/* Mobile Navigation Links */}
           <div className="space-y-1 mb-8">
             {navLinks.map((link, index) => (
@@ -188,10 +185,10 @@ const Navbar = () => {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <span className="text-base font-medium">{link.name}</span>
-                  <svg 
-                    className="w-5 h-5 text-gray-600 group-hover:text-pink-500 transition-colors" 
-                    fill="none" 
-                    stroke="currentColor" 
+                  <svg
+                    className="w-5 h-5 text-gray-600 group-hover:text-pink-500 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -209,10 +206,10 @@ const Navbar = () => {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <span className="text-base font-medium">{link.name}</span>
-                  <svg 
-                    className="w-5 h-5 text-gray-600 group-hover:text-pink-500 transition-colors" 
-                    fill="none" 
-                    stroke="currentColor" 
+                  <svg
+                    className="w-5 h-5 text-gray-600 group-hover:text-pink-500 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -224,7 +221,7 @@ const Navbar = () => {
 
           {/* Mobile CTA/Profile Section */}
           <div className="mt-auto pt-6 border-t border-white/10">
-            <button 
+            <button
               onClick={() => {
                 setIsMobileMenuOpen(false);
                 navigate('/register');

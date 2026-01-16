@@ -147,7 +147,7 @@ const PricingSection = () => {
             variants={itemVariants}
             className="text-body-md text-slate-500 max-w-2xl mx-auto"
           >
-            Registration Period: <span className="font-bold text-slate-700">January 1 to January 20, 2026</span>
+            Registration Period: <span className="font-bold text-slate-700">January 20 to February 19, 2026</span>
           </motion.p>
         </motion.div>
 

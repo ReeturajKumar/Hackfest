@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/refs */
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 // --- DATA: THE CODE TO TYPE ---
 const CODE_LINES = [
@@ -44,6 +45,8 @@ const CODE_LINES = [
 ];
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   // --- PHYSICS STATE ---
   const physics = useRef({
     scrollY: 0, mouseX: 0, mouseY: 0, targetMouseX: 0, targetMouseY: 0
@@ -383,10 +386,37 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
-            <button className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest hover:bg-gray-200 transition-colors rounded-sm shadow-lg hover:shadow-pink-500/50 cursor-pointer">
+            <Link 
+              to="/register"
+              className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest hover:bg-gray-200 transition-colors rounded-sm shadow-lg hover:shadow-pink-500/50 cursor-pointer inline-block"
+            >
               Launch Your Solution
-            </button>
-            <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold uppercase tracking-widest hover:border-pink-500 hover:text-pink-500 transition-colors rounded-sm cursor-pointer">
+            </Link>
+            <button 
+              onClick={() => {
+                if (location.pathname !== '/') {
+                  navigate('/');
+                  setTimeout(() => {
+                    const element = document.querySelector('#about');
+                    if (element) {
+                      const offset = 80;
+                      const elementPosition = element.getBoundingClientRect().top;
+                      const offsetPosition = elementPosition + window.scrollY - offset;
+                      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    }
+                  }, 100);
+                } else {
+                  const element = document.querySelector('#about');
+                  if (element) {
+                    const offset = 80;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.scrollY - offset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                  }
+                }
+              }}
+              className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold uppercase tracking-widest hover:border-pink-500 hover:text-pink-500 transition-colors rounded-sm cursor-pointer"
+            >
               Learn More
             </button>
           </motion.div>

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   CalendarIcon,
   MapPinIcon,
@@ -9,16 +10,17 @@ import {
 } from '@heroicons/react/24/outline';
 
 const PartnersSection = () => {
+  const navigate = useNavigate();
   const [hoveredCard, setHoveredCard] = useState(null);
 
   const partners = [
-    { category: "Organized By", name: "CloudBlitz", logo: "/cloudblitz_logo.png", desc: "EdTech & Cloud & AI Training" },
-    { category: "Powered By", name: "Greamio Technologies", logo: "/greamio.png", altLogos: ["/Greamio_logo.png", "/Greamio_logo.jpg", "/Greamio_logo.svg"], desc: "Technology Partner" },
+    { category: "Organized By", name: "CloudBlitz", logo: "/cloudblitz_logo.png", desc: "EdTech & Cloud & AI Training", url: "https://cloudblitz.in/" },
+    { category: "Powered By", name: "Greamio Technologies", logo: "/greamio.png", altLogos: ["/Greamio_logo.png", "/Greamio_logo.jpg", "/Greamio_logo.svg"], desc: "Technology Partner", url: "https://greamio.com/" },
     { category: "Learning Partner", name: "IIT-BHU", logo: "/iit_logo.png", desc: "Indian Institute of Technology (Varanasi)" }
   ];
 
   const eventDetails = [
-    { icon: CalendarIcon, label: "Timeline", value: "31 Jan - 1 Feb", bgColor: "bg-pink-50", iconColor: "text-pink-500" },
+    { icon: CalendarIcon, label: "Timeline", value: "28 Feb - 1 Mar", bgColor: "bg-pink-50", iconColor: "text-pink-500" },
     { icon: MapPinIcon, label: "Platform", value: "Online (24H)", bgColor: "bg-orange-50", iconColor: "text-orange-500" },
     { icon: UserGroupIcon, label: "Squad", value: "1-4 Members", bgColor: "bg-white", iconColor: "text-pink-500" },
   ];
@@ -83,27 +85,53 @@ const PartnersSection = () => {
 
               {/* Logo Container - Fixed Height */}
               <div className="h-20 md:h-24 w-full flex items-center justify-center">
-                <motion.img
-                  src={partner.logo}
-                  alt={partner.name}
-                  animate={{ scale: hoveredCard === i ? 1.1 : 1 }}
-                  className="h-full w-auto max-w-[200px] object-contain transition-all duration-300"
-                  onError={(e) => {
-                    const target = e.target;
-                    if (partner.altLogos && partner.altLogos.length > 0) {
-                      const currentSrc = target.src.split('/').pop();
-                      const currentIndex = partner.altLogos.findIndex(alt => alt.includes(currentSrc));
-                      if (currentIndex < partner.altLogos.length - 1) {
-                        target.src = partner.altLogos[currentIndex + 1];
-                        return;
+                {partner.url ? (
+                  <a href={partner.url} target="_blank" rel="noopener noreferrer" className="h-full flex items-center justify-center">
+                    <motion.img
+                      src={partner.logo}
+                      alt={partner.name}
+                      animate={{ scale: hoveredCard === i ? 1.1 : 1 }}
+                      className="h-full w-auto max-w-[200px] object-contain transition-all duration-300"
+                      onError={(e) => {
+                        const target = e.target;
+                        if (partner.altLogos && partner.altLogos.length > 0) {
+                          const currentSrc = target.src.split('/').pop();
+                          const currentIndex = partner.altLogos.findIndex(alt => alt.includes(currentSrc));
+                          if (currentIndex < partner.altLogos.length - 1) {
+                            target.src = partner.altLogos[currentIndex + 1];
+                            return;
+                          }
+                        }
+                        target.style.display = 'none';
+                        if (target.nextSibling) {
+                          target.nextSibling.style.display = 'block';
+                        }
+                      }}
+                    />
+                  </a>
+                ) : (
+                  <motion.img
+                    src={partner.logo}
+                    alt={partner.name}
+                    animate={{ scale: hoveredCard === i ? 1.1 : 1 }}
+                    className="h-full w-auto max-w-[200px] object-contain transition-all duration-300"
+                    onError={(e) => {
+                      const target = e.target;
+                      if (partner.altLogos && partner.altLogos.length > 0) {
+                        const currentSrc = target.src.split('/').pop();
+                        const currentIndex = partner.altLogos.findIndex(alt => alt.includes(currentSrc));
+                        if (currentIndex < partner.altLogos.length - 1) {
+                          target.src = partner.altLogos[currentIndex + 1];
+                          return;
+                        }
                       }
-                    }
-                    target.style.display = 'none';
-                    if (target.nextSibling) {
-                      target.nextSibling.style.display = 'block';
-                    }
-                  }}
-                />
+                      target.style.display = 'none';
+                      if (target.nextSibling) {
+                        target.nextSibling.style.display = 'block';
+                      }
+                    }}
+                  />
+                )}
               </div>
             </motion.div>
           ))}
@@ -126,7 +154,7 @@ const PartnersSection = () => {
               Registration Date
             </h3>
             <p className="text-heading-lg text-pink-400 mb-4">
-              1st Jan to 20th Jan
+              20th Jan to 19th Feb
             </p>
 
             {/* Urgency Text */}
@@ -135,9 +163,12 @@ const PartnersSection = () => {
             </p>
 
             {/* Button */}
-            <button className="w-full md:w-auto md:min-w-[250px] bg-white text-gray-900 px-10 py-2 md:px-12 md:py-2 rounded-lg font-bold text-label-lg hover:bg-gray-100 transition-colors">
+            <Link
+              to="/register"
+              className="relative z-20 w-full md:w-auto md:min-w-[250px] bg-white text-gray-900 px-10 py-3 md:px-12 md:py-3 rounded-xl font-black text-label-lg hover:bg-gray-100 transition-all transform hover:scale-105 active:scale-95 cursor-pointer inline-block text-center shadow-lg active:shadow-md"
+            >
               Register Now
-            </button>
+            </Link>
 
             {/* Background decorative element */}
             {/* Animated background elements */}
@@ -162,8 +193,8 @@ const PartnersSection = () => {
               >
                 <CalendarIcon className="w-5 h-5 text-pink-500 mb-2" />
                 <div>
-                  <p className="text-caption-sm font-bold text-gray-600 uppercase tracking-wider mb-1">Timeline</p>
-                  <p className="text-body-md font-bold text-gray-900">31 Jan - 1 Feb</p>
+                  <p className="text-caption-sm font-bold text-gray-600 uppercase tracking-wider mb-1">Hackathon Date</p>
+                  <p className="text-body-md font-bold text-gray-900">28th Feb</p>
                 </div>
               </motion.div>
 
@@ -204,15 +235,18 @@ const PartnersSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-pink-500 to-orange-500 rounded-xl p-4 flex flex-col md:flex-row items-center justify-between gap-3 shadow-lg shadow-pink-500/20"
+          className="bg-gradient-to-r from-pink-500 to-orange-500 rounded-xl p-4 flex flex-col md:flex-row items-center justify-between gap-3 shadow-lg shadow-pink-500/20 cursor-pointer"
         >
           <p className="text-white text-body-lg font-bold">Ready to build the future?</p>
-          <button className="bg-white text-pink-500 px-5 py-2 rounded-lg font-black text-caption-sm uppercase tracking-wider hover:bg-gray-100 hover:text-orange-500 transition-all transform hover:scale-105 active:scale-95 whitespace-nowrap">
+          <Link
+            to="/register"
+            className="bg-white text-pink-500 px-5 py-2 rounded-lg font-black text-caption-sm uppercase tracking-wider hover:bg-gray-100 hover:text-orange-500 transition-all transform hover:scale-105 active:scale-95 whitespace-nowrap cursor-pointer inline-block cursor-pointer"
+          >
             REGISTER FOR HACKATHON
-          </button>
+          </Link>
         </motion.div>
       </div>
-    </section>
+    </section >
   );
 };
 
