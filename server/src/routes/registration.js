@@ -323,18 +323,26 @@ router.post('/payment-callback', async (req, res) => {
     // Map Easebuzz status to our internal status (Case-insensitive)
     const normalizedStatus = status?.toLowerCase();
     let paymentStatus = 'pending';
+    const easebuzzId = req.body.easepayid;
+
     if (normalizedStatus === 'success') paymentStatus = 'completed';
     else if (normalizedStatus === 'failure' || normalizedStatus === 'usercancelled') paymentStatus = 'failed';
 
-    // 1. Try Lookup by ID (UDF1 or TXNID)
-    let registration = await Registration.findOneAndUpdate(
-      { registrationId: lookupId.trim() },
-      {
-        paymentStatus,
-        updatedAt: new Date()
-      },
-      { new: true }
-    );
+    let registration = null;
+
+    // A. Try Lookup by Discovered ID
+    if (lookupId) {
+      registration = await Registration.findOneAndUpdate(
+        { registrationId: lookupId.trim() },
+        {
+          paymentStatus,
+          easebuzzId: easebuzzId,
+          updatedAt: new Date()
+        },
+        { new: true }
+      );
+      if (registration) console.log(`ID Match Success: ${lookupId} - Stored Easebuzz ID: ${easebuzzId}`);
+    }
 
     // 2. SMART FALLBACK: If not found by ID, try Lookup by Email (Find most recent pending)
     if (!registration && req.body.email) {
@@ -346,6 +354,7 @@ router.post('/payment-callback', async (req, res) => {
         },
         {
           paymentStatus,
+          easebuzzId: easebuzzId,
           updatedAt: new Date()
         },
         {
@@ -353,7 +362,7 @@ router.post('/payment-callback', async (req, res) => {
           sort: { createdAt: -1 } // Get the most recent one
         }
       );
-      if (registration) console.log(`Smart Fallback Success! Found registration ${registration.registrationId} for ${req.body.email}`);
+      if (registration) console.log(`Smart Fallback Success! Found registration ${registration.registrationId} for ${req.body.email} - Stored Easebuzz ID: ${easebuzzId}`);
     }
 
     if (!registration) {

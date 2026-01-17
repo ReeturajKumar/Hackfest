@@ -110,6 +110,11 @@ const registrationSchema = new mongoose.Schema({
   paymentAmount: {
     type: Number,
   },
+  easebuzzId: {
+    type: String,
+    unique: true,
+    sparse: true,
+  },
 }, {
   timestamps: true, // Adds createdAt and updatedAt
 });

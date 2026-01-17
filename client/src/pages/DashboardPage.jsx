@@ -279,10 +279,10 @@ const DashboardPage = () => {
                       onClick={() => navigate(`/admin/registrations/${reg.registrationId}`)}
                       className="hover:bg-slate-50/80 transition-colors cursor-pointer group"
                     >
-                      <td className="px-6 py-4">
-                        <span className="text-xs font-black font-mono text-pink-600 bg-pink-50 px-2 py-1 rounded">
-                          {reg.registrationId}
-                        </span>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-mono text-pink-600 font-bold">
+                          {reg.easebuzzId || reg.registrationId}
+                        </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-col">
