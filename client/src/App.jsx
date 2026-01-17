@@ -20,7 +20,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/admin/dashboard" element={<DashboardPage />} />
         <Route path="/admin/registrations/:id" element={<RegistrationDetailsPage />} />
-        <Route path="/finance/dashboard" element={<FinanceDashboardPage />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         {/* Redirect any other path to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
