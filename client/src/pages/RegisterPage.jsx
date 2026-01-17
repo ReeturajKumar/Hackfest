@@ -45,6 +45,7 @@ const Register = () => {
     declaration: false,
   });
   const [errors, setErrors] = useState({});
+  const [isChecking, setIsChecking] = useState(false);
 
   const totalSteps = 5;
 
@@ -109,11 +110,43 @@ const Register = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleNext = () => {
-    if (validateStep(currentStep)) {
-      if (currentStep < totalSteps) {
-        setCurrentStep(currentStep + 1);
+  const handleNext = async () => {
+    if (!validateStep(currentStep)) return;
+
+    // Check for duplicates on Step 1
+    if (currentStep === 1) {
+      setIsChecking(true);
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/check-duplicate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.email,
+            mobile: formData.mobile
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+          setErrors(prev => ({
+            ...prev,
+            [data.field]: data.message
+          }));
+          setIsChecking(false);
+          return; // Stop here if duplicate
+        }
+      } catch (error) {
+        console.error('Check failed', error);
+        alert('Connection error. Please try again.');
+        setIsChecking(false);
+        return;
       }
+      setIsChecking(false);
+    }
+
+    if (currentStep < totalSteps) {
+      setCurrentStep(currentStep + 1);
     }
   };
 
@@ -291,23 +324,18 @@ const Register = () => {
               {currentStep < totalSteps ? (
                 <button
                   type="submit"
-                  className="relative flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden group"
+                  disabled={isChecking}
+                  className={`flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white rounded-lg font-semibold text-sm shadow-md hover:shadow-lg hover:bg-gradient-to-l transition-all cursor-pointer transform hover:scale-[1.02] ${isChecking ? 'opacity-70 cursor-wait' : ''}`}
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:scale-105"></span>
-                  <span className="relative flex items-center gap-2">
-                    Next
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
+                  {isChecking ? 'Checking...' : 'Next'}
+                  {!isChecking && <ArrowRight className="w-4 h-4" />}
                 </button>
               ) : (
                 <button
                   type="submit"
-                  className="relative flex items-center gap-2 px-6 py-3 text-white rounded-lg font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden group"
+                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] text-white rounded-lg font-semibold text-sm shadow-md hover:shadow-lg hover:bg-gradient-to-l transition-all cursor-pointer transform hover:scale-[1.02]"
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-[#FF2D95] to-[#7030A0] transition-all duration-300 group-hover:scale-105"></span>
-                  <span className="relative flex items-center gap-2">
-                    Submit Registration
-                  </span>
+                  Submit Registration
                 </button>
               )}
             </div>

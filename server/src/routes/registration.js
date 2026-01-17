@@ -20,12 +20,18 @@ router.post('/register', validateRegistration, handleValidationErrors, async (re
       communicationConsent, declaration
     } = req.body;
 
-    // Check if email already registered
-    const existingRegistration = await Registration.findOne({ email });
+    // Check if email or mobile already registered
+    const existingRegistration = await Registration.findOne({
+      $or: [{ email }, { mobile }]
+    });
+
     if (existingRegistration) {
+      const isEmailDuplicate = existingRegistration.email === email;
       return res.status(400).json({
         success: false,
-        message: 'This email is already registered',
+        message: isEmailDuplicate
+          ? 'This email is already registered'
+          : 'This mobile number is already registered',
       });
     }
 
@@ -84,6 +90,49 @@ router.post('/register', validateRegistration, handleValidationErrors, async (re
       success: false,
       message: 'Registration failed. Please try again.',
       error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+    });
+  }
+});
+
+// POST /api/v1/check-duplicate - Check for duplicate email/mobile before registration
+router.post('/check-duplicate', async (req, res) => {
+  try {
+    const { email, mobile } = req.body;
+
+    // Build query conditions only for provided fields
+    const conditions = [];
+    if (email) conditions.push({ email: email.toLowerCase().trim() });
+    if (mobile) conditions.push({ mobile: mobile.trim() });
+
+    if (conditions.length === 0) {
+      return res.status(200).json({ success: true });
+    }
+
+    const existingRegistration = await Registration.findOne({
+      $or: conditions
+    });
+
+    if (existingRegistration) {
+      const isEmailDuplicate = existingRegistration.email === email?.toLowerCase().trim();
+      return res.status(200).json({
+        success: false,
+        message: isEmailDuplicate
+          ? 'This email is already registered'
+          : 'This mobile number is already registered',
+        field: isEmailDuplicate ? 'email' : 'mobile'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'No duplicates found'
+    });
+
+  } catch (error) {
+    console.error('Check duplicate error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error'
     });
   }
 });

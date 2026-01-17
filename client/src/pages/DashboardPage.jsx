@@ -296,6 +296,11 @@ const DashboardPage = () => {
                           {reg.participationType}
                         </span>
                       </td>
+                      <td className="px-6 py-4">
+                        <span className="text-sm font-medium text-gray-700">
+                          {reg.participationType === 'team' ? reg.teamName : '-'}
+                        </span>
+                      </td>
                       <td className="px-6 py-4 text-sm font-medium text-gray-900">
                         ₹{reg.paymentAmount || (reg.participationType === 'individual' ? 499 : 999)}
                       </td>
