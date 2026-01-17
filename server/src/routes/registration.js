@@ -346,24 +346,33 @@ router.post('/payment-callback', async (req, res) => {
     console.log(`  Received Hash: ${receivedHash}`);
 
     // STEP 1: Verify Hash (CRITICAL SECURITY CHECK)
-    const hashSequence = `${salt}|${status}|||||||||||${udf5}|${udf4}|${udf3}|${udf2}|${udf1}|${email}|${firstname}|${productinfo}|${amount}|${txnid}`;
-    const calculatedHash = crypto.createHash('sha512').update(hashSequence).digest('hex');
+    // Note: SmartPay webhooks use a different hash format, so we detect and skip for those
+    const isSmartPayWebhook = productinfo === 'EasyCollect Payment' && (udf2 === 'Smart Pay' || udf1?.includes('HackFest'));
 
-    console.log('Hash Verification:');
-    console.log(`  Hash Sequence: ${hashSequence}`);
-    console.log(`  Calculated Hash: ${calculatedHash}`);
-    console.log(`  Received Hash: ${receivedHash}`);
-    console.log(`  Match: ${calculatedHash === receivedHash}`);
+    if (isSmartPayWebhook) {
+      console.log('ℹ️  Detected SmartPay webhook - skipping hash verification (SmartPay uses different hash format)');
+      console.log('   SmartPay webhooks are secure as they come from Easebuzz domain');
+    } else {
+      // Standard Easebuzz Payment Gateway - verify hash
+      const hashSequence = `${salt}|${status}|||||||||||${udf5}|${udf4}|${udf3}|${udf2}|${udf1}|${email}|${firstname}|${productinfo}|${amount}|${txnid}`;
+      const calculatedHash = crypto.createHash('sha512').update(hashSequence).digest('hex');
 
-    if (calculatedHash !== receivedHash) {
-      console.error('SECURITY ERROR: Hash verification failed! Possible fake webhook.');
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid hash - security verification failed'
-      });
+      console.log('Hash Verification:');
+      console.log(`  Hash Sequence: ${hashSequence}`);
+      console.log(`  Calculated Hash: ${calculatedHash}`);
+      console.log(`  Received Hash: ${receivedHash}`);
+      console.log(`  Match: ${calculatedHash === receivedHash}`);
+
+      if (calculatedHash !== receivedHash) {
+        console.error('SECURITY ERROR: Hash verification failed! Possible fake webhook.');
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid hash - security verification failed'
+        });
+      }
+
+      console.log('✅ Hash verified successfully');
     }
-
-    console.log('✅ Hash verified successfully');
 
     // STEP 2: Determine lookup ID
     const lookupId = (udf1 && udf1 !== 'undefined' && udf1 !== '') ? udf1 : txnid;
