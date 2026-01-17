@@ -6,7 +6,6 @@ import Footer from './components/Footer';
 import Register from './pages/RegisterPage';
 import ScrollToTop from './components/ScrollToTop';
 import DashboardPage from './pages/DashboardPage';
-import FinanceDashboardPage from './pages/FinanceDashboardPage';
 import PaymentSuccess from './pages/PaymentSuccess';
 import RegistrationDetailsPage from './pages/RegistrationDetailsPage';
 
