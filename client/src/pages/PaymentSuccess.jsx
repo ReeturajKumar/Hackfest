@@ -6,11 +6,10 @@ import { CheckCircleIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 const PaymentSuccess = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const txnid = searchParams.get('txnid');
+  const txnid = searchParams.get('udf1') || searchParams.get('txnid');
 
   useEffect(() => {
-    // BACKUP SYNC: If the user lands here, we know they were redirected from a success URL.
-    // We send a request to mark it as Paid just in case the backend webhook is delayed.
+    // BACKUP SYNC: Use udf1 (preferred) or txnid to sync payment status
     const syncPayment = async () => {
       if (txnid) {
         try {

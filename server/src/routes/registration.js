@@ -307,13 +307,17 @@ router.post('/payment-callback', async (req, res) => {
     console.log('--- EASEBUZZ CALLBACK RECEIVED ---');
     console.log(JSON.stringify(req.body, null, 2));
 
-    // Easebuzz might send txnid or transaction_id
+    // Easebuzz sends our custom ID in udf1 if we pass it, otherwise fallback to txnid
+    const customId = req.body.udf1;
     const txnid = req.body.txnid || req.body.transaction_id;
+    const lookupId = (customId && customId !== 'undefined') ? customId : txnid;
     const status = req.body.status;
 
-    if (!txnid) {
-      console.error('Callback error: Missing txnid in request body');
-      return res.status(400).json({ success: false, message: 'Missing txnid' });
+    console.log(`Lookup ID: ${lookupId} (UDF1: ${customId}, TXNID: ${txnid})`);
+
+    if (!lookupId) {
+      console.error('Callback error: Missing lookup ID (udf1/txnid) in request body');
+      return res.status(400).json({ success: false, message: 'Missing transaction identifier' });
     }
 
     // Map Easebuzz status to our internal status (Case-insensitive)
@@ -323,7 +327,7 @@ router.post('/payment-callback', async (req, res) => {
     else if (normalizedStatus === 'failure' || normalizedStatus === 'usercancelled') paymentStatus = 'failed';
 
     const registration = await Registration.findOneAndUpdate(
-      { registrationId: txnid.trim() },
+      { registrationId: lookupId.trim() },
       {
         paymentStatus,
         updatedAt: new Date()

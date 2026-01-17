@@ -157,6 +157,7 @@ const Register = () => {
             phone: formData.mobile,
             amount: data.data.paymentAmount,
             txnid: data.data.registrationId,
+            udf1: data.data.registrationId, // Used as a reliable carrier for our ID
           };
 
           // Add team name if team registration (try multiple parameter names)
