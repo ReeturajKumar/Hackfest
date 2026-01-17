@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
 import Register from './pages/RegisterPage';
 import ScrollToTop from './components/ScrollToTop';
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin/dashboard" element={<DashboardPage />} />
         {/* Redirect any other path to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

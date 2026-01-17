@@ -1,4 +1,5 @@
 import express from 'express';
+import * as XLSX from 'xlsx';
 import Registration from '../models/Registration.js';
 import { validateRegistration, handleValidationErrors } from '../middleware/validation.js';
 
@@ -120,6 +121,111 @@ router.get('/registrations', async (req, res) => {
   }
 });
 
+
+// GET /api/v1/registrations/export
+
+router.get('/registrations/export', async (req, res) => {
+  try {
+    const { type, paymentStatus, from, to } = req.query;
+
+    // Build filter dynamically
+    const filter = {};
+
+    if (type) {
+      filter.participationType = type;
+    }
+
+    if (paymentStatus) {
+      filter.paymentStatus = paymentStatus;
+    }
+
+    if (from || to) {
+      filter.createdAt = {};
+      if (from) filter.createdAt.$gte = new Date(from);
+      if (to) filter.createdAt.$lte = new Date(to);
+    }
+
+    const registrations = await Registration.find(filter)
+      .sort({ createdAt: -1 })
+      .lean();
+
+    if (!registrations.length) {
+      return res.status(404).json({
+        success: false,
+        message: 'No registrations found to export',
+      });
+    }
+
+    // Flatten data for Excel
+    const data = registrations.map((reg) => {
+      const row = {
+        'Registration ID': reg.registrationId,
+        'Name': reg.name,
+        'Email': reg.email,
+        'Mobile': reg.mobile,
+        'Gender': reg.gender || 'N/A',
+        'College': reg.college,
+        'City': reg.city,
+        'State': reg.state,
+        'Course': reg.course,
+        'Year': reg.year,
+        'Participation Type': reg.participationType,
+        'Team Name': reg.teamName || 'N/A',
+        'Skill Level': reg.skillLevel,
+        'Interests': Array.isArray(reg.interests)
+          ? reg.interests.join(', ')
+          : reg.interests || 'N/A',
+        'Referral Source': reg.referralSource || 'N/A',
+        'Payment Status': reg.paymentStatus,
+        'Payment Amount': reg.paymentAmount || 0,
+        'Registered Date': new Date(reg.createdAt).toLocaleString(),
+      };
+
+      // Team members (if team)
+      if (reg.participationType === 'team' && Array.isArray(reg.teamMembers)) {
+        reg.teamMembers.forEach((member, index) => {
+          row[`Member ${index + 2} Name`] = member.name || '';
+          row[`Member ${index + 2} Email`] = member.email || '';
+          row[`Member ${index + 2} Mobile`] = member.mobile || '';
+        });
+      }
+
+      return row;
+    });
+
+    // Create Excel workbook
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Registrations');
+
+    const buffer = XLSX.write(workbook, {
+      type: 'buffer',
+      bookType: 'xlsx',
+    });
+
+    // Response headers
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    );
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename=registrations_${new Date().toISOString().slice(0, 10)}.xlsx`
+    );
+
+    return res.send(buffer);
+
+  } catch (error) {
+    console.error('Export error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to export registrations',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined,
+    });
+  }
+});
+
+
 // GET /api/v1/registrations/:id - Get single registration
 router.get('/registrations/:id', async (req, res) => {
   try {
@@ -190,6 +296,7 @@ router.patch('/registrations/:id/payment', async (req, res) => {
     });
   }
 });
+
 
 // GET /api/v1/stats - Get registration statistics
 router.get('/stats', async (req, res) => {

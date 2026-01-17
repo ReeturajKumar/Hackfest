@@ -1,0 +1,188 @@
+{
+  "info": {
+    "name": "CloudBlitz Hackathon API",
+    "description": "API collection for testing hackathon registration endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Registration",
+      "item": [
+        {
+          "name": "Create Individual Registration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"mobile\": \"9876543210\",\n  \"gender\": \"male\",\n  \"college\": \"ABC Institute of Technology\",\n  \"city\": \"Mumbai\",\n  \"state\": \"Maharashtra\",\n  \"course\": \"BTech\",\n  \"year\": \"3rd Year\",\n  \"participationType\": \"individual\",\n  \"skillLevel\": \"Intermediate\",\n  \"interests\": [\"AI / ML\", \"Web / App Development\"],\n  \"referralSource\": \"Instagram\",\n  \"communicationConsent\": true,\n  \"declaration\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Team Registration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Smith\",\n  \"email\": \"jane.smith@example.com\",\n  \"mobile\": \"9876543211\",\n  \"gender\": \"female\",\n  \"college\": \"XYZ College of Engineering\",\n  \"city\": \"Pune\",\n  \"state\": \"Maharashtra\",\n  \"course\": \"MCA\",\n  \"year\": \"2nd Year\",\n  \"participationType\": \"team\",\n  \"teamName\": \"Code Warriors\",\n  \"member2Name\": \"Alice Johnson\",\n  \"member2Email\": \"alice@example.com\",\n  \"member2Mobile\": \"9876543212\",\n  \"member3Name\": \"Bob Wilson\",\n  \"member3Email\": \"bob@example.com\",\n  \"member3Mobile\": \"9876543213\",\n  \"skillLevel\": \"Advanced\",\n  \"interests\": [\"AI / ML\", \"Blockchain\", \"DevOps\"],\n  \"referralSource\": \"College / Friend\",\n  \"communicationConsent\": true,\n  \"declaration\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Registrations",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/registrations?page=1&limit=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "registrations"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Registration by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/registrations/CBZABC123XYZ",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "registrations",
+                "CBZABC123XYZ"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Payment Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentStatus\": \"completed\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/registrations/CBZABC123XYZ/payment",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "registrations",
+                "CBZABC123XYZ",
+                "payment"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Statistics",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/stats",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "stats"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "health"
+          ]
+        }
+      }
+    }
+  ]
+}
