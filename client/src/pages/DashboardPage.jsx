@@ -263,7 +263,6 @@ const DashboardPage = () => {
                   <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest">Type</th>
                   <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest">Team Name</th>
                   <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest">Amount</th>
-                  <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest">Payment</th>
                   <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest text-right">Date</th>
                 </tr>
               </thead>
@@ -299,22 +298,6 @@ const DashboardPage = () => {
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-gray-900">
                         ₹{reg.paymentAmount || (reg.participationType === 'individual' ? 499 : 999)}
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-1.5">
-                          {reg.paymentStatus === 'completed' ? (
-                            <CheckCircleIcon className="w-4 h-4 text-green-500" />
-                          ) : reg.paymentStatus === 'pending' ? (
-                            <ClockIcon className="w-4 h-4 text-orange-400" />
-                          ) : (
-                            <XCircleIcon className="w-4 h-4 text-red-500" />
-                          )}
-                          <span className={`text-xs font-bold capitalize ${reg.paymentStatus === 'completed' ? 'text-green-600' :
-                            reg.paymentStatus === 'pending' ? 'text-orange-600' : 'text-red-600'
-                            }`}>
-                            {reg.paymentStatus === 'completed' ? 'Paid' : reg.paymentStatus}
-                          </span>
-                        </div>
                       </td>
                       <td className="px-6 py-4 text-right">
                         <span className="text-xs font-medium text-gray-400">
