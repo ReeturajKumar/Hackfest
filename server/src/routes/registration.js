@@ -326,7 +326,8 @@ router.post('/payment-callback', async (req, res) => {
     if (normalizedStatus === 'success') paymentStatus = 'completed';
     else if (normalizedStatus === 'failure' || normalizedStatus === 'usercancelled') paymentStatus = 'failed';
 
-    const registration = await Registration.findOneAndUpdate(
+    // 1. Try Lookup by ID (UDF1 or TXNID)
+    let registration = await Registration.findOneAndUpdate(
       { registrationId: lookupId.trim() },
       {
         paymentStatus,
@@ -334,6 +335,26 @@ router.post('/payment-callback', async (req, res) => {
       },
       { new: true }
     );
+
+    // 2. SMART FALLBACK: If not found by ID, try Lookup by Email (Find most recent pending)
+    if (!registration && req.body.email) {
+      console.log(`ID Lookup failed. Attempting Smart Fallback via Email: ${req.body.email}`);
+      registration = await Registration.findOneAndUpdate(
+        {
+          email: req.body.email.toLowerCase().trim(),
+          paymentStatus: 'pending'
+        },
+        {
+          paymentStatus,
+          updatedAt: new Date()
+        },
+        {
+          new: true,
+          sort: { createdAt: -1 } // Get the most recent one
+        }
+      );
+      if (registration) console.log(`Smart Fallback Success! Found registration ${registration.registrationId} for ${req.body.email}`);
+    }
 
     if (!registration) {
       console.error(`Registration not found for txnid: ${txnid}`);
