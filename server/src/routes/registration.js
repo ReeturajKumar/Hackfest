@@ -229,12 +229,15 @@ router.get('/registrations/export', async (req, res) => {
 // GET /api/v1/registrations/:id - Get single registration
 router.get('/registrations/:id', async (req, res) => {
   try {
-    const registration = await Registration.findOne({
-      $or: [
-        { _id: req.params.id },
-        { registrationId: req.params.id }
-      ]
-    }).select('-__v');
+    // Check if the provided ID is a valid MongoDB ObjectId format
+    const isValidObjectId = req.params.id.match(/^[0-9a-fA-F]{24}$/);
+
+    // Only query _id if it's a valid format, otherwise only search by registrationId
+    const query = isValidObjectId
+      ? { $or: [{ _id: req.params.id }, { registrationId: req.params.id }] }
+      : { registrationId: req.params.id };
+
+    const registration = await Registration.findOne(query).select('-__v');
 
     if (!registration) {
       return res.status(404).json({

@@ -8,6 +8,7 @@ import ScrollToTop from './components/ScrollToTop';
 import DashboardPage from './pages/DashboardPage';
 import FinanceDashboardPage from './pages/FinanceDashboardPage';
 import PaymentSuccess from './pages/PaymentSuccess';
+import RegistrationDetailsPage from './pages/RegistrationDetailsPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin/dashboard" element={<DashboardPage />} />
+        <Route path="/admin/registrations/:id" element={<RegistrationDetailsPage />} />
         <Route path="/finance/dashboard" element={<FinanceDashboardPage />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         {/* Redirect any other path to home */}

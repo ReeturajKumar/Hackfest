@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   UsersIcon,
@@ -17,6 +18,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const DashboardPage = () => {
+  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [registrations, setRegistrations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -274,7 +276,8 @@ const DashboardPage = () => {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       key={reg._id}
-                      className="hover:bg-slate-50/80 transition-colors"
+                      onClick={() => navigate(`/admin/registrations/${reg.registrationId}`)}
+                      className="hover:bg-slate-50/80 transition-colors cursor-pointer group"
                     >
                       <td className="px-6 py-4">
                         <span className="text-xs font-black font-mono text-pink-600 bg-pink-50 px-2 py-1 rounded">
