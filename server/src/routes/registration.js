@@ -297,6 +297,51 @@ router.patch('/registrations/:id/payment', async (req, res) => {
   }
 });
 
+// POST /api/v1/payment-callback - Handle Easebuzz payment response
+router.post('/payment-callback', async (req, res) => {
+  try {
+    // IMPORTANT: Log the entire body so we can see what Easebuzz sends in production
+    console.log('--- EASEBUZZ CALLBACK RECEIVED ---');
+    console.log(JSON.stringify(req.body, null, 2));
+
+    // Easebuzz might send txnid or transaction_id
+    const txnid = req.body.txnid || req.body.transaction_id;
+    const status = req.body.status;
+
+    if (!txnid) {
+      console.error('Callback error: Missing txnid in request body');
+      return res.status(400).json({ success: false, message: 'Missing txnid' });
+    }
+
+    // Map Easebuzz status to our internal status (Case-insensitive)
+    const normalizedStatus = status?.toLowerCase();
+    let paymentStatus = 'pending';
+    if (normalizedStatus === 'success') paymentStatus = 'completed';
+    else if (normalizedStatus === 'failure' || normalizedStatus === 'usercancelled') paymentStatus = 'failed';
+
+    const registration = await Registration.findOneAndUpdate(
+      { registrationId: txnid.trim() },
+      {
+        paymentStatus,
+        updatedAt: new Date()
+      },
+      { new: true }
+    );
+
+    if (!registration) {
+      console.error(`Registration not found for txnid: ${txnid}`);
+      // Return 200 anyway to stop Easebuzz retries if the ID is just invalid
+      return res.status(200).json({ success: false, message: 'Registration not found' });
+    }
+
+    console.log(`Successfully updated status for ${txnid} to ${paymentStatus}`);
+    res.status(200).json({ success: true, message: 'Status updated successfully' });
+  } catch (error) {
+    console.error('Callback processing error:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+});
+
 
 // GET /api/v1/stats - Get registration statistics
 router.get('/stats', async (req, res) => {
