@@ -441,12 +441,37 @@ router.post('/payment-callback', async (req, res) => {
       );
 
       if (registration) {
-        console.log(`✅ Fallback successful! Updated registration ${registration.registrationId}`);
+        console.log(`✅ Email fallback successful! Updated registration ${registration.registrationId}`);
+      }
+    }
+
+    // FALLBACK 2: Try lookup by phone if email lookup also failed
+    if (!registration && phone) {
+      console.log(`Email lookup failed. Attempting fallback by phone: ${phone}`);
+      registration = await Registration.findOneAndUpdate(
+        {
+          mobile: phone.trim(),
+          paymentStatus: 'pending'
+        },
+        {
+          paymentStatus,
+          easebuzzId: easepayid,
+          transactionId: txnid,
+          updatedAt: new Date()
+        },
+        {
+          new: true,
+          sort: { createdAt: -1 }
+        }
+      );
+
+      if (registration) {
+        console.log(`✅ Phone fallback successful! Updated registration ${registration.registrationId}`);
       }
     }
 
     if (!registration) {
-      console.error(`❌ Registration not found for ID: ${lookupId}, Email: ${email}`);
+      console.error(`❌ Registration not found for ID: ${lookupId}, Email: ${email}, Phone: ${phone}`);
       // Return 200 to prevent Easebuzz from retrying
       return res.status(200).json({
         success: false,
