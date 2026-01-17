@@ -157,15 +157,12 @@ const Register = () => {
             phone: formData.mobile,
             amount: data.data.paymentAmount,
             txnid: data.data.registrationId,
-            udf1: data.data.registrationId, // Used as a reliable carrier for our ID
+            udf1: data.data.registrationId, // CRITICAL: Always pass registration ID in UDF1
           };
 
-          // Add team name if team registration (try multiple parameter names)
+          // Add team name in UDF2 if team registration
           if (data.data.participationType === 'team' && formData.teamName) {
-            urlParams.teamName = formData.teamName;
-            urlParams.team_name = formData.teamName;
-            urlParams['Team Name'] = formData.teamName;
-            urlParams.udf1 = formData.teamName; // User Defined Field 1
+            urlParams.udf2 = formData.teamName; // Team name in UDF2
           }
 
           const params = new URLSearchParams(urlParams);

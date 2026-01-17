@@ -1,4 +1,5 @@
 import express from 'express';
+import crypto from 'crypto';
 import * as XLSX from 'xlsx';
 import Registration from '../models/Registration.js';
 import { validateRegistration, handleValidationErrors } from '../middleware/validation.js';
@@ -301,81 +302,174 @@ router.patch('/registrations/:id/payment', async (req, res) => {
 });
 
 // POST /api/v1/payment-callback - Handle Easebuzz payment response
+// POST /api/v1/payment-callback - Handle Easebuzz payment response (FIXED VERSION)
 router.post('/payment-callback', async (req, res) => {
   try {
-    // IMPORTANT: Log the entire body so we can see what Easebuzz sends in production
-    console.log('--- EASEBUZZ CALLBACK RECEIVED ---');
-    console.log(JSON.stringify(req.body, null, 2));
+    console.log('=== EASEBUZZ WEBHOOK RECEIVED ===');
+    console.log('Headers:', JSON.stringify(req.headers, null, 2));
+    console.log('Body:', JSON.stringify(req.body, null, 2));
+    console.log('Raw Body Type:', typeof req.body);
 
-    // Easebuzz sends our custom ID in udf1 if we pass it, otherwise fallback to txnid
-    const customId = req.body.udf1;
-    const txnid = req.body.txnid || req.body.transaction_id;
-    const lookupId = (customId && customId !== 'undefined') ? customId : txnid;
-    const status = req.body.status;
-
-    console.log(`Lookup ID: ${lookupId} (UDF1: ${customId}, TXNID: ${txnid})`);
-
-    if (!lookupId) {
-      console.error('Callback error: Missing lookup ID (udf1/txnid) in request body');
-      return res.status(400).json({ success: false, message: 'Missing transaction identifier' });
+    // CRITICAL: Verify Easebuzz hash to prevent fake webhooks
+    const salt = process.env.EASEBUZZ_SALT?.trim();
+    if (!salt || salt === 'YOUR_MERCHANT_SALT') {
+      console.error('ERROR: Easebuzz SALT not configured in .env');
+      return res.status(500).json({ success: false, message: 'Server configuration error' });
     }
 
-    // Map Easebuzz status to our internal status (Case-insensitive)
+    // Extract webhook data
+    const {
+      txnid,
+      amount,
+      productinfo,
+      firstname,
+      email,
+      phone,
+      status,
+      easepayid,
+      hash: receivedHash,
+      udf1, // This should contain your registrationId if you passed it
+      udf2,
+      udf3,
+      udf4,
+      udf5,
+      error_Message
+    } = req.body;
+
+    console.log('Transaction Details:');
+    console.log(`  TXNID: ${txnid}`);
+    console.log(`  Status: ${status}`);
+    console.log(`  Amount: ${amount}`);
+    console.log(`  Email: ${email}`);
+    console.log(`  UDF1 (Registration ID): ${udf1}`);
+    console.log(`  Easepay ID: ${easepayid}`);
+    console.log(`  Received Hash: ${receivedHash}`);
+
+    // STEP 1: Verify Hash (CRITICAL SECURITY CHECK)
+    const hashSequence = `${salt}|${status}|||||||||||${udf5}|${udf4}|${udf3}|${udf2}|${udf1}|${email}|${firstname}|${productinfo}|${amount}|${txnid}`;
+    const calculatedHash = crypto.createHash('sha512').update(hashSequence).digest('hex');
+
+    console.log('Hash Verification:');
+    console.log(`  Hash Sequence: ${hashSequence}`);
+    console.log(`  Calculated Hash: ${calculatedHash}`);
+    console.log(`  Received Hash: ${receivedHash}`);
+    console.log(`  Match: ${calculatedHash === receivedHash}`);
+
+    if (calculatedHash !== receivedHash) {
+      console.error('SECURITY ERROR: Hash verification failed! Possible fake webhook.');
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid hash - security verification failed'
+      });
+    }
+
+    console.log('✅ Hash verified successfully');
+
+    // STEP 2: Determine lookup ID
+    const lookupId = (udf1 && udf1 !== 'undefined' && udf1 !== '') ? udf1 : txnid;
+    console.log(`Lookup ID determined: ${lookupId}`);
+
+    if (!lookupId) {
+      console.error('ERROR: No valid lookup ID found in webhook');
+      return res.status(400).json({
+        success: false,
+        message: 'Missing transaction identifier'
+      });
+    }
+
+    // STEP 3: Map Easebuzz status to internal status
     const normalizedStatus = status?.toLowerCase();
     let paymentStatus = 'pending';
-    const easebuzzId = req.body.easepayid;
 
-    if (normalizedStatus === 'success') paymentStatus = 'completed';
-    else if (normalizedStatus === 'failure' || normalizedStatus === 'usercancelled') paymentStatus = 'failed';
+    if (normalizedStatus === 'success') {
+      paymentStatus = 'completed';
+    } else if (normalizedStatus === 'failure' || normalizedStatus === 'userCancelled' || normalizedStatus === 'usercancelled') {
+      paymentStatus = 'failed';
+    }
 
+    console.log(`Mapped status: ${status} -> ${paymentStatus}`);
+
+    // STEP 4: Update registration in database
     let registration = null;
 
-    // A. Try Lookup by Discovered ID
+    // Try lookup by registrationId first
     if (lookupId) {
+      console.log(`Attempting to find registration by ID: ${lookupId}`);
       registration = await Registration.findOneAndUpdate(
         { registrationId: lookupId.trim() },
         {
           paymentStatus,
-          easebuzzId: easebuzzId,
+          easebuzzId: easepayid,
+          transactionId: txnid,
           updatedAt: new Date()
         },
         { new: true }
       );
-      if (registration) console.log(`ID Match Success: ${lookupId} - Stored Easebuzz ID: ${easebuzzId}`);
+
+      if (registration) {
+        console.log(`✅ Successfully updated registration ${lookupId}`);
+      }
     }
 
-    // 2. SMART FALLBACK: If not found by ID, try Lookup by Email (Find most recent pending)
-    if (!registration && req.body.email) {
-      console.log(`ID Lookup failed. Attempting Smart Fallback via Email: ${req.body.email}`);
+    // FALLBACK: Try lookup by email if ID lookup failed
+    if (!registration && email) {
+      console.log(`ID lookup failed. Attempting fallback by email: ${email}`);
       registration = await Registration.findOneAndUpdate(
         {
-          email: req.body.email.toLowerCase().trim(),
+          email: email.toLowerCase().trim(),
           paymentStatus: 'pending'
         },
         {
           paymentStatus,
-          easebuzzId: easebuzzId,
+          easebuzzId: easepayid,
+          transactionId: txnid,
           updatedAt: new Date()
         },
         {
           new: true,
-          sort: { createdAt: -1 } // Get the most recent one
+          sort: { createdAt: -1 }
         }
       );
-      if (registration) console.log(`Smart Fallback Success! Found registration ${registration.registrationId} for ${req.body.email} - Stored Easebuzz ID: ${easebuzzId}`);
+
+      if (registration) {
+        console.log(`✅ Fallback successful! Updated registration ${registration.registrationId}`);
+      }
     }
 
     if (!registration) {
-      console.error(`Registration not found for txnid: ${txnid}`);
-      // Return 200 anyway to stop Easebuzz retries if the ID is just invalid
-      return res.status(200).json({ success: false, message: 'Registration not found' });
+      console.error(`❌ Registration not found for ID: ${lookupId}, Email: ${email}`);
+      // Return 200 to prevent Easebuzz from retrying
+      return res.status(200).json({
+        success: false,
+        message: 'Registration not found',
+        txnid
+      });
     }
 
-    console.log(`Successfully updated status for ${txnid} to ${paymentStatus}`);
-    res.status(200).json({ success: true, message: 'Status updated successfully' });
+    console.log(`=== WEBHOOK PROCESSED SUCCESSFULLY ===`);
+    console.log(`Registration: ${registration.registrationId}`);
+    console.log(`Status: ${registration.paymentStatus}`);
+    console.log(`Easebuzz ID: ${registration.easebuzzId}`);
+
+    // IMPORTANT: Return 200 OK to acknowledge receipt
+    res.status(200).json({
+      success: true,
+      message: 'Payment status updated successfully',
+      registrationId: registration.registrationId,
+      status: registration.paymentStatus
+    });
+
   } catch (error) {
-    console.error('Callback processing error:', error);
-    res.status(500).json({ success: false, error: 'Internal server error' });
+    console.error('=== WEBHOOK ERROR ===');
+    console.error('Error:', error);
+    console.error('Stack:', error.stack);
+
+    // Return 200 even on error to prevent endless retries
+    res.status(200).json({
+      success: false,
+      message: 'Internal server error',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 });
 
