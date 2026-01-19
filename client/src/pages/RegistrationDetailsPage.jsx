@@ -228,17 +228,17 @@ const RegistrationDetailsPage = () => {
               </div>
             </Section>
 
-            {/* Compliance Audit */}
-            <Section title="Security & Compliance" icon={ShieldCheckIcon} colorClass="bg-emerald-600" gridCols="md:grid-cols-2">
-              <DetailItem label="Comm. Opt-in" value={registration.communicationConsent ? 'Authorized' : 'Deactivated'} />
-              <DetailItem label="Data Declaration" value={registration.declaration ? 'Verified Signature' : 'Pending'} />
+            {/* System Details */}
+            <Section title="System & Registration Details" icon={ShieldCheckIcon} colorClass="bg-emerald-600" gridCols="md:grid-cols-2">
+              <DetailItem label="Communication Preferences" value={registration.communicationConsent ? 'Subscribed' : 'Not Subscribed'} />
+              <DetailItem label="Terms & Conditions" value={registration.declaration ? 'Accepted' : 'Pending'} />
               <DetailItem label="Registration ID" value={registration.registrationId} icon={FingerprintIcon} />
               {registration.easebuzzId && (
-                <DetailItem label="Easebuzz Official ID" value={registration.easebuzzId} icon={CheckCircleIcon} />
+                <DetailItem label="Transaction Ref. ID" value={registration.easebuzzId} icon={CheckCircleIcon} />
               )}
-              <DetailItem label="Created At" value={new Date(registration.createdAt).toLocaleString()} icon={CalendarIcon} />
-              <DetailItem label="System Status" value={registration.paymentStatus.toUpperCase()} />
-              <DetailItem label="Last Database Refresh" value={new Date(registration.updatedAt).toLocaleString()} />
+              <DetailItem label="Registration Date" value={new Date(registration.createdAt).toLocaleString()} icon={CalendarIcon} />
+              <DetailItem label="Payment Status" value={registration.paymentStatus.toUpperCase()} />
+              <DetailItem label="Last Updated On" value={new Date(registration.updatedAt).toLocaleString()} />
             </Section>
           </div>
 

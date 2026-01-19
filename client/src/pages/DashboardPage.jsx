@@ -263,6 +263,7 @@ const DashboardPage = () => {
                   <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest">Type</th>
                   <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest">Team Name</th>
                   <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest">Amount</th>
+                  <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest">Status</th>
                   <th className="px-6 py-4 text-caption-sm font-bold text-gray-500 uppercase tracking-widest text-right">Date</th>
                 </tr>
               </thead>
@@ -303,6 +304,14 @@ const DashboardPage = () => {
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-gray-900">
                         ₹{reg.paymentAmount || (reg.participationType === 'individual' ? 499 : 999)}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-1 rounded-full ${reg.paymentStatus === 'completed' ? 'bg-green-100 text-green-700' :
+                            reg.paymentStatus === 'failed' ? 'bg-red-100 text-red-700' :
+                              'bg-orange-100 text-orange-700'
+                          }`}>
+                          {reg.paymentStatus || 'pending'}
+                        </span>
                       </td>
                       <td className="px-6 py-4 text-right">
                         <span className="text-xs font-medium text-gray-400">
