@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 
 const Step5Consent = ({ formData, handleChange, setFormData, errors }) => {
@@ -46,7 +46,7 @@ const Step5Consent = ({ formData, handleChange, setFormData, errors }) => {
               Declaration <span className="text-red-500">*</span>
             </span>
             <p className="text-xs text-gray-500 mt-1">
-              I confirm that the information provided is correct and I agree to the hackathon rules and guidelines.
+              I confirm that the information provided is correct and I agree to the <Link to="/Terms & Conditions – Refund & Cancellation Policy.pdf" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:underline" onClick={(e) => e.stopPropagation()}>Terms & Conditions</Link>.
             </p>
           </div>
         </label>

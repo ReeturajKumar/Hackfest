@@ -34,10 +34,10 @@ const Footer = () => {
   ];
 
   const resources = [
-    { name: 'Registration Guide', href: '/' },
-    { name: 'Problem Statements', href: '/' },
-    { name: 'Judging Criteria', href: '/' },
-    { name: 'FAQ', href: '/' }
+    { name: 'Registration Guide', href: '#pricing' },
+    { name: 'Problem Statements', href: '#problems' },
+    { name: 'Judging Criteria', href: '#deliverables' },
+    { name: 'FAQ', href: '#faq' }
   ];
 
   // Smart navigation function
@@ -197,7 +197,8 @@ const Footer = () => {
               {resources.map((resource) => (
                 <li key={resource.name}>
                   <Link
-                    to={resource.href}
+                    to="/"
+                    onClick={(e) => handleNavClick(e, resource.href)}
                     className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group cursor-pointer"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-[#7030A0] transition-colors"></span>
@@ -266,14 +267,13 @@ const Footer = () => {
             <p>In partnership with <span className="text-white">IIT-BHU</span> & <span className="text-white">Greamio Technologies</span></p>
           </div>
           <div className="flex items-center gap-6 text-xs">
-            <Link to="/" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
-              Privacy Policy
-            </Link>
-            <Link to="/" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
-              Terms of Service
-            </Link>
-            <Link to="/" className="text-gray-500 hover:text-white transition-colors cursor-pointer">
-              Code of Conduct
+            <Link
+              to="/Terms & Conditions – Refund & Cancellation Policy.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-white transition-colors cursor-pointer"
+            >
+              Terms & Refund Policy
             </Link>
           </div>
         </motion.div>
