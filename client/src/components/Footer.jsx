@@ -30,7 +30,6 @@ const Footer = () => {
     { name: 'Problem Statements', href: '#problems' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'Partners', href: '#partners' },
-    { name: 'Admin Dashboard', href: '/admin/dashboard', isRoute: true }
   ];
 
   const resources = [

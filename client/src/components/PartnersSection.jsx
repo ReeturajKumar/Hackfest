@@ -154,7 +154,7 @@ const PartnersSection = () => {
               Registration Date
             </h3>
             <p className="text-heading-lg text-pink-400 mb-4">
-              20th Jan to 19th Feb
+              20 Jan - 26 Feb
             </p>
 
             {/* Urgency Text */}

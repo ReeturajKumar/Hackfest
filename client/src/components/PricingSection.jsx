@@ -147,7 +147,7 @@ const PricingSection = () => {
             variants={itemVariants}
             className="text-body-md text-slate-500 max-w-2xl mx-auto"
           >
-            Registration Period: <span className="font-bold text-slate-700">January 20 to February 19, 2026</span>
+            Registration Period: <span className="font-bold text-slate-700">20 Jan - 26 Feb</span>
           </motion.p>
         </motion.div>
 
@@ -167,8 +167,8 @@ const PricingSection = () => {
                 variants={itemVariants}
                 whileHover={{ y: -4, scale: 1.01 }}
                 className={`relative p-6 rounded-2xl border-2 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full ${plan.popular
-                    ? 'border-pink-300 bg-white'
-                    : 'border-slate-200 bg-white hover:border-pink-300'
+                  ? 'border-pink-300 bg-white'
+                  : 'border-slate-200 bg-white hover:border-pink-300'
                   }`}
               >
                 {/* Popular Badge */}

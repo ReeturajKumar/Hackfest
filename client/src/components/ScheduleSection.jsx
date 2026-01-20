@@ -38,7 +38,7 @@ const ScheduleSection = () => {
     {
       phase: "Phase 1",
       title: "Registration & Onboarding",
-      period: "Jan 20 - Feb 19, 2026",
+      period: "20 Jan - 26 Feb",
       icon: CalendarIcon,
       color: "pink",
       items: [
@@ -163,23 +163,23 @@ const ScheduleSection = () => {
                   >
                     {/* Phase Number Badge */}
                     <div className={`absolute -top-3 left-5 px-3 py-1 rounded-full font-black text-caption-sm ${phase.color === 'pink' ? 'bg-pink-500 text-white' :
-                        phase.color === 'purple' ? 'bg-purple-500 text-white' :
-                          phase.color === 'orange' ? 'bg-orange-500 text-white' :
-                            'bg-blue-500 text-white'
+                      phase.color === 'purple' ? 'bg-purple-500 text-white' :
+                        phase.color === 'orange' ? 'bg-orange-500 text-white' :
+                          'bg-blue-500 text-white'
                       }`}>
                       {phase.phase}
                     </div>
 
                     {/* Icon */}
                     <div className={`w-12 h-12 ${phase.color === 'pink' ? 'bg-pink-50' :
-                        phase.color === 'purple' ? 'bg-purple-50' :
-                          phase.color === 'orange' ? 'bg-orange-50' :
-                            'bg-blue-50'
+                      phase.color === 'purple' ? 'bg-purple-50' :
+                        phase.color === 'orange' ? 'bg-orange-50' :
+                          'bg-blue-50'
                       } rounded-xl flex items-center justify-center mb-4 mt-3 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                       <IconComponent className={`w-6 h-6 ${phase.color === 'pink' ? 'text-pink-600' :
-                          phase.color === 'purple' ? 'text-purple-600' :
-                            phase.color === 'orange' ? 'text-orange-600' :
-                              'text-blue-600'
+                        phase.color === 'purple' ? 'text-purple-600' :
+                          phase.color === 'orange' ? 'text-orange-600' :
+                            'text-blue-600'
                         }`} />
                     </div>
 
@@ -198,9 +198,9 @@ const ScheduleSection = () => {
                       {phase.items.map((item, i) => (
                         <li key={i} className="flex items-start gap-2">
                           <CheckCircleIcon className={`w-4 h-4 flex-shrink-0 mt-0.5 ${phase.color === 'pink' ? 'text-pink-500' :
-                              phase.color === 'purple' ? 'text-purple-500' :
-                                phase.color === 'orange' ? 'text-orange-500' :
-                                  'text-blue-500'
+                            phase.color === 'purple' ? 'text-purple-500' :
+                              phase.color === 'orange' ? 'text-orange-500' :
+                                'text-blue-500'
                             }`} />
                           <span className="text-label-sm text-slate-600">{item}</span>
                         </li>
